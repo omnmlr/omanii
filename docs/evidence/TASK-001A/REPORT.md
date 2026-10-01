@@ -86,3 +86,18 @@ Device: Redmi 13
 - Unexpected permission prompt: none observed
 
 TASK-001A physical-device acceptance gate: PASS.
+
+## Physical-device verification
+
+Date: 2026-10-01
+Device: Redmi 13
+
+- ADB device connection: PASS
+- Debug APK installation: PASS
+- Application launch: PASS
+- Package: com.omanii.app
+- Launch result: displayed "omanii development build"
+- Immediate crash: none observed
+- Unexpected permission prompt: none observed
+
+TASK-001A physical-device acceptance gate: PASS.
