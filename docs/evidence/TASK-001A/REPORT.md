@@ -71,3 +71,18 @@ The shell intentionally has no product functionality or custom launcher icon. Th
 The task packet recommends an independent review of the Gradle, dependency, and manifest choices before Tasks 002 and 003 branch; that review has not yet been performed.
 
 Deviations from TASK-001A: none. Contracts changed: none. Privacy/security implication: no sensitive permission or collection was added; backup is disabled in the source manifest. Unresolved question: only the required physical-device launch result. Commit/PR reference: none, as instructed.
+
+## Physical-device verification
+
+Date: 2026-10-01
+Device: Redmi 13
+
+- ADB device connection: PASS
+- Debug APK installation: PASS
+- Application launch: PASS
+- Package: com.omanii.app
+- Launch result: displayed "omanii development build"
+- Immediate crash: none observed
+- Unexpected permission prompt: none observed
+
+TASK-001A physical-device acceptance gate: PASS.
