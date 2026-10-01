@@ -1,6 +1,9 @@
 # TASK-001A acceptance evidence
 
-Status: automated scaffold gate passed on 2026-10-01; physical-device launch pending.
+Status: automated scaffold and physical Redmi 13 install/launch gates passed on 2026-10-01; independent Phase 2 audit verdict: PASS WITH FOLLOW-UP.
+
+Scaffold HEAD reviewed: `74edbc718c4cf7f31f86cbf974c998ba41289385`.
+PR: [#1 - chore: add shared Android build scaffold](https://github.com/omnmlr/omanii/pull/1), targeting `main`.
 
 ## Files created or changed
 
@@ -9,7 +12,7 @@ Status: automated scaffold gate passed on 2026-10-01; physical-device launch pen
 - Created: `android/gradlew`, `android/gradlew.bat`, `android/gradle/wrapper/gradle-wrapper.jar`, `android/gradle/wrapper/gradle-wrapper.properties`.
 - Created: `android/app/build.gradle.kts`, `android/app/src/main/AndroidManifest.xml`, `android/app/src/main/res/values/strings.xml`, `android/app/src/main/java/com/omanii/app/MainActivity.kt`, `android/app/src/test/java/com/omanii/app/ScaffoldTest.kt`.
 - Created: this report.
-- No root build-support file or other canonical contract changed. No commit or PR was created.
+- No root build-support file or other canonical contract changed.
 
 ## Build contract
 
@@ -62,30 +65,17 @@ BUILD SUCCESSFUL in 14m 39s
 - Wrapper JAR SHA-256: `497c8c2a7e5031f6aa847f88104aa80a93532ec32ee17bdb8d1d2f67a194a9c7`, matching Gradle's published 9.6.1 checksum.
 - Repository whitespace gate: `git diff --check` and `git diff --cached --check` passed with no whitespace errors. New files were marked intent-to-add so the requested check includes them; `android/gradlew` alone was staged to preserve its Unix executable bit.
 
-## Physical verification and limitations
-
-Physical-device installation and launch on Francis's phone have not been performed. Local `adb devices` could not enumerate devices because this environment's `adb` failed to create its `\.android` directory. Therefore installation, no-crash launch, and absence of an unexpected permission prompt still need phone evidence.
+## Independent review and limitations
 
 The shell intentionally has no product functionality or custom launcher icon. The Android 12 backup-rule lint warning should be revisited before a task introduces sensitive persisted data; the current app stores none. Runtime behavior on Android 17 is not claimed because target SDK remains 36.
 
-The task packet recommends an independent review of the Gradle, dependency, and manifest choices before Tasks 002 and 003 branch; that review has not yet been performed.
+The independent Phase 2 launch audit reviewed the actual scaffold diff, existing build/test/lint artifacts and logs, dependency and manifest choices, and current official toolchain documentation. Verdict: **PASS WITH FOLLOW-UP**. No blocking scaffold implementation defect was found. The audit was read-only and did not rerun builds or physical tests; the Redmi 13 result below is founder-attested.
 
-Deviations from TASK-001A: none. Contracts changed: none. Privacy/security implication: no sensitive permission or collection was added; backup is disabled in the source manifest. Unresolved question: only the required physical-device launch result. Commit/PR reference: none, as instructed.
+The audit identified an untracked local `android/gradle/gradle-daemon-jvm.properties` file selecting Java 25, while the documented scaffold build uses Java 17. This local-file issue was resolved outside the repository; the file is no longer present in the checkout. No tracked Android build file changed. The original Java 17 build evidence remains valid.
 
-## Physical-device verification
+Follow-ups remain the backup/extraction-rule review before sensitive persistence, the documented target-SDK/launcher-icon limitations, and the Kotlin tested-matrix qualification noted in the independent audit. These do not establish a scaffold failure or validate future radio, ARCore or probe behavior.
 
-Date: 2026-10-01
-Device: Redmi 13
-
-- ADB device connection: PASS
-- Debug APK installation: PASS
-- Application launch: PASS
-- Package: com.omanii.app
-- Launch result: displayed "omanii development build"
-- Immediate crash: none observed
-- Unexpected permission prompt: none observed
-
-TASK-001A physical-device acceptance gate: PASS.
+Deviations from TASK-001A: none. Contracts changed: none. Privacy/security implication: no sensitive permission or collection was added; backup is disabled in the source manifest. Unresolved questions: no outstanding physical launch question; the non-blocking follow-ups above remain. Commit/PR reference: scaffold HEAD `74edbc718c4cf7f31f86cbf974c998ba41289385`; [PR #1](https://github.com/omnmlr/omanii/pull/1), targeting `main`.
 
 ## Physical-device verification
 
