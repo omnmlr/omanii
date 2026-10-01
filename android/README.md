@@ -1,5 +1,13 @@
-# Android boundary
+# Android development scaffold
 
-No application feature code is created in Bootstrap Task 001.
+This directory contains the single native Android app module for TASK-001A. It
+currently launches a Compose development shell. Product functionality belongs
+to later task packets; see `../ARCHITECTURE.md` for package boundaries.
 
-After Task 001 approval, the integration owner creates the minimal native Kotlin/Compose build scaffold once, then Tasks 002 and 003 branch from that shared scaffold so parallel agents do not create conflicting Gradle/app structures.
+Use a JDK 17 installation and Android SDK platform 37, then run:
+
+```sh
+./gradlew :app:assembleDebug :app:testDebugUnitTest :app:lintDebug
+```
+
+The debug APK is written to `app/build/outputs/apk/debug/`.
