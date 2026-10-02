@@ -1,0 +1,47 @@
+[
+  {
+    "suite": "com.omanii.app.model.AvailabilityTest",
+    "tests": 4,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "timestamp": "2026-10-01T21:59:28.770Z",
+    "sha256": "8F8031CB0668B429A4DF9261FB3372E3264B2512155830B47A20652C67488E2F"
+  },
+  {
+    "suite": "com.omanii.app.model.GeometryMetadataTest",
+    "tests": 5,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "timestamp": "2026-10-01T21:59:28.834Z",
+    "sha256": "40DE9F2E8890BA2C158AA6EB0C0BE0EB62832C92EDCC9BC6FB911C241A946EBC"
+  },
+  {
+    "suite": "com.omanii.app.model.ObservationTimingTest",
+    "tests": 7,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "timestamp": "2026-10-01T21:59:28.927Z",
+    "sha256": "7D721A1E08FE052FE1055A84E9A11D207870861BAB403B33FE696BFF65DF6365"
+  },
+  {
+    "suite": "com.omanii.app.ScaffoldTest",
+    "tests": 1,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "timestamp": "2026-10-01T21:59:28.685Z",
+    "sha256": "EACB609EC1F2CE3318C9C7EF5F020441FEC6CF1BC08353A03EED1EA0335E2D93"
+  },
+  {
+    "suite": "com.omanii.app.session.ProbeIntervalContextTest",
+    "tests": 15,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "timestamp": "2026-10-01T21:59:28.972Z",
+    "sha256": "5247D5EE1F9539209EA7AC02F07583D6B773BF2A1AE2F68C4B169907B13A180E"
+  }
+]
