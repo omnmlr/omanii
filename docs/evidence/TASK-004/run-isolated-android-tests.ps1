@@ -7,21 +7,13 @@ $repo = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../../..'))
 $output = Join-Path $PSScriptRoot '.jvm-test'
 New-Item -ItemType Directory -Force -Path $output | Out-Null
 
-# Extract the proposed additions only into an ignored test sandbox. Never apply the shared patch.
-$patch = Get-Content -LiteralPath (Join-Path $PSScriptRoot 'shared-integration.patch') -Raw
-$parts = $patch -split '(?m)^diff --git '
-$shared = @()
-foreach ($part in $parts) {
-    if ($part -match 'b/android/app/src/main/java/com/omanii/app/(model|time|session)/([^\s]+\.kt)' -and
-        $part -notmatch 'ElapsedRealtimeClock.kt') {
-        $destination = Join-Path $output $Matches[2]
-        $lines = ($part -split "`n") | Where-Object { $_.StartsWith('+') -and -not $_.StartsWith('+++') } |
-            ForEach-Object { $_.Substring(1).TrimEnd("`r") }
-        [IO.File]::WriteAllText($destination, ($lines -join "`n") + "`n")
-        $shared += $destination
-    }
-}
-if ($shared.Count -ne 3) { throw 'Expected exactly three proposed contract files' }
+# Compile against the approved foundation sources, never the superseded proposal or a stub.
+$shared = @(
+    (Join-Path $repo 'android/app/src/main/java/com/omanii/app/model/MonotonicClock.kt'),
+    (Join-Path $repo 'android/app/src/main/java/com/omanii/app/model/Availability.kt'),
+    (Join-Path $repo 'android/app/src/main/java/com/omanii/app/model/Identity.kt'),
+    (Join-Path $repo 'android/app/src/main/java/com/omanii/app/session/ProbeContextHooks.kt')
+)
 function Jar([string]$relative, [string]$filename) {
     $found = @(Get-ChildItem -LiteralPath (Join-Path $GradleCache $relative) -Recurse -File |
         Where-Object { $_.Name -eq $filename })
@@ -44,7 +36,7 @@ $compilerJars = @(
 $sources = @($shared) + @((Get-ChildItem -LiteralPath (Join-Path $repo 'android/app/src/main/java/com/omanii/app/probe') -Filter *.kt).FullName) +
     @((Get-ChildItem -LiteralPath (Join-Path $repo 'android/app/src/test/java/com/omanii/app/probe') -Filter *.kt).FullName)
 $java = Join-Path $JavaHome 'bin/java.exe'
-$classes = Join-Path $output 'classes'
+$classes = Join-Path $output 'wave1-classes'
 $classpath = @($stdlib, $junit, $hamcrest, $annotations) -join ';'
 & $java -cp ($compilerJars -join ';') org.jetbrains.kotlin.cli.jvm.K2JVMCompiler -no-stdlib -no-reflect -Werror -jvm-target 17 -classpath $classpath -d $classes @sources
 if ($LASTEXITCODE -ne 0) { throw 'Isolated Kotlin compilation failed' }

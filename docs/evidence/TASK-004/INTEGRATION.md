@@ -1,4 +1,14 @@
-# TASK-004 proposed integration changes — unapplied
+# TASK-004 integration evidence
+
+## Approved Wave 1 foundation
+
+Foundation `4be02dce58b2b070de6bff669309ead2bbe384e9` is merged. The probe now consumes canonical `model.MonotonicClock` and typed `session.ProbeContextHooks.begin(probeId,startAtElapsedRealtimeNs)` / `end(probeId,endAtElapsedRealtimeNs)`. Full `ContextSnapshot`, scoped segment/network/frame refs, every `ContextBoundary` with before/after evidence, `ContextContinuity` and movement `ValueState` are preserved. The actual begin snapshot is also retained when a hook reports different coverage. Unavailable movement has an explicit reason. Comparison requires complete continuous coverage, stable scoped identities, no boundaries and a successful validated endpoint response.
+
+The task-owned execution/HTTP DTOs and byte budget interfaces live in `probe/ProbeModels.kt`; they do not duplicate shared context or clock types. Production construction uses `ProbeClient(AndroidElapsedRealtimeClock, sessionProbeContextHooks)` with the adapter imported from `com.omanii.app.time`. Endpoint selection, foreground lifecycle and aggregate scheduling remain integration work; no ScanSessionController is implemented here. The approved foundation supplies INTERNET permission. No shared file is edited by this adaptation.
+
+Isolated tests compile the actual approved shared Kotlin source files. Full Android build/unit/lint results are recorded in REPORT.md. Replay uses task-local `probe-wave1-alpha-1` serialization with full context evidence; HTTP procedure `http-probe-alpha-1` is unchanged. Neither version promotes an experimental profile or changes canonical measurement meaning.
+
+## Historical proposal — superseded, unapplied
 
 The integration owner owns all shared files. `shared-integration.patch` is an exact apply-checkable proposal against base `c1b3903ca9078651d74cefad9c22b67e5acd3f12`. It has **not** been applied. Canonical semantic contracts remain [protocol/README.md](../../../protocol/README.md); this note describes missing wiring, not a competing specification.
 
@@ -35,6 +45,8 @@ Budget reservation refusal reports BUDGET_EXHAUSTED because the next bounded req
 - Alternative: JavaScript plus runtime-only tests would avoid TypeScript declarations but lose the requested TypeScript/static contract. No HTTP server framework or Android HTTP library is needed.
 - Android: platform Java sockets/TLS/SecureRandom, existing Kotlin and JUnit scaffold. No added Gradle dependency, manifest edit, storage, telemetry or stable identifier. Fresh UUID per request is debugging correlation only.
 
-## Remaining gates
+## Historical remaining gates
 
 Apply/reconcile the shared patch and validate build/lint; independently approve APIs/permission; verify platform TLS and cancellation on a real Android device. Run the task's Wi-Fi and alternate/poor-path steps, download/upload byte comparison, cancellation, timeout and qualitative battery/thermal notes. Record real evidence in REPORT.md. The implementation cannot pass the physical acceptance gate without those observations.
+
+The proposal application step above is superseded by the approved foundation merge. Do not apply the old patch. Physical Android/TLS/network/cancellation evidence remains NOT RUN and required before physical acceptance; current automated status is in REPORT.md.

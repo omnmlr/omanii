@@ -28,4 +28,6 @@ Server download counters mean application bytes queued to Node, not confirmed re
 
 `src/replay.ts` validates/replays the task's eight explicitly synthetic fixtures. Nanoseconds are decimal strings so values beyond JavaScript's safe integer range survive round trips. Replay is for future pure analysis consumers and does not create production measurement data.
 
+Replay serialization `probe-wave1-alpha-1` preserves canonical Wave 1 scoped snapshots, availability/reasons and complete before/after boundary evidence. Its parser rejects cross-session refs, hidden boundaries and unjustified comparison safety. This task-local mapping leaves HTTP procedure `http-probe-alpha-1` and shared contracts unchanged.
+
 Development dependencies are pinned TypeScript and Node declarations (with `undici-types` transitive declarations); runtime dependencies: **none**. Public exposure requires separately approved TLS, capacity qualification, bounded grants/rate controls and operations. No hosting/provider/credentials are chosen here.

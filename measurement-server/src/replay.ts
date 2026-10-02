@@ -1,6 +1,7 @@
 // Experimental fixture representation only; canonical owners: protocol/README.md, ADR-004.
+import { contextIsComparable, type ReplayContextSnapshot, type ReplayIntervalContext } from './replay-context.ts';
 export interface ReplayRecord {
-  fixture: 'synthetic'; case: string; schema_version: 'probe-alpha-1';
+  fixture: 'synthetic'; case: string; schema_version: 'probe-wave1-alpha-1';
   protocol_version: 'http-probe-alpha-1'; test_profile: string; profile_version: string;
   endpoint_context: { endpoint_id: string; service_version: string; region: string; protocol_type: 'HTTP/1.1' };
   probe_id: string; sequence: number; probe_type: 'RESPONSIVENESS' | 'DOWNLOAD' | 'UPLOAD';
@@ -8,9 +9,7 @@ export interface ReplayRecord {
   requested_bytes: number; actual_bytes: number; http_bytes_charged: number; unconfirmed_upload_bytes: number;
   outcome: 'SUCCESS' | 'TIMEOUT' | 'ERROR' | 'CANCELLED' | 'SERVER_INVALID' | 'PARTIAL' | 'BUDGET_EXHAUSTED';
   endpoint_health: string | null; endpoint_validated: boolean;
-  context: { start_segment: string | null; end_segment: string | null;
-    start_epoch: string | null; end_epoch: string | null;
-    continuity: 'CONTINUOUS' | 'BROKEN' | 'UNKNOWN' | 'NOT_EVALUATED'; boundary_nanos: string[] };
+  begin_context: ReplayContextSnapshot; context: ReplayIntervalContext;
   comparison_safe: boolean; lower_bound: boolean; connection: 'COLD' | 'REUSED' | 'NOT_OPENED';
   concurrent_load: 'NOT_EVALUATED'; http_application_rtt_nanos: string | null;
   server_upload_bytes: number | null; reason: string | null;
@@ -26,7 +25,7 @@ export function parseReplay(text: string): ReplayRecord[] {
   if (!Array.isArray(data) || data.length === 0 || data.length > 1000) throw new Error('Invalid replay');
   const ids = new Set<string>();
   for (const item of data) {
-    if (!isObject(item) || item['fixture'] !== 'synthetic' || item['schema_version'] !== 'probe-alpha-1' ||
+    if (!isObject(item) || item['fixture'] !== 'synthetic' || item['schema_version'] !== 'probe-wave1-alpha-1' ||
         item['protocol_version'] !== 'http-probe-alpha-1') throw new Error('Unsupported fixture version');
     if ('packet_loss' in item || 'score' in item) throw new Error('HTTP replay cannot supply packet loss or score');
     for (const key of ['case', 'test_profile', 'profile_version', 'probe_id']) {
@@ -49,20 +48,9 @@ export function parseReplay(text: string): ReplayRecord[] {
     const endpoint = item['endpoint_context'];
     if (!isObject(endpoint) || endpoint['protocol_type'] !== 'HTTP/1.1' ||
         ['endpoint_id', 'service_version', 'region'].some(key => typeof endpoint[key] !== 'string' || endpoint[key] === '')) throw new Error('Invalid endpoint');
-    const context = item['context'];
-    if (!isObject(context) || !Array.isArray(context['boundary_nanos']) ||
-        !['CONTINUOUS', 'BROKEN', 'UNKNOWN', 'NOT_EVALUATED'].includes(context['continuity'] as string)) throw new Error('Invalid context');
-    let previous = start;
-    for (const boundary of context['boundary_nanos']) {
-      const at = nanos(boundary); if (at < previous || at > end) throw new Error('Invalid boundary'); previous = at;
-    }
-    for (const key of ['start_segment', 'end_segment', 'start_epoch', 'end_epoch']) {
-      if (context[key] !== null && typeof context[key] !== 'string') throw new Error('Invalid context reference');
-    }
+    const contextSafe = contextIsComparable(item['context'], item['begin_context'], start, end, nanos);
     const safe = item['outcome'] === 'SUCCESS' && item['endpoint_validated'] === true &&
-      context['continuity'] === 'CONTINUOUS' && context['boundary_nanos'].length === 0 &&
-      context['start_segment'] !== null && context['start_epoch'] !== null &&
-      context['start_segment'] === context['end_segment'] && context['start_epoch'] === context['end_epoch'];
+      contextSafe;
     if (item['comparison_safe'] !== safe) throw new Error('Unsafe comparison');
     if (typeof item['endpoint_validated'] !== 'boolean' || typeof item['lower_bound'] !== 'boolean' ||
         !['COLD', 'REUSED', 'NOT_OPENED'].includes(item['connection'] as string) || item['concurrent_load'] !== 'NOT_EVALUATED') throw new Error('Invalid evidence');

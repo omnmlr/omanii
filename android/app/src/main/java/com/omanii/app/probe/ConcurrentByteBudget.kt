@@ -1,9 +1,5 @@
 package com.omanii.app.probe
 
-import com.omanii.app.model.ByteBudget
-import com.omanii.app.model.ByteBudgetSnapshot
-import com.omanii.app.model.ByteReservation
-
 /** Caller shares one instance across all probes in the selected session/profile. */
 class ConcurrentByteBudget(override val budgetId: String, private val totalBytes: Long) : ByteBudget {
     private var consumed = 0L

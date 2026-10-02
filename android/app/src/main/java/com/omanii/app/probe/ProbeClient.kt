@@ -1,8 +1,10 @@
 package com.omanii.app.probe
 
-import com.omanii.app.model.*
+import com.omanii.app.model.Availability
+import com.omanii.app.model.MonotonicClock
+import com.omanii.app.model.ValueState
+import com.omanii.app.session.ContextContinuity
 import com.omanii.app.session.ProbeContextHooks
-import com.omanii.app.time.MonotonicClock
 import java.io.IOException
 import java.io.InputStream
 import java.io.BufferedInputStream
@@ -48,14 +50,14 @@ class ProbeClient internal constructor(
         validate(endpoint, profile)
         synchronized(gate) { check(!running) { "One run per client at a time" }; running = true }
         val observations = mutableListOf<ProbeObservation>()
-        val profileStart = clock.nowNanos()
+        val profileStart = clock.nowElapsedRealtimeNs()
         var socket: Socket? = null
         try {
             for (sequence in 0 until profile.samples) {
                 // Preparation consumes the total profile budget, before HTTP interval timing.
                 val probeId = prepareProbeId()
-                val start = clock.nowNanos()
-                val token = contextHooks.begin(start)
+                val start = clock.nowElapsedRealtimeNs()
+                val beginContext = contextHooks.begin(probeId, start)
                 var outcome = ProbeOutcome.SUCCESS
                 var reason: String? = null
                 var actual = 0L
@@ -78,7 +80,7 @@ class ProbeClient internal constructor(
                         val deadline = start + timeoutNanos
                         alarm = synchronized(gate) {
                             checkWork(budget, deadline)
-                            val watchdogDelay = deadline - clock.nowNanos()
+                            val watchdogDelay = deadline - clock.nowElapsedRealtimeNs()
                             if (watchdogDelay <= 0) throw SocketTimeoutException()
                             activeProbeId = probeId
                             watchdog.schedule({
@@ -182,7 +184,7 @@ class ProbeClient internal constructor(
                 catch (_: IOException) {
                     outcome = when {
                         isCancelled(budget) -> ProbeOutcome.CANCELLED
-                        synchronized(gate) { timedOut } || clock.nowNanos() - start >= minOf(profile.sampleTimeoutNanos, remaining) -> ProbeOutcome.TIMEOUT
+                        synchronized(gate) { timedOut } || clock.nowElapsedRealtimeNs() - start >= minOf(profile.sampleTimeoutNanos, remaining) -> ProbeOutcome.TIMEOUT
                         else -> ProbeOutcome.ERROR
                     }
                     reason = when (outcome) { ProbeOutcome.TIMEOUT -> "deadline_or_io_timeout"; ProbeOutcome.CANCELLED -> "cancelled"; else -> "request_failure" }
@@ -192,20 +194,31 @@ class ProbeClient internal constructor(
                     if (outcome != ProbeOutcome.SUCCESS) { socket?.close(); socket = null; input = null }
                     lease?.close()
                 }
-                val end = clock.nowNanos()
-                val span = contextHooks.end(token, end)
+                val end = clock.nowElapsedRealtimeNs()
+                val reportedSpan = contextHooks.end(probeId, end)
+                val span = if (reportedSpan.movementSpanM.value == null && reportedSpan.movementSpanM.reason == null) {
+                    reportedSpan.copy(movementSpanM = ValueState(null, reportedSpan.movementSpanM.availability,
+                        "movement_reason_not_supplied"))
+                } else reportedSpan
                 val safe = outcome == ProbeOutcome.SUCCESS && validated &&
-                    span.continuity == ContextContinuity.CONTINUOUS && span.boundaryNanos.isEmpty() &&
-                    span.start == span.end && span.start.segmentId != null && span.start.networkEpoch != null
+                    span.continuity == ContextContinuity.CONTINUOUS && span.boundaries.isEmpty() &&
+                    span.start == beginContext && span.start.atElapsedRealtimeNs == start && span.end.atElapsedRealtimeNs == end &&
+                    span.start.sessionId == span.end.sessionId &&
+                    span.start.segment.availability == Availability.AVAILABLE && span.start.segment.value != null &&
+                    span.start.segment.value == span.end.segment.value &&
+                    span.start.networkEpoch.availability == Availability.AVAILABLE && span.start.networkEpoch.value != null &&
+                    span.start.networkEpoch.value == span.end.networkEpoch.value &&
+                    span.start.coordinateFrame == span.end.coordinateFrame &&
+                    span.start.coordinateFrame.availability in setOf(Availability.AVAILABLE, Availability.NOT_APPLICABLE)
                 observations += ProbeObservation(
-                    probeId, sequence, "probe-alpha-1", endpoint, profile, start, end, clock.nowNanos(), end,
+                    probeId, sequence, "probe-wave1-alpha-1", endpoint, profile, start, end, clock.nowElapsedRealtimeNs(), end,
                     profile.requestedBytes, actual, lease?.chargedBytes ?: 0, unconfirmed,
-                    outcome, reason, health, validated, serverUpload, span, safe, connection, "NOT_EVALUATED",
+                    outcome, reason, health, validated, serverUpload, beginContext, span, safe, connection, "NOT_EVALUATED",
                     if (profile.type == ProbeType.RESPONSIVENESS && outcome == ProbeOutcome.SUCCESS) end - start else null,
                     profile.type != ProbeType.RESPONSIVENESS,
                 )
                 if (outcome == ProbeOutcome.CANCELLED || outcome == ProbeOutcome.BUDGET_EXHAUSTED ||
-                    outcome == ProbeOutcome.SERVER_INVALID || clock.nowNanos() - profileStart >= profile.totalTimeoutNanos) break
+                    outcome == ProbeOutcome.SERVER_INVALID || clock.nowElapsedRealtimeNs() - profileStart >= profile.totalTimeoutNanos) break
             }
         } finally {
             socket?.close()
@@ -217,7 +230,7 @@ class ProbeClient internal constructor(
     private fun isCancelled(budget: ByteBudget): Boolean = synchronized(gate) { cancelled } || budget.snapshot().cancelled
     private fun checkWork(budget: ByteBudget, deadline: Long) {
         if (isCancelled(budget)) throw Stopped()
-        if (clock.nowNanos() >= deadline) throw SocketTimeoutException()
+        if (clock.nowElapsedRealtimeNs() >= deadline) throw SocketTimeoutException()
     }
     private fun open(endpoint: EndpointContext, deadline: Long, budget: ByteBudget): Socket {
         checkWork(budget, deadline)
@@ -228,7 +241,7 @@ class ProbeClient internal constructor(
         }
         try {
             checkWork(budget, deadline)
-            val timeoutNanos = deadline - clock.nowNanos()
+            val timeoutNanos = deadline - clock.nowElapsedRealtimeNs()
             if (timeoutNanos <= 0) throw SocketTimeoutException()
             val timeoutMs = ((timeoutNanos + 999_999) / 1_000_000).toInt().coerceAtLeast(1)
             raw.soTimeout = timeoutMs

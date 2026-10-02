@@ -1,8 +1,7 @@
 package com.omanii.app.probe
 
 import com.omanii.app.model.*
-import com.omanii.app.session.ProbeContextHooks
-import com.omanii.app.time.MonotonicClock
+import com.omanii.app.session.*
 import org.junit.Assert.*
 import org.junit.Test
 import java.net.InetAddress
@@ -24,11 +23,26 @@ class ProbeClientTest {
         prepareId: () -> String = { "synthetic-${probeSequence.incrementAndGet()}" },
         payloadFiller: () -> (ByteArray) -> Unit = { java.util.Random(0)::nextBytes },
     ) = ProbeClient(receiveClock, contextHooks, prepareId, payloadFiller)
-    private val ref = ProbeContextRef("segment-a", "epoch-a")
-    private val hooks = object : ProbeContextHooks {
-        override fun begin(startNanos: Long): Any = startNanos
-        override fun end(token: Any, endNanos: Long) = ProbeContextSpan(ref, ref, ContextContinuity.CONTINUOUS, emptyList())
+    private fun <T : Any> known(value: T) = ValueState(value, Availability.AVAILABLE, null)
+    private fun <T : Any> unavailable(reason: String) = ValueState<T>(null, Availability.NOT_EVALUATED, reason)
+    private fun snapshot(at: Long, segment: String = "segment-a", epoch: String = "epoch-a") = ContextSnapshot(
+        at, "synthetic-session", known(SegmentRef("synthetic-session", segment)),
+        known(NetworkEpochRef("synthetic-session", epoch)), known(CoordinateFrameRef("synthetic-session", "frame-a")),
+        unavailable<String>("pose_not_evaluated"),
+    )
+    private fun contextHooks(
+        finish: (ContextSnapshot, Long) -> ProbeIntervalContext = { start, end ->
+            ProbeIntervalContext(start, start.copy(atElapsedRealtimeNs = end), emptyList(),
+                ContextContinuity.CONTINUOUS, unavailable("movement_not_evaluated"))
+        },
+    ) = object : ProbeContextHooks {
+        private val starts = java.util.concurrent.ConcurrentHashMap<String, ContextSnapshot>()
+        override fun begin(probeId: String, startAtElapsedRealtimeNs: Long): ContextSnapshot =
+            snapshot(startAtElapsedRealtimeNs).also { check(starts.putIfAbsent(probeId, it) == null) }
+        override fun end(probeId: String, endAtElapsedRealtimeNs: Long): ProbeIntervalContext =
+            finish(starts.remove(probeId) ?: error("Missing probe begin"), endAtElapsedRealtimeNs)
     }
+    private val hooks = contextHooks()
     private fun endpoint(port: Int) = EndpointContext("omanii-local-alpha", "0.1.0", "local-private",
         "http-probe-alpha-1", "localhost", port, InetAddress.getByName("127.0.0.1"), false)
     private fun profile(type: ProbeType = ProbeType.RESPONSIVENESS, bytes: Long = 1, samples: Int = 1,
@@ -157,26 +171,104 @@ class ProbeClientTest {
         Thread.sleep(2100)
         socket.getOutputStream().write("cd".toByteArray())
     }) { endpoint ->
-        val transitions = object : ProbeContextHooks {
-            override fun begin(startNanos: Long): Any = startNanos
-            override fun end(token: Any, endNanos: Long) = ProbeContextSpan(ref, ref, ContextContinuity.BROKEN,
-                listOf(token as Long + 1, endNanos - 1), 2.0)
+        val transitions = contextHooks { start, end ->
+            val leaveAt = start.atElapsedRealtimeNs + 1
+            val returnAt = end - 1
+            val boundaries = listOf(
+                ContextBoundary(leaveAt, "network_transition", snapshot(leaveAt), snapshot(leaveAt, "segment-b", "epoch-b")),
+                ContextBoundary(returnAt, "network_return", snapshot(returnAt, "segment-b", "epoch-b"), snapshot(returnAt)),
+            )
+            ProbeIntervalContext(start, start.copy(atElapsedRealtimeNs = end), boundaries, ContextContinuity.BROKEN, known(2.0))
         }
         probeClient(contextHooks = transitions).use {
             val result = it.run(endpoint, profile(ProbeType.DOWNLOAD, 4, timeout = 3_000_000_000), ConcurrentByteBudget("movement", 100_000)).single()
             assertEquals(result.toString(), ProbeOutcome.SUCCESS, result.outcome); assertFalse(result.comparisonSafe)
-            assertEquals(2, result.context.boundaryNanos.size); assertTrue(result.endNanos - result.startNanos >= 2_000_000_000)
+            assertEquals(2, result.context.boundaries.size); assertTrue(result.endNanos - result.startNanos >= 2_000_000_000)
+            assertEquals(result.beginContext, result.context.start)
+            assertEquals(result.context.start.networkEpoch, result.context.end.networkEpoch)
+            val first = result.context.boundaries.first(); val last = result.context.boundaries.last()
+            assertEquals("epoch-a", first.before.networkEpoch.value!!.epochToken)
+            assertEquals("epoch-b", first.after.networkEpoch.value!!.epochToken)
+            assertEquals("epoch-b", last.before.networkEpoch.value!!.epochToken)
+            assertEquals("epoch-a", last.after.networkEpoch.value!!.epochToken)
+            assertEquals("synthetic-session", first.after.networkEpoch.value.sessionId)
+            assertEquals("network_transition", first.reason); assertEquals("network_return", last.reason)
+            assertEquals(2.0, result.context.movementSpanM.value!!, 0.0)
         }
     }
     @Test fun unknownAndUnevaluatedContinuityNeverSafe() = withNode { endpoint ->
         for (continuity in listOf(ContextContinuity.UNKNOWN, ContextContinuity.NOT_EVALUATED)) {
-            val unknown = object : ProbeContextHooks {
-                override fun begin(startNanos: Long): Any = startNanos
-                override fun end(token: Any, endNanos: Long) = ProbeContextSpan(ref, ref, continuity, emptyList())
+            val unknown = contextHooks { start, end ->
+                ProbeIntervalContext(start, start.copy(atElapsedRealtimeNs = end), emptyList(), continuity,
+                    unavailable("coverage_not_evaluated"))
             }
             probeClient(contextHooks = unknown).use {
                 assertFalse(it.run(endpoint, profile(), ConcurrentByteBudget("unknown", 100_000)).single().comparisonSafe)
             }
+        }
+    }
+    @Test fun continuousCoverageComparesScopedIdentitiesRatherThanPoseOrTimestampEquality() = withNode { endpoint ->
+        val moving = contextHooks { start, end ->
+            ProbeIntervalContext(start, start.copy(atElapsedRealtimeNs = end, poseObservationId = known("pose-end")),
+                emptyList(), ContextContinuity.CONTINUOUS, unavailable("movement_not_evaluated"))
+        }
+        probeClient(contextHooks = moving).use {
+            val result = it.run(endpoint, profile(), ConcurrentByteBudget("identities", 100_000)).single()
+            assertTrue(result.comparisonSafe)
+            assertNotEquals(result.context.start, result.context.end)
+            assertEquals(result.context.start.segment.value, result.context.end.segment.value)
+            assertEquals(result.context.start.networkEpoch.value, result.context.end.networkEpoch.value)
+            assertEquals("synthetic-session", result.context.start.segment.value!!.sessionId)
+            assertNull(result.context.movementSpanM.value)
+            assertEquals("movement_not_evaluated", result.context.movementSpanM.reason)
+        }
+    }
+    @Test fun incompleteCoverageOrDisagreeingBeginIsUnsafeWithoutDiscardingEvidence() = withNode { endpoint ->
+        for (mode in listOf("partial_start", "partial_end", "different_segment")) {
+            val partial = contextHooks { start, end ->
+                val reportedStart = when (mode) {
+                    "partial_start" -> start.copy(atElapsedRealtimeNs = start.atElapsedRealtimeNs + 1)
+                    "different_segment" -> start.copy(segment = known(SegmentRef(start.sessionId, "reported-segment")))
+                    else -> start
+                }
+                val reportedEnd = reportedStart.copy(atElapsedRealtimeNs = if (mode == "partial_end") end - 1 else end)
+                ProbeIntervalContext(reportedStart, reportedEnd, emptyList(), ContextContinuity.CONTINUOUS,
+                    unavailable("movement_not_evaluated"))
+            }
+            probeClient(contextHooks = partial).use {
+                val result = it.run(endpoint, profile(), ConcurrentByteBudget(mode, 100_000)).single()
+                assertEquals(ProbeOutcome.SUCCESS, result.outcome); assertFalse(result.comparisonSafe)
+                assertEquals(result.startNanos, result.beginContext.atElapsedRealtimeNs)
+                assertEquals("segment-a", result.beginContext.segment.value!!.segmentId)
+                if (mode == "different_segment") assertEquals("reported-segment", result.context.start.segment.value!!.segmentId)
+            }
+        }
+    }
+    @Test fun unavailableMovementPreservesAvailabilityAndExplainsMissingReason() = withNode { endpoint ->
+        for (reason in listOf("pose_source_unavailable", null)) {
+            val missing = contextHooks { start, end ->
+                ProbeIntervalContext(start, start.copy(atElapsedRealtimeNs = end), emptyList(), ContextContinuity.CONTINUOUS,
+                    ValueState(null, Availability.UNKNOWN, reason))
+            }
+            probeClient(contextHooks = missing).use {
+                val result = it.run(endpoint, profile(), ConcurrentByteBudget("movement", 100_000)).single()
+                assertNull(result.context.movementSpanM.value)
+                assertEquals(Availability.UNKNOWN, result.context.movementSpanM.availability)
+                assertEquals(reason ?: "movement_reason_not_supplied", result.context.movementSpanM.reason)
+            }
+        }
+    }
+    @Test fun matchingUnavailableIdentityValuesCannotCertifyComparison() = withNode { endpoint ->
+        val missing = contextHooks { start, end ->
+            val unknown = start.copy(networkEpoch = ValueState(null, Availability.REDACTED, "context_redacted"))
+            ProbeIntervalContext(unknown, unknown.copy(atElapsedRealtimeNs = end), emptyList(), ContextContinuity.UNKNOWN,
+                unavailable("movement_not_evaluated"))
+        }
+        probeClient(contextHooks = missing).use {
+            val result = it.run(endpoint, profile(), ConcurrentByteBudget("unknown-identity", 100_000)).single()
+            assertEquals(ProbeOutcome.SUCCESS, result.outcome); assertFalse(result.comparisonSafe)
+            assertEquals(Availability.REDACTED, result.context.end.networkEpoch.availability)
+            assertEquals("context_redacted", result.context.end.networkEpoch.reason)
         }
     }
     @Test fun cancellationClosesBlockedReadWithin500msNoNewSamplesOrPayloadFor300ms() {
