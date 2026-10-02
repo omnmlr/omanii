@@ -1,0 +1,58 @@
+[
+  {
+    "path": "android/app/build.gradle.kts",
+    "sha256": "251631F3944EC84DC34E374E239C4AA304C6C0F7A801216239C51E77875D8FC4"
+  },
+  {
+    "path": "android/app/src/main/AndroidManifest.xml",
+    "sha256": "5365B148271D74D5359108AE9A024130CCDF56EAA2BD4161512F369D55C5E54F"
+  },
+  {
+    "path": "android/app/src/main/java/com/omanii/app/model/Availability.kt",
+    "sha256": "1A0DC03C66015DAA771BBD12560709A8C0FF5EB149D76790CA6D0B1C14D373C2"
+  },
+  {
+    "path": "android/app/src/main/java/com/omanii/app/model/DevelopmentMetadata.kt",
+    "sha256": "ECB28E133D64A1CD31C8EBE57DE24780F2EEA9998E98B3FB7B4C99E48A545E25"
+  },
+  {
+    "path": "android/app/src/main/java/com/omanii/app/model/Geometry.kt",
+    "sha256": "7FB6BCFCDB7E590CCFBD96EF79EDC382F73A338B489CFB2F9DB930FC25FC5DAA"
+  },
+  {
+    "path": "android/app/src/main/java/com/omanii/app/model/Identity.kt",
+    "sha256": "09F023BEB8E048EE820D748F3901275A1D89F9D7D12B4D0F05826463D79A0FDE"
+  },
+  {
+    "path": "android/app/src/main/java/com/omanii/app/model/MonotonicClock.kt",
+    "sha256": "2F9C7FAFE0B86D30E729761B6CE1175A77AB283A798418965707B9F3D3A68684"
+  },
+  {
+    "path": "android/app/src/main/java/com/omanii/app/model/ObservationTiming.kt",
+    "sha256": "1C5649DD9DD611EBF0FCD8020A626A384F4CB63805CA749BA99E49B6121FA330"
+  },
+  {
+    "path": "android/app/src/main/java/com/omanii/app/session/ProbeContextHooks.kt",
+    "sha256": "568FF1590D5999649F22262C1F6615C8F84AF3B664468557519557F218C874EC"
+  },
+  {
+    "path": "android/app/src/main/java/com/omanii/app/time/AndroidElapsedRealtimeClock.kt",
+    "sha256": "EEFAD49645A8ED157A09CD9BC834039D4C2CD902E30D6988ABD4829DE4E84586"
+  },
+  {
+    "path": "android/app/src/test/java/com/omanii/app/model/AvailabilityTest.kt",
+    "sha256": "C16CBE113C7267508C0E10CED30B5F58F3480691A546A21067634C549C101ECC"
+  },
+  {
+    "path": "android/app/src/test/java/com/omanii/app/model/GeometryMetadataTest.kt",
+    "sha256": "3ED2C5CCF531FDF243E9A077711C78468D657C83957B4B05E03A9E131B2F22D2"
+  },
+  {
+    "path": "android/app/src/test/java/com/omanii/app/model/ObservationTimingTest.kt",
+    "sha256": "DBEEF86A1727E108784BECC72AEFAFB99D3E2B03377E48F0531D0927243D2A26"
+  },
+  {
+    "path": "android/app/src/test/java/com/omanii/app/session/ProbeIntervalContextTest.kt",
+    "sha256": "567DD1037DE733ABFF254DAF39706C501E938673E21C39E80929E3030641103D"
+  }
+]

@@ -1,0 +1,537 @@
+{
+  "approvedBase": "c1b3903ca9078651d74cefad9c22b67e5acd3f12",
+  "integrationWorktree": "C:/Users/USER/Desktop/omanii",
+  "integrationBranch": "feat/wave1-shared-integration",
+  "integrationCleanBeforeEdits": true,
+  "workerWorktree": "C:/Users/USER/Desktop/omanii-task-002",
+  "workerBranchBefore": "feat/wave1-shared-integration",
+  "workerBranchAfter": "feat/task-002-capability-radio",
+  "workerBefore": {
+    "status": [
+      "?? android/app/src/main/java/com/omanii/app/capability/AndroidCapabilityRepository.kt",
+      "?? android/app/src/main/java/com/omanii/app/capability/AvailabilityReason.kt",
+      "?? android/app/src/main/java/com/omanii/app/capability/CapabilityReport.kt",
+      "?? android/app/src/main/java/com/omanii/app/capability/CapabilityRepository.kt",
+      "?? android/app/src/main/java/com/omanii/app/capability/DeviceMetadata.kt",
+      "?? android/app/src/main/java/com/omanii/app/capability/PermissionState.kt",
+      "?? android/app/src/main/java/com/omanii/app/capability/ValueWithAvailability.kt",
+      "?? android/app/src/main/java/com/omanii/app/devexport/DevDebugStateProvider.kt",
+      "?? android/app/src/main/java/com/omanii/app/devexport/DevExportJsonSerializer.kt",
+      "?? android/app/src/main/java/com/omanii/app/devexport/DevExportRecord.kt",
+      "?? android/app/src/main/java/com/omanii/app/devexport/DevExportWriter.kt",
+      "?? android/app/src/main/java/com/omanii/app/network/epoch/NetworkEpochTracker.kt",
+      "?? android/app/src/main/java/com/omanii/app/network/filter/IndependentSampleFilter.kt",
+      "?? android/app/src/main/java/com/omanii/app/network/model/CellularSignalMetrics.kt",
+      "?? android/app/src/main/java/com/omanii/app/network/model/CellularTech.kt",
+      "?? android/app/src/main/java/com/omanii/app/network/model/MeteredState.kt",
+      "?? android/app/src/main/java/com/omanii/app/network/model/NetworkPathSnapshot.kt",
+      "?? android/app/src/main/java/com/omanii/app/network/model/NetworkTransition.kt",
+      "?? android/app/src/main/java/com/omanii/app/network/model/NetworkTransport.kt",
+      "?? android/app/src/main/java/com/omanii/app/network/model/NetworkValidationState.kt",
+      "?? android/app/src/main/java/com/omanii/app/network/model/RadioObservation.kt",
+      "?? android/app/src/main/java/com/omanii/app/network/model/VpnContext.kt",
+      "?? android/app/src/main/java/com/omanii/app/network/model/WifiBand.kt",
+      "?? android/app/src/main/java/com/omanii/app/network/model/WifiConnectedMetrics.kt",
+      "?? android/app/src/main/java/com/omanii/app/network/model/WifiStandard.kt",
+      "?? android/app/src/main/java/com/omanii/app/network/provider/AndroidNetworkContextProvider.kt",
+      "?? android/app/src/main/java/com/omanii/app/network/provider/NetworkContextProvider.kt",
+      "?? android/app/src/main/java/com/omanii/app/network/sentinel/AndroidSentinelFilter.kt",
+      "?? android/app/src/main/java/com/omanii/app/network/time/MonotonicClock.kt",
+      "?? android/app/src/main/java/com/omanii/app/network/token/IdentifierAnonymizer.kt",
+      "?? android/app/src/test/java/com/omanii/app/capability/CapabilityReportTest.kt",
+      "?? android/app/src/test/java/com/omanii/app/devexport/DevExportJsonSerializerTest.kt",
+      "?? android/app/src/test/java/com/omanii/app/network/AndroidNetworkContextProviderTest.kt",
+      "?? android/app/src/test/java/com/omanii/app/network/AndroidSentinelFilterTest.kt",
+      "?? android/app/src/test/java/com/omanii/app/network/CellularMetricsMappingTest.kt",
+      "?? android/app/src/test/java/com/omanii/app/network/IdentifierAnonymizerTest.kt",
+      "?? android/app/src/test/java/com/omanii/app/network/IndependentSampleFilterTest.kt",
+      "?? android/app/src/test/java/com/omanii/app/network/NetworkEpochTrackerTest.kt",
+      "?? android/app/src/test/java/com/omanii/app/network/NetworkFixturesValidationTest.kt",
+      "?? android/app/src/test/java/com/omanii/app/network/WifiMetricsMappingTest.kt",
+      "?? docs/evidence/TASK-002/REPORT.md",
+      "?? docs/evidence/TASK-002/physical.md",
+      "?? docs/evidence/TASK-002/proposed_manifest_patch.md",
+      "?? fixtures/network/ap-band-transition.jsonl",
+      "?? fixtures/network/cached-looking-repeated-value.jsonl",
+      "?? fixtures/network/capability_report_sample.json",
+      "?? fixtures/network/captive-or-unvalidated.json",
+      "?? fixtures/network/missing-metric.json",
+      "?? fixtures/network/transport-change.jsonl",
+      "?? fixtures/network/unknown-age-radio.json"
+    ],
+    "files": [
+      {
+        "path": "AGENTS.md",
+        "length": 7756,
+        "sha256": "01D9BBE137D589C1C1A2F9AF5138AF552D5424F95A3FED28927811CC58362083"
+      },
+      {
+        "path": "android/.gitattributes",
+        "length": 48,
+        "sha256": "CCE31694DB07DB4B908879017F1FD8BF8B59AECC84785B88FFD9CE309BCEFCE6"
+      },
+      {
+        "path": "android/.gitignore",
+        "length": 72,
+        "sha256": "901B50A335765DFE96F712FB6EFC1C18857AC2B99A3716A6FEDA069E8A1669F2"
+      },
+      {
+        "path": "android/app/build.gradle.kts",
+        "length": 835,
+        "sha256": "3902DFE88FD0C544444884E4184609B2B9ECF623E2A8E4708BE7226CAAE3AFAF"
+      },
+      {
+        "path": "android/app/src/main/AndroidManifest.xml",
+        "length": 602,
+        "sha256": "29C00A38861C6A7F7F3363EE16B1E9683B19A4B594D95ED695E21A1CF77805AB"
+      },
+      {
+        "path": "android/app/src/main/java/com/omanii/app/capability/AndroidCapabilityRepository.kt",
+        "length": 6142,
+        "sha256": "DE451CE52A74EC02D1E303D81F492DE9200D5AF65F4B3A0D34F8DC3FF12393B1"
+      },
+      {
+        "path": "android/app/src/main/java/com/omanii/app/capability/AvailabilityReason.kt",
+        "length": 1154,
+        "sha256": "830081C475F74D23B67AFADF282C397619ADA428865DCD3D9A202E2D54043D18"
+      },
+      {
+        "path": "android/app/src/main/java/com/omanii/app/capability/CapabilityReport.kt",
+        "length": 1025,
+        "sha256": "69F7C22D33CE1AD2C13854281CE4AD3CA8A52485BC077E2E0D5CDA82622A663A"
+      },
+      {
+        "path": "android/app/src/main/java/com/omanii/app/capability/CapabilityRepository.kt",
+        "length": 316,
+        "sha256": "2248BB1C490F2E512CDE6F0365DA4CA1524EBCA23E9AF50EC9B9A5490C2955CC"
+      },
+      {
+        "path": "android/app/src/main/java/com/omanii/app/capability/DeviceMetadata.kt",
+        "length": 339,
+        "sha256": "CFA0C8F777B116AB120562721D08DB0E7463AFA0F53E6BB80D428828378323C4"
+      },
+      {
+        "path": "android/app/src/main/java/com/omanii/app/capability/PermissionState.kt",
+        "length": 729,
+        "sha256": "5F45D33A934158F213A9C55B23F2A3451BA14745AE1A94D57206FAABFC27303B"
+      },
+      {
+        "path": "android/app/src/main/java/com/omanii/app/capability/ValueWithAvailability.kt",
+        "length": 1013,
+        "sha256": "5F04B865075B9B689D38C934C2D9F8FF724F3A2694222609F28604944028BE20"
+      },
+      {
+        "path": "android/app/src/main/java/com/omanii/app/devexport/DevDebugStateProvider.kt",
+        "length": 4527,
+        "sha256": "42A66D951997A24D0659070490FC690A6E7F28E016DE823BDE10C1DC7D234FF4"
+      },
+      {
+        "path": "android/app/src/main/java/com/omanii/app/devexport/DevExportJsonSerializer.kt",
+        "length": 10408,
+        "sha256": "CD2B1136A35D42A4FA934B81AE5EA64A3775BC3E50ADBC6973FBA9978EFA693B"
+      },
+      {
+        "path": "android/app/src/main/java/com/omanii/app/devexport/DevExportRecord.kt",
+        "length": 874,
+        "sha256": "6D1337346F26BC1E53A3FA538EA34C5A66052562409A1CBEECB34AACC0900AD8"
+      },
+      {
+        "path": "android/app/src/main/java/com/omanii/app/devexport/DevExportWriter.kt",
+        "length": 2266,
+        "sha256": "8ABEBCEE19D06769A1D0DE64460A764E9F50BF15C0239EE170E13DCB172B03B1"
+      },
+      {
+        "path": "android/app/src/main/java/com/omanii/app/MainActivity.kt",
+        "length": 721,
+        "sha256": "9CBD9DA2830CA2BD73E3259A41DFB199BDA870C16F0D38CA17FE8DF681F90EDB"
+      },
+      {
+        "path": "android/app/src/main/java/com/omanii/app/network/epoch/NetworkEpochTracker.kt",
+        "length": 6570,
+        "sha256": "090FD91E462E6330E1CCE537101F2AA7924DA17187EE8494B53D4AD1B5BBB4C2"
+      },
+      {
+        "path": "android/app/src/main/java/com/omanii/app/network/filter/IndependentSampleFilter.kt",
+        "length": 3448,
+        "sha256": "E5BDAC6E91A3BEE9C94106B74556AF0D3029326432E52A83EF0F8C3AD96F061E"
+      },
+      {
+        "path": "android/app/src/main/java/com/omanii/app/network/model/CellularSignalMetrics.kt",
+        "length": 2347,
+        "sha256": "25EA3621A96F84EFC156439CD7B1E1DFC6A7AEA478C1BD8B29754A3E861EE120"
+      },
+      {
+        "path": "android/app/src/main/java/com/omanii/app/network/model/CellularTech.kt",
+        "length": 176,
+        "sha256": "95583499EFF532A1854C2D2AB56B235EF988411B43F2CC2265763DB5A2A34AEF"
+      },
+      {
+        "path": "android/app/src/main/java/com/omanii/app/network/model/MeteredState.kt",
+        "length": 191,
+        "sha256": "910BB2A3DB32C6CFF792D99D2CF552AA2F0E46C370D08100FA2F553C7A619B43"
+      },
+      {
+        "path": "android/app/src/main/java/com/omanii/app/network/model/NetworkPathSnapshot.kt",
+        "length": 466,
+        "sha256": "683C33A3A2E88ED1338BFE7BE8DCD6569BB546947BB16DF9457604D77D0BD07D"
+      },
+      {
+        "path": "android/app/src/main/java/com/omanii/app/network/model/NetworkTransition.kt",
+        "length": 800,
+        "sha256": "3A916058465BA847A78C2F28DBBE2D695B22F0D61244D5E6371D9E291C69A3AA"
+      },
+      {
+        "path": "android/app/src/main/java/com/omanii/app/network/model/NetworkTransport.kt",
+        "length": 227,
+        "sha256": "2745FA87163ABEA219898E0DEEF57FFFECC5318516B3B68D4249D26E9A1CA210"
+      },
+      {
+        "path": "android/app/src/main/java/com/omanii/app/network/model/NetworkValidationState.kt",
+        "length": 274,
+        "sha256": "E146CD271ABC0188A4C196CDC41E0D8E12C09DCC5525DF5FF07FDD701303061F"
+      },
+      {
+        "path": "android/app/src/main/java/com/omanii/app/network/model/RadioObservation.kt",
+        "length": 842,
+        "sha256": "6325DA3E866E6E8A679C843DBBDE7A1DCB60FCA040E146A86785D2AD5DD20E78"
+      },
+      {
+        "path": "android/app/src/main/java/com/omanii/app/network/model/VpnContext.kt",
+        "length": 222,
+        "sha256": "8B7BF3BF87A2C453B62A761F1079AC54AB096726A7DB1A24E441DD0D0DC8D5A6"
+      },
+      {
+        "path": "android/app/src/main/java/com/omanii/app/network/model/WifiBand.kt",
+        "length": 627,
+        "sha256": "CF38B3F6544C55162EFEFAAD45F6C9CAA56680D4841EE87EE02A9AF40ED10A80"
+      },
+      {
+        "path": "android/app/src/main/java/com/omanii/app/network/model/WifiConnectedMetrics.kt",
+        "length": 732,
+        "sha256": "ADEFFEFACB9B85411CAB14EC3A929C6967A7D17670BA5728ABE54C25E89AEB16"
+      },
+      {
+        "path": "android/app/src/main/java/com/omanii/app/network/model/WifiStandard.kt",
+        "length": 682,
+        "sha256": "0CED1A0AF504F4F9945A834B09DAD35B40DF3FA713B3747DF666627956D0522D"
+      },
+      {
+        "path": "android/app/src/main/java/com/omanii/app/network/provider/AndroidNetworkContextProvider.kt",
+        "length": 21894,
+        "sha256": "D1395A06CDE320233B2F9FE464B0433339E295A67C297EDC11EAB4FFE33F8166"
+      },
+      {
+        "path": "android/app/src/main/java/com/omanii/app/network/provider/NetworkContextProvider.kt",
+        "length": 1021,
+        "sha256": "EC2C11D6DAEA5370F4CC078411A7A1665F74F1B8B1CCCD3C9357153ACCC1C7B2"
+      },
+      {
+        "path": "android/app/src/main/java/com/omanii/app/network/sentinel/AndroidSentinelFilter.kt",
+        "length": 4954,
+        "sha256": "E50A812D90CF6DFF271C65141CA7C19200B7B8A495FCE50E31C6D14EBB7B5D54"
+      },
+      {
+        "path": "android/app/src/main/java/com/omanii/app/network/time/MonotonicClock.kt",
+        "length": 583,
+        "sha256": "A6543E647B4AC129BF070FDD077128A427A14D0C58185154F21433EF98FCE80B"
+      },
+      {
+        "path": "android/app/src/main/java/com/omanii/app/network/token/IdentifierAnonymizer.kt",
+        "length": 2850,
+        "sha256": "497F24BD473814F2F3AD0F2702DEFC25372FFDC163ED67CCABE535562D9A0C2A"
+      },
+      {
+        "path": "android/app/src/main/res/values/strings.xml",
+        "length": 72,
+        "sha256": "A8F232B62C6DEE53CAE13F7EEC61D7F7FEB653514CB8BDDA21D2570A745B6773"
+      },
+      {
+        "path": "android/app/src/test/java/com/omanii/app/capability/CapabilityReportTest.kt",
+        "length": 2615,
+        "sha256": "0451DC8AC4E03BB29547485853E6FA94759E9FFFA016FBF6505D2A3AFD5627A8"
+      },
+      {
+        "path": "android/app/src/test/java/com/omanii/app/devexport/DevExportJsonSerializerTest.kt",
+        "length": 5197,
+        "sha256": "B1AF326728A4D0A4D90C6CCDEEE663917EA1544E724C44CE93AADBFB9F0DA8E6"
+      },
+      {
+        "path": "android/app/src/test/java/com/omanii/app/network/AndroidNetworkContextProviderTest.kt",
+        "length": 4109,
+        "sha256": "4DD963083B99B15E342293925A98590D63B9F3AB3F1EDCE14544076CEFB380C0"
+      },
+      {
+        "path": "android/app/src/test/java/com/omanii/app/network/AndroidSentinelFilterTest.kt",
+        "length": 4173,
+        "sha256": "C43703A8A98EC42EC2CCC1F9E497C53F100C764EF47D7F564AE1FD90C747F3D0"
+      },
+      {
+        "path": "android/app/src/test/java/com/omanii/app/network/CellularMetricsMappingTest.kt",
+        "length": 2699,
+        "sha256": "CDE03F8CF7872BBBAA1142126392EC2ED21AB3F918CFC25AFA80EDC725938713"
+      },
+      {
+        "path": "android/app/src/test/java/com/omanii/app/network/IdentifierAnonymizerTest.kt",
+        "length": 2618,
+        "sha256": "C22EA7D803C9648E8218C8CED9343B82C485F5CD12CB2516601C475BBBFE2DCC"
+      },
+      {
+        "path": "android/app/src/test/java/com/omanii/app/network/IndependentSampleFilterTest.kt",
+        "length": 5258,
+        "sha256": "A090B5E58E9DB04CD0CB486E146ED1D7DA9D364775B1D253302C3B8AEFEC7D24"
+      },
+      {
+        "path": "android/app/src/test/java/com/omanii/app/network/NetworkEpochTrackerTest.kt",
+        "length": 5640,
+        "sha256": "3E3DD690B5A6DA96D430970AE7D904EA4FB1597B79E36266B8E30105780C5582"
+      },
+      {
+        "path": "android/app/src/test/java/com/omanii/app/network/NetworkFixturesValidationTest.kt",
+        "length": 3026,
+        "sha256": "D5F4451612159412140B410F35B382C542FE147DD749C9F8EED076603C0E8C91"
+      },
+      {
+        "path": "android/app/src/test/java/com/omanii/app/network/WifiMetricsMappingTest.kt",
+        "length": 2127,
+        "sha256": "5FC2B238076787D22E7078AC9D6E1371F4840B466971E74F8EA65E50B74057BB"
+      },
+      {
+        "path": "android/app/src/test/java/com/omanii/app/ScaffoldTest.kt",
+        "length": 265,
+        "sha256": "4F123A0F20B994849A90BB12D9CF0D2CD7C84B15233E5F43EA77405970B245DB"
+      },
+      {
+        "path": "android/build.gradle.kts",
+        "length": 153,
+        "sha256": "70AAEED9B5FF333A01B1091114C7E55BC8865C91085A2E24CAA5CD0D2A98D283"
+      },
+      {
+        "path": "android/gradle.properties",
+        "length": 78,
+        "sha256": "6E08B0A8ABC9999E45B475098FBAE4DB97EFC7F1BB792A521390D58A65124CFF"
+      },
+      {
+        "path": "android/gradle/wrapper/gradle-wrapper.jar",
+        "length": 48462,
+        "sha256": "497C8C2A7E5031F6AA847F88104AA80A93532EC32EE17BDB8D1D2F67A194A9C7"
+      },
+      {
+        "path": "android/gradle/wrapper/gradle-wrapper.properties",
+        "length": 295,
+        "sha256": "62E69C7C5012461B65379CFCBEE6C50C6DC989BF8DA540ED77D3922EEC87CCF7"
+      },
+      {
+        "path": "android/gradlew",
+        "length": 8678,
+        "sha256": "E01B5C97892572C82405C02B96A3382379100E7D825CE7C48883D95C26928750"
+      },
+      {
+        "path": "android/gradlew.bat",
+        "length": 2870,
+        "sha256": "D228565307DF93FCD8DCAF83F7CDBAF17DE2F147FC602F4C8E6938033AA3BC20"
+      },
+      {
+        "path": "android/README.md",
+        "length": 479,
+        "sha256": "DE27F426B897C1F3A2FF65544A245FB532961E626411DA234E7A0F6FCE1D859F"
+      },
+      {
+        "path": "android/settings.gradle.kts",
+        "length": 352,
+        "sha256": "B2A91FC6BB7CA73A529DC643F66617F98775C9A9150B9D6A2C63F093754AB475"
+      },
+      {
+        "path": "ARCHITECTURE.md",
+        "length": 21426,
+        "sha256": "FD0957880DB24078303AA2ECDF11994E49CEA65D5188C0A0E9B58864DFADB1A0"
+      },
+      {
+        "path": "docs/adr/ADR-001-android-native-stack.md",
+        "length": 2698,
+        "sha256": "AD7A7108AB6809127C53E65CA2158FA5686839432FC73DE5DF3DCC2860EFA738"
+      },
+      {
+        "path": "docs/adr/ADR-002-measurement-truth-and-uncertainty.md",
+        "length": 2469,
+        "sha256": "4066E18AD1E93344E556AD181754B053EA94E09748978C969B1483E5CB1B0BA0"
+      },
+      {
+        "path": "docs/adr/ADR-003-spatial-coordinate-session-model.md",
+        "length": 2342,
+        "sha256": "A93A0AAC3B5ED9286539F6EF815166085150D75AC158E6F40893432438858490"
+      },
+      {
+        "path": "docs/adr/ADR-004-protocol-and-score-versioning.md",
+        "length": 2041,
+        "sha256": "7AB9F2BD2087A6387A85E4ACA1FB8391C39A0A2F207049E36B3B166A801831D3"
+      },
+      {
+        "path": "docs/adr/ADR-005-local-first-privacy.md",
+        "length": 2221,
+        "sha256": "70B47B131788F7EC58CACEC47939848E85767447E1AB17E638D8CEB765C4CCAB"
+      },
+      {
+        "path": "docs/adr/ADR-006-controlled-measurement-endpoints.md",
+        "length": 2143,
+        "sha256": "3B73B68F4B7BBD7CE7FE6DEA9D7A6D1F70622B023F4C1B880A82D680C6A3DA0D"
+      },
+      {
+        "path": "docs/adr/ADR-007-ai-agent-development-workflow.md",
+        "length": 1896,
+        "sha256": "49FA5D21DCA258AC5A4BB68CF92674159ED3D3B4213E889C267E9CC10F13DA7F"
+      },
+      {
+        "path": "docs/adr/ADR-008-autonomous-repair-loop-safety.md",
+        "length": 1946,
+        "sha256": "67A366FFE20D444647701976CAF67C5C927E52E0EA1E8ADA0FCA9468390D20FF"
+      },
+      {
+        "path": "docs/adr/ADR-009-consumer-layer-vs-measurement-engine.md",
+        "length": 1956,
+        "sha256": "71C404CE446159AC1DFD4A7397B8B954BA64508C351CCC86A82BECE4D7D4843E"
+      },
+      {
+        "path": "docs/adr/ADR-010-experimental-algorithms-and-promotion.md",
+        "length": 2220,
+        "sha256": "F025BA0BB142601DB282FDA53777BEA669D90021FB610D1D3E2E682A0F06B6A8"
+      },
+      {
+        "path": "docs/DEVELOPMENT_CONTROL.md",
+        "length": 7083,
+        "sha256": "AF0CB7054C931790DF1F5CD8E7599ABE20F5AAF308D2071338B56747A0823467"
+      },
+      {
+        "path": "docs/evidence/README.md",
+        "length": 895,
+        "sha256": "23A5A4C4B3EE5443152ECFEAF79421DB0B7AA8002292A220555ADD75F98D3ECA"
+      },
+      {
+        "path": "docs/evidence/TASK-001A/REPORT.md",
+        "length": 7975,
+        "sha256": "97D87C3EA0A5DD65CDE5D587D5BA26C0EC7A1BA7D1EF0E0DAB347883C69C8A76"
+      },
+      {
+        "path": "docs/evidence/TASK-002/physical.md",
+        "length": 6890,
+        "sha256": "BDA645F46BD426C2E81ACD40B15CCBB836CEBB2284A6503600DBF6D2760B3837"
+      },
+      {
+        "path": "docs/evidence/TASK-002/proposed_manifest_patch.md",
+        "length": 3387,
+        "sha256": "0D560D64DD4C82592C9E9B128E30D74C4CEBFD6F05CE262F763FC8F6C43ED531"
+      },
+      {
+        "path": "docs/evidence/TASK-002/REPORT.md",
+        "length": 11540,
+        "sha256": "906394ABC8B0EDDBAB573467FF3364974A655522FCAF26321FE492DFFBD6C63F"
+      },
+      {
+        "path": "docs/proposals/README.md",
+        "length": 479,
+        "sha256": "8ADF6506A3104EC68CFC95AC67854EB8062D82BBC98E2B414B096B00A23E6B5C"
+      },
+      {
+        "path": "docs/research/EXPERIMENTS.md",
+        "length": 2235,
+        "sha256": "1A342D7A8ADDE132902C258563CC6D6C5BF5F9DFB6DA65A8F9E03FD714305717"
+      },
+      {
+        "path": "docs/research/README.md",
+        "length": 418,
+        "sha256": "157CC6C45F7B78E920FACE3526AF1B1E0246A335F964AFA77C2DDFC44B43BA00"
+      },
+      {
+        "path": "docs/SCORE_ARCHITECTURE.md",
+        "length": 6347,
+        "sha256": "73F0C73817A437662BBEA7551F99BDA4962AB132A5D7E931663C9852C3C05AAF"
+      },
+      {
+        "path": "docs/tasks/TASK-001A-shared-android-scaffold.md",
+        "length": 4422,
+        "sha256": "664CB756904EA2C449F6A9FFDD2F46A4FE857880B448EC2355420B62EDE9222C"
+      },
+      {
+        "path": "docs/tasks/TASK-002-android-capability-radio-logger.md",
+        "length": 12236,
+        "sha256": "4A902BD0C0D298D61411630BC3674AE32D24549BBA03265618FF7C39FF7E907B"
+      },
+      {
+        "path": "docs/tasks/TASK-003-arcore-pose-scan-session-adapter.md",
+        "length": 10511,
+        "sha256": "43E29AD99A4E3D847F1A48C17BF30531133BB034EE742A7239F8F13D00531B02"
+      },
+      {
+        "path": "docs/tasks/TASK-004-controlled-endpoint-probe-replay.md",
+        "length": 12039,
+        "sha256": "84623D93AA34E532F53C50DE72BF6A9EE52F0D122B78DB8BA410A8550305263E"
+      },
+      {
+        "path": "fixtures/network/ap-band-transition.jsonl",
+        "length": 4631,
+        "sha256": "19677A06D2BD8878ACB6CBD2950DA37CBA0D001CB7FFD2070D8A86335A636A94"
+      },
+      {
+        "path": "fixtures/network/cached-looking-repeated-value.jsonl",
+        "length": 3763,
+        "sha256": "8FACFA44BF37A8E18F00C5519A65BB607E7BF7695C8F58B31E0F4CCC63B2A166"
+      },
+      {
+        "path": "fixtures/network/capability_report_sample.json",
+        "length": 2199,
+        "sha256": "8A1764BDE14475334EA286F6B4E4C69156B3D88EDEC5564BF514875E81F43608"
+      },
+      {
+        "path": "fixtures/network/captive-or-unvalidated.json",
+        "length": 1779,
+        "sha256": "A51AB24216DC3F0EA93A34174B1524C944E8F23A855F341A3CE142412966D52C"
+      },
+      {
+        "path": "fixtures/network/missing-metric.json",
+        "length": 2092,
+        "sha256": "0E04A1E34D5943CC3F7DBC678FFF4343AF6EE057E6F37BEF73BE2C7DDE6DBE16"
+      },
+      {
+        "path": "fixtures/network/transport-change.jsonl",
+        "length": 2937,
+        "sha256": "2E397F876F86D2699938EBC2F22B57E93AC3BC79E49895BA459E3BB3D74D50A5"
+      },
+      {
+        "path": "fixtures/network/unknown-age-radio.json",
+        "length": 1773,
+        "sha256": "F6B17E89511CB4A69550D8942DACE65E35AD3675D88C5E48AAF1CD7C5FE74B2C"
+      },
+      {
+        "path": "fixtures/README.md",
+        "length": 2559,
+        "sha256": "AF8EDFB18C56E85DDE2AD62C56695EBBBCDE70F059AC9BF8770233656FDACBF4"
+      },
+      {
+        "path": "measurement-server/README.md",
+        "length": 253,
+        "sha256": "8758ABE3EA980CF71AD94E725F855A6F033D20612F019F1258D9F1E9D1C165B8"
+      },
+      {
+        "path": "PRODUCT.md",
+        "length": 13284,
+        "sha256": "AD60AD2B65757AB739B9D6009607976F6C59B5293F63E36F001A298552E0720C"
+      },
+      {
+        "path": "protocol/README.md",
+        "length": 9018,
+        "sha256": "16C3D67174C30AE4B1B4E6F6CD3B510BD8206DD28AED4E385D9F6229F05E046C"
+      },
+      {
+        "path": "README.md",
+        "length": 3297,
+        "sha256": "69EAB9018D116B7D6884F8BD607F49A50A5EB84E780438015DC771352728E0C2"
+      },
+      {
+        "path": "web/README.md",
+        "length": 226,
+        "sha256": "90DDBE2A7E6149575B0FFA327464510A286A0D1AD5CF5E6F57441DFE73797350"
+      }
+    ]
+  },
+  "workerAfterMatchesExactly": true,
+  "method": "SHA-256 and lengths for git-listed tracked/untracked files; exact porcelain status comparison immediately after switching. No stash/reset/clean/overwrite."
+}
