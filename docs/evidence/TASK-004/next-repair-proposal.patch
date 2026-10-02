@@ -1,0 +1,20 @@
+diff --git a/android/app/src/main/java/com/omanii/app/probe/ProbeClient.kt b/android/app/src/main/java/com/omanii/app/probe/ProbeClient.kt
+--- a/android/app/src/main/java/com/omanii/app/probe/ProbeClient.kt
++++ b/android/app/src/main/java/com/omanii/app/probe/ProbeClient.kt
+@@ -42,12 +42,14 @@
+     fun run(endpoint: EndpointContext, profile: TestProfile, budget: ByteBudget): List<ProbeObservation> {
+         validate(endpoint, profile)
+         synchronized(gate) { check(!running) { "One run per client at a time" }; running = true }
+         val observations = mutableListOf<ProbeObservation>()
+-        val profileStart = clock.nowNanos()
+         var socket: Socket? = null
+         try {
++            // Prepare bounded correlation IDs before timing the network profile.
++            val probeIds = List(profile.samples) { UUID.randomUUID().toString() }
++            val profileStart = clock.nowNanos()
+             for (sequence in 0 until profile.samples) {
+                 // ID generation is preparation, not part of HTTP application timing.
+-                val probeId = UUID.randomUUID().toString()
++                val probeId = probeIds[sequence]
+                 val start = clock.nowNanos()
+                 val token = contextHooks.begin(start)

@@ -1,0 +1,4 @@
+.gradle/
+.jvm-test/
+.npm-cache/
+*.log
