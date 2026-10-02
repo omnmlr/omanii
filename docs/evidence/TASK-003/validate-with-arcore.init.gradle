@@ -1,0 +1,6 @@
+// Validation-only dependency injection. Does not edit any shared Gradle file or install device code.
+gradle.beforeProject { p ->
+    p.plugins.withId('com.android.application') {
+        p.dependencies.add('implementation', 'com.google.ar:core:1.56.0')
+    }
+}

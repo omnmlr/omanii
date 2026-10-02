@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.omanii.app.pose.PoseReplayTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2026-10-01T19:41:22.223Z" hostname="DESKTOP-0JG6VKQ" time="0.587">
+  <properties/>
+  <testcase name="replayRoundTripPreservesAllSegmentBoundariesAndSourceDomains" classname="com.omanii.app.pose.PoseReplayTest" time="0.254"/>
+  <testcase name="routeNeverBridgesPausedTrackingOrDifferentFrames" classname="com.omanii.app.pose.PoseReplayTest" time="0.031"/>
+  <testcase name="parserRejectsRegressingReceiveTimePartialPoseAndMissingBoundary" classname="com.omanii.app.pose.PoseReplayTest" time="0.107"/>
+  <testcase name="exportContainsContractMetadataAndNoImageryOrGeography" classname="com.omanii.app.pose.PoseReplayTest" time="0.066"/>
+  <testcase name="fixtureGoldenCoordinatesAndTrackingTimeline" classname="com.omanii.app.pose.PoseReplayTest" time="0.032"/>
+  <testcase name="parserRejectsTruncationDuplicateKeysAndUnterminatedString" classname="com.omanii.app.pose.PoseReplayTest" time="0.039"/>
+  <testcase name="parserRejectsWrongVersionsUnknownFieldsAndFalseAge" classname="com.omanii.app.pose.PoseReplayTest" time="0.03"/>
+  <testcase name="longNanosecondsRemainExactAboveDoubleIntegerPrecision" classname="com.omanii.app.pose.PoseReplayTest" time="0.018"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
