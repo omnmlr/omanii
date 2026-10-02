@@ -1,0 +1,170 @@
+[
+  {
+    "old_exists": true,
+    "exact_match": false,
+    "path": "android/app/src/main/java/com/omanii/app/capability/AndroidCapabilityRepository.kt",
+    "action": "reimplemented/new"
+  },
+  {
+    "old_exists": true,
+    "exact_match": false,
+    "path": "android/app/src/main/java/com/omanii/app/capability/CapabilityRepository.kt",
+    "action": "reimplemented/new"
+  },
+  {
+    "old_exists": true,
+    "exact_match": true,
+    "path": "android/app/src/main/java/com/omanii/app/capability/DeviceMetadata.kt",
+    "action": "salvaged-exact"
+  },
+  {
+    "old_exists": true,
+    "exact_match": false,
+    "path": "android/app/src/main/java/com/omanii/app/devexport/DevDebugStateProvider.kt",
+    "action": "reimplemented/new"
+  },
+  {
+    "old_exists": true,
+    "exact_match": false,
+    "path": "android/app/src/main/java/com/omanii/app/devexport/DevExportJsonSerializer.kt",
+    "action": "reimplemented/new"
+  },
+  {
+    "old_exists": true,
+    "exact_match": false,
+    "path": "android/app/src/main/java/com/omanii/app/network/epoch/NetworkEpochTracker.kt",
+    "action": "reimplemented/new"
+  },
+  {
+    "old_exists": true,
+    "exact_match": true,
+    "path": "android/app/src/main/java/com/omanii/app/network/model/CellularTech.kt",
+    "action": "salvaged-exact"
+  },
+  {
+    "old_exists": false,
+    "exact_match": false,
+    "path": "android/app/src/main/java/com/omanii/app/network/model/NetworkObservation.kt",
+    "action": "reimplemented/new"
+  },
+  {
+    "old_exists": true,
+    "exact_match": true,
+    "path": "android/app/src/main/java/com/omanii/app/network/model/NetworkTransport.kt",
+    "action": "salvaged-exact"
+  },
+  {
+    "old_exists": true,
+    "exact_match": true,
+    "path": "android/app/src/main/java/com/omanii/app/network/model/WifiBand.kt",
+    "action": "salvaged-exact"
+  },
+  {
+    "old_exists": true,
+    "exact_match": true,
+    "path": "android/app/src/main/java/com/omanii/app/network/model/WifiStandard.kt",
+    "action": "salvaged-exact"
+  },
+  {
+    "old_exists": false,
+    "exact_match": false,
+    "path": "android/app/src/main/java/com/omanii/app/network/provider/AndroidNetworkReadSource.kt",
+    "action": "reimplemented/new"
+  },
+  {
+    "old_exists": true,
+    "exact_match": false,
+    "path": "android/app/src/main/java/com/omanii/app/network/provider/NetworkContextProvider.kt",
+    "action": "reimplemented/new"
+  },
+  {
+    "old_exists": false,
+    "exact_match": false,
+    "path": "android/app/src/main/java/com/omanii/app/network/provider/RadioAccessGate.kt",
+    "action": "reimplemented/new"
+  },
+  {
+    "old_exists": true,
+    "exact_match": false,
+    "path": "android/app/src/main/java/com/omanii/app/network/sentinel/AndroidSentinelFilter.kt",
+    "action": "reimplemented/new"
+  },
+  {
+    "old_exists": false,
+    "exact_match": false,
+    "path": "android/app/src/main/java/com/omanii/app/network/sentinel/CellularMetricMapper.kt",
+    "action": "reimplemented/new"
+  },
+  {
+    "old_exists": true,
+    "exact_match": false,
+    "path": "android/app/src/main/java/com/omanii/app/network/token/IdentifierAnonymizer.kt",
+    "action": "reimplemented/new"
+  },
+  {
+    "old_exists": false,
+    "exact_match": false,
+    "path": "android/app/src/test/java/com/omanii/app/capability/CapabilityGateTest.kt",
+    "action": "reimplemented/new"
+  },
+  {
+    "old_exists": false,
+    "exact_match": false,
+    "path": "android/app/src/test/java/com/omanii/app/devexport/DevExportTest.kt",
+    "action": "reimplemented/new"
+  },
+  {
+    "old_exists": true,
+    "exact_match": false,
+    "path": "android/app/src/test/java/com/omanii/app/network/IdentifierAnonymizerTest.kt",
+    "action": "reimplemented/new"
+  },
+  {
+    "old_exists": true,
+    "exact_match": false,
+    "path": "android/app/src/test/java/com/omanii/app/network/NetworkEpochTrackerTest.kt",
+    "action": "reimplemented/new"
+  },
+  {
+    "old_exists": false,
+    "exact_match": false,
+    "path": "android/app/src/test/java/com/omanii/app/network/NetworkFixturesReplayTest.kt",
+    "action": "reimplemented/new"
+  },
+  {
+    "old_exists": false,
+    "exact_match": false,
+    "path": "android/app/src/test/java/com/omanii/app/network/RadioSemanticsTest.kt",
+    "action": "reimplemented/new"
+  },
+  {
+    "old_exists": false,
+    "exact_match": false,
+    "path": "android/app/src/test/java/com/omanii/app/network/RepairTestData.kt",
+    "action": "reimplemented/new"
+  },
+  {
+    "old_exists": true,
+    "exact_match": true,
+    "path": "android/app/src/test/java/com/omanii/app/network/WifiMetricsMappingTest.kt",
+    "action": "salvaged-exact"
+  },
+  {
+    "old_exists": false,
+    "exact_match": false,
+    "path": "fixtures/network/README.md",
+    "action": "reimplemented/new"
+  },
+  {
+    "old_exists": false,
+    "exact_match": false,
+    "path": "fixtures/network/repair-cases.tsv",
+    "action": "reimplemented/new"
+  },
+  {
+    "old_exists": false,
+    "exact_match": false,
+    "path": "fixtures/network/repair-golden.jsonl",
+    "action": "reimplemented/new"
+  }
+]

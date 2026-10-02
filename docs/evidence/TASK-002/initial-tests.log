@@ -1,0 +1,59 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.6.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+> Task :app:preBuild UP-TO-DATE
+> Task :app:preDebugBuild UP-TO-DATE
+> Task :app:generateDebugResources UP-TO-DATE
+> Task :app:packageDebugResources UP-TO-DATE
+> Task :app:processDebugNavigationResources UP-TO-DATE
+> Task :app:parseDebugLocalResources UP-TO-DATE
+> Task :app:generateDebugRFile UP-TO-DATE
+> Task :app:compileDebugKotlin UP-TO-DATE
+> Task :app:javaPreCompileDebug
+> Task :app:compileDebugJavaWithJavac NO-SOURCE
+> Task :app:mapDebugSourceSetPaths
+> Task :app:checkDebugAarMetadata
+> Task :app:compileDebugNavigationResources
+> Task :app:createDebugCompatibleScreenManifests
+> Task :app:extractDeepLinksDebug
+> Task :app:mergeDebugResources
+> Task :app:processDebugMainManifest
+> Task :app:processDebugManifest
+> Task :app:preDebugUnitTestBuild UP-TO-DATE
+> Task :app:javaPreCompileDebugUnitTest
+> Task :app:processDebugJavaRes
+> Task :app:processDebugManifestForPackage
+> Task :app:processDebugResources
+> Task :app:bundleDebugClassesToRuntimeJar
+> Task :app:bundleDebugClassesToCompileJar
+
+> Task :app:compileDebugUnitTestKotlin
+w: file:///C:/Users/USER/Desktop/omanii-task-002-repair/android/app/src/test/java/com/omanii/app/network/NetworkFixturesReplayTest.kt:32:88 Unnecessary non-null assertion (!!) on a non-null receiver of type 'WifiConnectedMetrics'.
+w: file:///C:/Users/USER/Desktop/omanii-task-002-repair/android/app/src/test/java/com/omanii/app/network/NetworkFixturesReplayTest.kt:42:48 Unnecessary non-null assertion (!!) on a non-null receiver of type 'NetworkContextLogger'.
+w: file:///C:/Users/USER/Desktop/omanii-task-002-repair/android/app/src/test/java/com/omanii/app/network/NetworkFixturesReplayTest.kt:48:9 Only safe (?.) or non-null asserted (!!.) calls are allowed on a nullable receiver of type 'File?'.
+w: file:///C:/Users/USER/Desktop/omanii-task-002-repair/android/app/src/test/java/com/omanii/app/network/RadioSemanticsTest.kt:72:85 Unnecessary non-null assertion (!!) on a non-null receiver of type 'List<CellularSignalMetrics>'.
+w: file:///C:/Users/USER/Desktop/omanii-task-002-repair/android/app/src/test/java/com/omanii/app/network/RadioSemanticsTest.kt:74:44 Unnecessary non-null assertion (!!) on a non-null receiver of type 'List<CellularSignalMetrics>'.
+
+> Task :app:compileDebugUnitTestJavaWithJavac NO-SOURCE
+> Task :app:processDebugUnitTestJavaRes
+
+> Task :app:testDebugUnitTest
+
+NetworkFixturesReplayTest > replaySyntheticCasesThroughProductionLoggerAndCompareGoldenExport FAILED
+    java.io.FileNotFoundException at NetworkFixturesReplayTest.kt:50
+        Caused by: java.nio.file.NoSuchFileException at NetworkFixturesReplayTest.kt:50
+
+60 tests completed, 1 failed
+
+> Task :app:testDebugUnitTest FAILED
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':app:testDebugUnitTest'.
+> There were failing tests. See the report at: file:///C:/Users/USER/Desktop/omanii-task-002-repair/android/app/build/reports/tests/testDebugUnitTest/index.html
+
+* Try:
+> Run with --scan to get full insights from a Build Scan (powered by Develocity).
+
+BUILD FAILED in 1m 31s
+24 actionable tasks: 18 executed, 6 up-to-date
