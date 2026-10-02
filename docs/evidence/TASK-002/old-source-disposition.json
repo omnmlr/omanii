@@ -1,0 +1,252 @@
+[
+  {
+    "old_path": "android/app/src/main/java/com/omanii/app/capability/AndroidCapabilityRepository.kt",
+    "old_sha256": "de451ce52a74ec02d1e303d81f492de9200d5af65f4b3a0d34f8dc3ff12393b1",
+    "disposition": "old bytes rejected; role reimplemented at same owned path"
+  },
+  {
+    "old_path": "android/app/src/main/java/com/omanii/app/capability/AvailabilityReason.kt",
+    "old_sha256": "830081c475f74d23b67afadf282c397619ada428865dcd3d9a202e2d54043d18",
+    "disposition": "not copied; rejected/replaced by canonical or rebuilt task-owned types/tests"
+  },
+  {
+    "old_path": "android/app/src/main/java/com/omanii/app/capability/CapabilityReport.kt",
+    "old_sha256": "69f7c22d33ce1ad2c13854281ce4ad3ca8a52485bc077e2e0d5cda82622a663a",
+    "disposition": "not copied; rejected/replaced by canonical or rebuilt task-owned types/tests"
+  },
+  {
+    "old_path": "android/app/src/main/java/com/omanii/app/capability/CapabilityRepository.kt",
+    "old_sha256": "2248bb1c490f2e512cde6f0365da4ca1524ebca23e9af50ec9b9a5490c2955cc",
+    "disposition": "old bytes rejected; role reimplemented at same owned path"
+  },
+  {
+    "old_path": "android/app/src/main/java/com/omanii/app/capability/DeviceMetadata.kt",
+    "old_sha256": "cfa0c8f777b116ab120562721d08db0e7463afa0f53e6bb80d428828378323c4",
+    "disposition": "salvaged exact bytes"
+  },
+  {
+    "old_path": "android/app/src/main/java/com/omanii/app/capability/PermissionState.kt",
+    "old_sha256": "5f45d33a934158f213a9c55b23f2a3451ba14745ae1a94d57206faabfc27303b",
+    "disposition": "not copied; rejected/replaced by canonical or rebuilt task-owned types/tests"
+  },
+  {
+    "old_path": "android/app/src/main/java/com/omanii/app/capability/ValueWithAvailability.kt",
+    "old_sha256": "5f04b865075b9b689d38c934c2d9f8ff724f3a2694222609f28604944028be20",
+    "disposition": "not copied; rejected/replaced by canonical or rebuilt task-owned types/tests"
+  },
+  {
+    "old_path": "android/app/src/main/java/com/omanii/app/devexport/DevDebugStateProvider.kt",
+    "old_sha256": "42a66d951997a24d0659070490fc690a6e7f28e016de823bde10c1dc7d234ff4",
+    "disposition": "old bytes rejected; role reimplemented at same owned path"
+  },
+  {
+    "old_path": "android/app/src/main/java/com/omanii/app/devexport/DevExportJsonSerializer.kt",
+    "old_sha256": "cd2b1136a35d42a4fa934b81ae5ea64a3775bc3e50adbc6973fba9978efa693b",
+    "disposition": "old bytes rejected; role reimplemented at same owned path"
+  },
+  {
+    "old_path": "android/app/src/main/java/com/omanii/app/devexport/DevExportRecord.kt",
+    "old_sha256": "6d1337346f26bc1e53a3fa538ea34c5a66052562409a1cbeecb34aacc0900ad8",
+    "disposition": "not copied; rejected/replaced by canonical or rebuilt task-owned types/tests"
+  },
+  {
+    "old_path": "android/app/src/main/java/com/omanii/app/devexport/DevExportWriter.kt",
+    "old_sha256": "8abebcee19d06769a1d0de64460a764e9f50bf15c0239ee170e13dcb172b03b1",
+    "disposition": "not copied; rejected/replaced by canonical or rebuilt task-owned types/tests"
+  },
+  {
+    "old_path": "android/app/src/main/java/com/omanii/app/network/epoch/NetworkEpochTracker.kt",
+    "old_sha256": "090fd91e462e6330e1cce537101f2aa7924da17187ee8494b53d4ad1b5bbb4c2",
+    "disposition": "old bytes rejected; role reimplemented at same owned path"
+  },
+  {
+    "old_path": "android/app/src/main/java/com/omanii/app/network/filter/IndependentSampleFilter.kt",
+    "old_sha256": "e5bdac6e91a3bee9c94106b74556af0d3029326432e52a83ef0f8c3ad96f061e",
+    "disposition": "not copied; rejected/replaced by canonical or rebuilt task-owned types/tests"
+  },
+  {
+    "old_path": "android/app/src/main/java/com/omanii/app/network/model/CellularSignalMetrics.kt",
+    "old_sha256": "25ea3621a96f84efc156439cd7b1e1dfc6a7aea478c1bd8b29754a3e861ee120",
+    "disposition": "not copied; rejected/replaced by canonical or rebuilt task-owned types/tests"
+  },
+  {
+    "old_path": "android/app/src/main/java/com/omanii/app/network/model/CellularTech.kt",
+    "old_sha256": "95583499eff532a1854c2d2ab56b235ef988411b43f2cc2265763db5a2a34aef",
+    "disposition": "salvaged exact bytes"
+  },
+  {
+    "old_path": "android/app/src/main/java/com/omanii/app/network/model/MeteredState.kt",
+    "old_sha256": "910bb2a3db32c6cff792d99d2cf552aa2f0e46c370d08100fa2f553c7a619b43",
+    "disposition": "not copied; rejected/replaced by canonical or rebuilt task-owned types/tests"
+  },
+  {
+    "old_path": "android/app/src/main/java/com/omanii/app/network/model/NetworkPathSnapshot.kt",
+    "old_sha256": "683c33a3a2e88ed1338bfe7be8dcd6569bb546947bb16df9457604d77d0bd07d",
+    "disposition": "not copied; rejected/replaced by canonical or rebuilt task-owned types/tests"
+  },
+  {
+    "old_path": "android/app/src/main/java/com/omanii/app/network/model/NetworkTransition.kt",
+    "old_sha256": "3a916058465ba847a78c2f28dbbe2d695b22f0d61244d5e6371d9e291c69a3aa",
+    "disposition": "not copied; rejected/replaced by canonical or rebuilt task-owned types/tests"
+  },
+  {
+    "old_path": "android/app/src/main/java/com/omanii/app/network/model/NetworkTransport.kt",
+    "old_sha256": "2745fa87163abea219898e0deef57fffecc5318516b3b68d4249d26e9a1ca210",
+    "disposition": "salvaged exact bytes"
+  },
+  {
+    "old_path": "android/app/src/main/java/com/omanii/app/network/model/NetworkValidationState.kt",
+    "old_sha256": "e146cd271abc0188a4c196cdc41e0d8e12c09dcc5525df5ff07fdd701303061f",
+    "disposition": "not copied; rejected/replaced by canonical or rebuilt task-owned types/tests"
+  },
+  {
+    "old_path": "android/app/src/main/java/com/omanii/app/network/model/RadioObservation.kt",
+    "old_sha256": "6325da3e866e6e8a679c843dbbde7a1dcb60fca040e146a86785d2ad5dd20e78",
+    "disposition": "not copied; rejected/replaced by canonical or rebuilt task-owned types/tests"
+  },
+  {
+    "old_path": "android/app/src/main/java/com/omanii/app/network/model/VpnContext.kt",
+    "old_sha256": "8b7bf3bf87a2c453b62a761f1079ac54ab096726a7db1a24e441dd0d0dc8d5a6",
+    "disposition": "not copied; rejected/replaced by canonical or rebuilt task-owned types/tests"
+  },
+  {
+    "old_path": "android/app/src/main/java/com/omanii/app/network/model/WifiBand.kt",
+    "old_sha256": "cf38b3f6544c55162efefaad45f6c9caa56680d4841ee87ee02a9af40ed10a80",
+    "disposition": "salvaged exact bytes"
+  },
+  {
+    "old_path": "android/app/src/main/java/com/omanii/app/network/model/WifiConnectedMetrics.kt",
+    "old_sha256": "adeffefacb9b85411cab14ec3a929c6967a7d17670ba5728abe54c25e89aeb16",
+    "disposition": "not copied; rejected/replaced by canonical or rebuilt task-owned types/tests"
+  },
+  {
+    "old_path": "android/app/src/main/java/com/omanii/app/network/model/WifiStandard.kt",
+    "old_sha256": "0ced1a0af504f4f9945a834b09dad35b40df3fa713b3747df666627956d0522d",
+    "disposition": "salvaged exact bytes"
+  },
+  {
+    "old_path": "android/app/src/main/java/com/omanii/app/network/provider/AndroidNetworkContextProvider.kt",
+    "old_sha256": "d1395a06cde320233b2f9fe464b0433339e295a67c297edc11eab4ffe33f8166",
+    "disposition": "not copied; rejected/replaced by canonical or rebuilt task-owned types/tests"
+  },
+  {
+    "old_path": "android/app/src/main/java/com/omanii/app/network/provider/NetworkContextProvider.kt",
+    "old_sha256": "ec2c11d6daea5370f4cc078411a7a1665f74f1b8b1cccd3c9357153accc1c7b2",
+    "disposition": "old bytes rejected; role reimplemented at same owned path"
+  },
+  {
+    "old_path": "android/app/src/main/java/com/omanii/app/network/sentinel/AndroidSentinelFilter.kt",
+    "old_sha256": "e50a812d90cf6dff271c65141ca7c19200b7b8a495fce50e31c6d14ebb7b5d54",
+    "disposition": "old bytes rejected; role reimplemented at same owned path"
+  },
+  {
+    "old_path": "android/app/src/main/java/com/omanii/app/network/time/MonotonicClock.kt",
+    "old_sha256": "a6543e647b4ac129bf070fdd077128a427a14d0c58185154f21433ef98fce80b",
+    "disposition": "not copied; rejected/replaced by canonical or rebuilt task-owned types/tests"
+  },
+  {
+    "old_path": "android/app/src/main/java/com/omanii/app/network/token/IdentifierAnonymizer.kt",
+    "old_sha256": "497f24bd473814f2f3ad0f2702defc25372ffdc163ed67ccabe535562d9a0c2a",
+    "disposition": "old bytes rejected; role reimplemented at same owned path"
+  },
+  {
+    "old_path": "android/app/src/test/java/com/omanii/app/capability/CapabilityReportTest.kt",
+    "old_sha256": "0451dc8ac4e03bb29547485853e6fa94759e9fffa016fbf6505d2a3afd5627a8",
+    "disposition": "not copied; rejected/replaced by canonical or rebuilt task-owned types/tests"
+  },
+  {
+    "old_path": "android/app/src/test/java/com/omanii/app/devexport/DevExportJsonSerializerTest.kt",
+    "old_sha256": "b1af326728a4d0a4d90c6ccdeee663917ea1544e724c44ce93aadbfb9f0da8e6",
+    "disposition": "not copied; rejected/replaced by canonical or rebuilt task-owned types/tests"
+  },
+  {
+    "old_path": "android/app/src/test/java/com/omanii/app/network/AndroidNetworkContextProviderTest.kt",
+    "old_sha256": "4dd963083b99b15e342293925a98590d63b9f3ab3f1edce14544076cefb380c0",
+    "disposition": "not copied; rejected/replaced by canonical or rebuilt task-owned types/tests"
+  },
+  {
+    "old_path": "android/app/src/test/java/com/omanii/app/network/AndroidSentinelFilterTest.kt",
+    "old_sha256": "c43703a8a98ec42ec2ccc1f9e497c53f100c764ef47d7f564ae1fd90c747f3d0",
+    "disposition": "not copied; rejected/replaced by canonical or rebuilt task-owned types/tests"
+  },
+  {
+    "old_path": "android/app/src/test/java/com/omanii/app/network/CellularMetricsMappingTest.kt",
+    "old_sha256": "cde03f8cf7872bbbaa1142126392ec2ed21ab3f918cfc25afa80edc725938713",
+    "disposition": "not copied; rejected/replaced by canonical or rebuilt task-owned types/tests"
+  },
+  {
+    "old_path": "android/app/src/test/java/com/omanii/app/network/IdentifierAnonymizerTest.kt",
+    "old_sha256": "c22ea7d803c9648e8218c8ced9343b82c485f5cd12cb2516601c475bbbfe2dcc",
+    "disposition": "old bytes rejected; role reimplemented at same owned path"
+  },
+  {
+    "old_path": "android/app/src/test/java/com/omanii/app/network/IndependentSampleFilterTest.kt",
+    "old_sha256": "a090b5e58e9db04cd0cb486e146ed1d7da9d364775b1d253302c3b8aefec7d24",
+    "disposition": "not copied; rejected/replaced by canonical or rebuilt task-owned types/tests"
+  },
+  {
+    "old_path": "android/app/src/test/java/com/omanii/app/network/NetworkEpochTrackerTest.kt",
+    "old_sha256": "3e3dd690b5a6da96d430970ae7d904ea4fb1597b79e36266b8e30105780c5582",
+    "disposition": "old bytes rejected; role reimplemented at same owned path"
+  },
+  {
+    "old_path": "android/app/src/test/java/com/omanii/app/network/NetworkFixturesValidationTest.kt",
+    "old_sha256": "d5f4451612159412140b410f35b382c542fe147dd749c9f8eed076603c0e8c91",
+    "disposition": "not copied; rejected/replaced by canonical or rebuilt task-owned types/tests"
+  },
+  {
+    "old_path": "android/app/src/test/java/com/omanii/app/network/WifiMetricsMappingTest.kt",
+    "old_sha256": "5fc2b238076787d22e7078ac9d6e1371f4840b466971e74f8ea65e50b74057bb",
+    "disposition": "salvaged exact bytes"
+  },
+  {
+    "old_path": "docs/evidence/TASK-002/physical.md",
+    "old_sha256": "bda645f46bd426c2e81acd40b15ccbb836cebb2284a6503600dbf6d2760b3837",
+    "disposition": "old bytes rejected; role reimplemented at same owned path"
+  },
+  {
+    "old_path": "docs/evidence/TASK-002/proposed_manifest_patch.md",
+    "old_sha256": "0d560d64dd4c82592c9e9b128e30d74c4cebfd6f05ce262f763fc8f6c43ed531",
+    "disposition": "old evidence rejected; physical unsupported claims not ported"
+  },
+  {
+    "old_path": "docs/evidence/TASK-002/REPORT.md",
+    "old_sha256": "906394abc8b0eddbab573467ff3364974a655522fcaf26321fe492dffbd6c63f",
+    "disposition": "old bytes rejected; role reimplemented at same owned path"
+  },
+  {
+    "old_path": "fixtures/network/ap-band-transition.jsonl",
+    "old_sha256": "19677a06d2bd8878acb6cbd2950da37cba0d001cb7ffd2070d8a86335a636a94",
+    "disposition": "old export bytes rejected; relevant scenario rebuilt in synthetic replay"
+  },
+  {
+    "old_path": "fixtures/network/cached-looking-repeated-value.jsonl",
+    "old_sha256": "8facfa44bf37a8e18f00c5519a65bb607e7bf7695c8f58b31e0f4ccc63b2a166",
+    "disposition": "old export bytes rejected; relevant scenario rebuilt in synthetic replay"
+  },
+  {
+    "old_path": "fixtures/network/capability_report_sample.json",
+    "old_sha256": "8a1764bde14475334ea286f6b4e4c69156b3d88edec5564bf514875e81f43608",
+    "disposition": "old export bytes rejected; relevant scenario rebuilt in synthetic replay"
+  },
+  {
+    "old_path": "fixtures/network/captive-or-unvalidated.json",
+    "old_sha256": "a51ab24216dc3f0ea93a34174b1524c944e8f23a855f341a3ce142412966d52c",
+    "disposition": "old export bytes rejected; relevant scenario rebuilt in synthetic replay"
+  },
+  {
+    "old_path": "fixtures/network/missing-metric.json",
+    "old_sha256": "0e04a1e34d5943cc3f7dbc678fff4343af6ee057e6f37bef73be2c7dde6dbe16",
+    "disposition": "old export bytes rejected; relevant scenario rebuilt in synthetic replay"
+  },
+  {
+    "old_path": "fixtures/network/transport-change.jsonl",
+    "old_sha256": "2e397f876f86d2699938ebc2f22b57e93ac3bc79e49895ba459e3bb3d74d50a5",
+    "disposition": "old export bytes rejected; relevant scenario rebuilt in synthetic replay"
+  },
+  {
+    "old_path": "fixtures/network/unknown-age-radio.json",
+    "old_sha256": "f6b17e89511cb4a69550d8942dace65e35ad3675d88c5e48aaf1cd7c5fe74b2c",
+    "disposition": "old export bytes rejected; relevant scenario rebuilt in synthetic replay"
+  }
+]

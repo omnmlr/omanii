@@ -1,0 +1,22 @@
+# Synthetic only. Fields documented in README.md.
+repeat	100	WIFI	a	a	5180	a	-	0	-60	false	true	AVAILABLE	epoch-1	INITIAL_EPOCH
+repeat	200	WIFI	a	a	5180	a	-	0	-60	false	true	AVAILABLE	epoch-1	-
+repeat	300	WIFI	a	a	5180	a	-	0	-70	false	true	AVAILABLE	epoch-1	-
+network	100	WIFI	a	a	5180	a	-	0	-60	false	true	AVAILABLE	epoch-1	INITIAL_EPOCH
+network	200	WIFI	b	a	5180	a	-	0	-60	false	true	AVAILABLE	epoch-2	NETWORK_REPLACED
+network	300	WIFI	a	a	5180	a	-	0	-60	false	true	AVAILABLE	epoch-3	NETWORK_REPLACED
+ap-band	100	WIFI	a	a	5180	a	-	0	-60	false	true	AVAILABLE	epoch-1	INITIAL_EPOCH
+ap-band	200	WIFI	a	b	5180	a	-	0	-60	false	true	AVAILABLE	epoch-2	WIFI_AP_CHANGED
+ap-band	300	WIFI	a	b	2412	a	-	0	-60	false	true	AVAILABLE	epoch-3	WIFI_BAND_CHANGED
+cell	100	CELLULAR	a	a	5180	a	a	50	-60	false	true	AVAILABLE	epoch-1	INITIAL_EPOCH
+cell	200	CELLULAR	a	a	5180	a	a	50	-60	false	true	AVAILABLE	epoch-1	-
+cell	300	CELLULAR	a	a	5180	a	a	250	-60	false	true	AVAILABLE	epoch-1	-
+cell	400	CELLULAR	a	a	5180	a	b	350	-60	false	true	AVAILABLE	epoch-2	SERVING_CELL_CHANGED
+cell	500	CELLULAR	a	a	5180	b	b	450	-60	false	true	AVAILABLE	epoch-3	CELLULAR_SUBSCRIPTION_CHANGED
+vpn-validation	100	WIFI	a	a	5180	a	-	0	-60	false	true	AVAILABLE	epoch-1	INITIAL_EPOCH
+vpn-validation	200	WIFI	a	a	5180	a	-	0	-60	true	true	AVAILABLE	epoch-2	VPN_CHANGED
+vpn-validation	300	WIFI	a	a	5180	a	-	0	-60	true	false	AVAILABLE	epoch-3	NETWORK_VALIDATION_CHANGED
+loss-denial	100	WIFI	a	a	5180	a	-	0	-60	false	true	AVAILABLE	epoch-1	INITIAL_EPOCH
+loss-denial	200	NONE	a	a	5180	a	-	0	-60	false	true	AVAILABLE	epoch-2	NETWORK_LOST
+loss-denial	300	WIFI	a	a	5180	a	-	0	-60	false	true	AVAILABLE	epoch-3	NETWORK_RESTORED
+loss-denial	400	WIFI	a	a	5180	a	-	0	-60	false	true	PERMISSION_DENIED	epoch-4	OBSERVABILITY_CHANGED

@@ -1,0 +1,23 @@
+{
+  "tests": 63.0,
+  "source_files_verified": 54,
+  "command": "& ./android/gradlew.bat -p android :app:assembleDebug :app:testDebugUnitTest :app:lintDebug --offline --no-daemon --console=plain",
+  "lint_warnings": 3,
+  "sdk_home": "C:/Users/USER/AppData/Local/Android/Sdk",
+  "head": "4be02dce58b2b070de6bff669309ead2bbe384e9",
+  "gate_log_sha256": "940e58a0ceb43e7b8be298dc60cc91a7ca52425b2b9e5995fb02c6b06a39e5b5",
+  "apk_sha256": "a396a5b758dabe0b087f9f25fbc2922becc52fbaee8696d8b7f8b42241cc9540",
+  "java_home": "C:/Program Files/Android/Android Studio/jbr",
+  "shared_changes": "none",
+  "working_directory": "C:\\Users\\USER\\Desktop\\omanii-task-002-repair",
+  "gate_exit": 0,
+  "errors": 0.0,
+  "lint_errors": 0,
+  "skipped": 0.0,
+  "gradle_home": "C:/Users/USER/.gradle",
+  "replay": "21 parsed synthetic records / 6 sessions / 3 negative semantic cases rejected",
+  "physical": "NOT PERFORMED",
+  "failures": 0.0,
+  "apk_bytes": 10063641,
+  "source_manifest_sha256": "a744ad10c4f77053efc29bdc5af9976edbf6921e5075edb3606d383b679b9c25"
+}
