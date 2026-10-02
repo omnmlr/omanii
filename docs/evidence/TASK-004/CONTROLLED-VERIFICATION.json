@@ -1,0 +1,554 @@
+{
+  "schema": "task004-evidence-1",
+  "worktree": "C:/Users/USER/Desktop/omanii-task-004",
+  "branch": "feat/task-004-measurement-probe",
+  "head": "955fd6adc3052a1cf74cfa55265f11a63e0490fc",
+  "foundation": "4be02dce58b2b070de6bff669309ead2bbe384e9",
+  "repair_passes": 3,
+  "physical_status": "NOT_RUN",
+  "historical_failures": [
+    "SERVER_INVALID",
+    "PARTIAL / early_eof"
+  ],
+  "integration_owner_report": {
+    "provenance": "Human integration-owner authorization message in this session; raw per-run diagnostic telemetry not supplied in worktree",
+    "leading_cause": "Host-dependent TypeScript fixture health behavior",
+    "exact_historical_trigger": "UNPROVEN: missing historical telemetry",
+    "individual_test": {
+      "passed": 10,
+      "executed": 10
+    },
+    "normal_order": [
+      {
+        "executed": 28,
+        "passed": 28
+      },
+      {
+        "executed": 28,
+        "passed": 28
+      },
+      {
+        "executed": 28,
+        "passed": 28
+      }
+    ],
+    "reversed_order": {
+      "executed": 28,
+      "passed": 28
+    },
+    "forced_full_android": [
+      {
+        "executed": 60,
+        "passed": 60
+      },
+      {
+        "executed": 60,
+        "passed": 60
+      }
+    ],
+    "synthetic_stalls_reproduce": [
+      "SERVER_INVALID",
+      "PARTIAL"
+    ],
+    "production_or_shared_repair_justified": false
+  },
+  "retained_latest_xml": {
+    "provenance": "Direct read during evidence refresh, not re-executed",
+    "tests": 60.0,
+    "failures": 0.0,
+    "errors": 0.0,
+    "skipped": 0.0,
+    "suites": [
+      {
+        "path": "android/app/build/test-results/testDebugUnitTest/TEST-com.omanii.app.model.AvailabilityTest.xml",
+        "sha256": "aabdff632cfaa0f2b3ff96d12d2ad88c3d0b57dc87b0b5ae0f98473b1690bfb6",
+        "suite": "com.omanii.app.model.AvailabilityTest",
+        "tests": 4,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "timestamp": "2026-10-02T03:40:02.925Z",
+        "testcases": [
+          {
+            "name": "unknownAndNotEvaluatedRemainDifferent",
+            "seconds": "0.023",
+            "passed": true
+          },
+          {
+            "name": "missingStatesNeverCarryMeasurements",
+            "seconds": "0.004",
+            "passed": true
+          },
+          {
+            "name": "reasonsAreOptionalButCannotBeBlank",
+            "seconds": "0.001",
+            "passed": true
+          },
+          {
+            "name": "zeroAndFalseRemainAvailableValues",
+            "seconds": "0.0",
+            "passed": true
+          }
+        ]
+      },
+      {
+        "path": "android/app/build/test-results/testDebugUnitTest/TEST-com.omanii.app.model.GeometryMetadataTest.xml",
+        "sha256": "55a73ddc60340cad7423a8a77fccc10322c2621dd3d4e52e98667e40bbedf1d5",
+        "suite": "com.omanii.app.model.GeometryMetadataTest",
+        "tests": 5,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "timestamp": "2026-10-02T03:40:02.961Z",
+        "testcases": [
+          {
+            "name": "developmentVersionAxesAreIndependentAndPassiveProfileIsExplicit",
+            "seconds": "0.031",
+            "passed": true
+          },
+          {
+            "name": "identitiesAreSessionScopedAndRemainSeparateConcepts",
+            "seconds": "0.007",
+            "passed": true
+          },
+          {
+            "name": "invalidRotationsAreNotSilentlyNormalized",
+            "seconds": "0.004",
+            "passed": true
+          },
+          {
+            "name": "xyzwRepresentsIdentityAndKnownQuarterTurn",
+            "seconds": "0.0",
+            "passed": true
+          },
+          {
+            "name": "coordinatesRetainHeightAndRejectNonFiniteValues",
+            "seconds": "0.003",
+            "passed": true
+          }
+        ]
+      },
+      {
+        "path": "android/app/build/test-results/testDebugUnitTest/TEST-com.omanii.app.model.ObservationTimingTest.xml",
+        "sha256": "e3e71d5bf5a470e10e489232a6127e8a3e408862e6e78c9cac7bf1f2fe85c8c2",
+        "suite": "com.omanii.app.model.ObservationTimingTest",
+        "tests": 7,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "timestamp": "2026-10-02T03:40:03.013Z",
+        "testcases": [
+          {
+            "name": "arcoreTimestampCannotBecomeElapsedRealtimeMeasurementTime",
+            "seconds": "0.004",
+            "passed": true
+          },
+          {
+            "name": "domainsAreScopedEvenWhenTimestampValuesMatch",
+            "seconds": "0.002",
+            "passed": true
+          },
+          {
+            "name": "absentSourceIsNotReplacedWithReceiveTime",
+            "seconds": "0.001",
+            "passed": true
+          },
+          {
+            "name": "futureAndMismatchedMeasurementTimesAreRejected",
+            "seconds": "0.002",
+            "passed": true
+          },
+          {
+            "name": "modemReceiptDoesNotEstablishActualMeasurementAge",
+            "seconds": "0.001",
+            "passed": true
+          },
+          {
+            "name": "sameClockMeasurementPreservesReceiveDelay",
+            "seconds": "0.0",
+            "passed": true
+          },
+          {
+            "name": "sourceAndReceiveTimesAreNotRequiredToShareAnOrigin",
+            "seconds": "0.0",
+            "passed": true
+          }
+        ]
+      },
+      {
+        "path": "android/app/build/test-results/testDebugUnitTest/TEST-com.omanii.app.probe.ConcurrentByteBudgetTest.xml",
+        "sha256": "d7a28eca5f2067fa18a3d7f2a27d07ea71c53af4e76c0af2a45452cc33626377",
+        "suite": "com.omanii.app.probe.ConcurrentByteBudgetTest",
+        "tests": 3,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "timestamp": "2026-10-02T03:40:03.032Z",
+        "testcases": [
+          {
+            "name": "concurrentReservationsCannotDoubleSpendRemainingBudget",
+            "seconds": "0.02",
+            "passed": true
+          },
+          {
+            "name": "cancellationPersistsAndInflightAccountingStillSettles",
+            "seconds": "0.001",
+            "passed": true
+          },
+          {
+            "name": "releasesUnusedReservationAndRejectsOverchargeAndDoubleClose",
+            "seconds": "0.003",
+            "passed": true
+          }
+        ]
+      },
+      {
+        "path": "android/app/build/test-results/testDebugUnitTest/TEST-com.omanii.app.probe.ProbeClientTest.xml",
+        "sha256": "003930ec9c2fbb6d96c41ee3d4ae9fe2a0bb9be413728ea688b527cc70014823",
+        "suite": "com.omanii.app.probe.ProbeClientTest",
+        "tests": 25,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "timestamp": "2026-10-02T03:40:03.088Z",
+        "testcases": [
+          {
+            "name": "unavailableMovementPreservesAvailabilityAndExplainsMissingReason",
+            "seconds": "0.632",
+            "passed": true
+          },
+          {
+            "name": "boundariesPreserveAToBToAEvenWhenFinalContextMatchesStart",
+            "seconds": "2.16",
+            "passed": true
+          },
+          {
+            "name": "concurrentClientsShareOneBudgetWithoutDoubleSpending",
+            "seconds": "0.689",
+            "passed": true
+          },
+          {
+            "name": "overloadAndVersionMismatchInvalidate",
+            "seconds": "0.016",
+            "passed": true
+          },
+          {
+            "name": "connectionFailureIsErrorAndNeverPacketLoss",
+            "seconds": "0.003",
+            "passed": true
+          },
+          {
+            "name": "timeoutIsDistinctAndRetainsPartialBytes",
+            "seconds": "0.309",
+            "passed": true
+          },
+          {
+            "name": "budgetRefusalProducesNoConnectionAndStopsSamples",
+            "seconds": "0.001",
+            "passed": true
+          },
+          {
+            "name": "cancellationDuringPreparationOpensNoSocketOrLaterSamples",
+            "seconds": "0.116",
+            "passed": true
+          },
+          {
+            "name": "malformedFramingAndOversizedHeadersInvalidated",
+            "seconds": "0.021",
+            "passed": true
+          },
+          {
+            "name": "slowPreparationConsumesTotalProfileBudgetAndOpensNoSocket",
+            "seconds": "0.103",
+            "passed": true
+          },
+          {
+            "name": "earlyEndReturnsPartialLowerBound",
+            "seconds": "0.006",
+            "passed": true
+          },
+          {
+            "name": "cancelBeforeRunAndCancelledBudgetOpenNoConnection",
+            "seconds": "0.0",
+            "passed": true
+          },
+          {
+            "name": "totalBudgetExhaustedDuringReservationOpensNoSocketAndReleasesLease",
+            "seconds": "0.105",
+            "passed": true
+          },
+          {
+            "name": "slowUploadPayloadPreparationTimesOutBeforeSendingBody",
+            "seconds": "0.008",
+            "passed": true
+          },
+          {
+            "name": "rejectsUnboundedProfileAndRemoteCleartextBeforeOpening",
+            "seconds": "0.002",
+            "passed": true
+          },
+          {
+            "name": "closeRacingReservationReturnsCancellationWithoutExecutorRejection",
+            "seconds": "0.002",
+            "passed": true
+          },
+          {
+            "name": "unknownAndUnevaluatedContinuityNeverSafe",
+            "seconds": "0.406",
+            "passed": true
+          },
+          {
+            "name": "boundedDownloadAndUploadAgainstTypescriptService",
+            "seconds": "0.822",
+            "passed": true
+          },
+          {
+            "name": "matchingUnavailableIdentityValuesCannotCertifyComparison",
+            "seconds": "0.719",
+            "passed": true
+          },
+          {
+            "name": "continuousCoverageComparesScopedIdentitiesRatherThanPoseOrTimestampEquality",
+            "seconds": "0.593",
+            "passed": true
+          },
+          {
+            "name": "warmSamplesReuseConnectionAndAccumulateActualBytesAcrossRuns",
+            "seconds": "0.47",
+            "passed": true
+          },
+          {
+            "name": "cancellationClosesBlockedReadWithin500msNoNewSamplesOrPayloadFor300ms",
+            "seconds": "0.381",
+            "passed": true
+          },
+          {
+            "name": "incompleteCoverageOrDisagreeingBeginIsUnsafeWithoutDiscardingEvidence",
+            "seconds": "0.469",
+            "passed": true
+          },
+          {
+            "name": "laterSlowPreparationClosesWarmSocketAndSchedulesNoSecondRequestOrConnection",
+            "seconds": "0.11",
+            "passed": true
+          },
+          {
+            "name": "stalledUploadCancellationClosesActiveWriteAndPeerWithin500ms",
+            "seconds": "0.411",
+            "passed": true
+          }
+        ]
+      },
+      {
+        "path": "android/app/build/test-results/testDebugUnitTest/TEST-com.omanii.app.ScaffoldTest.xml",
+        "sha256": "86382f5fad004cb6d3b1c3c90e352dacf387a9a1118ca78f044c4ade4854af47",
+        "suite": "com.omanii.app.ScaffoldTest",
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "timestamp": "2026-10-02T03:40:02.854Z",
+        "testcases": [
+          {
+            "name": "launchActivityUsesTheApplicationNamespace",
+            "seconds": "0.031",
+            "passed": true
+          }
+        ]
+      },
+      {
+        "path": "android/app/build/test-results/testDebugUnitTest/TEST-com.omanii.app.session.ProbeIntervalContextTest.xml",
+        "sha256": "0ecfbed417758e0656516ed3becddc7bf1f618dc1842dc5dae04e74d41895db2",
+        "suite": "com.omanii.app.session.ProbeIntervalContextTest",
+        "tests": 15,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "timestamp": "2026-10-02T03:40:11.652Z",
+        "testcases": [
+          {
+            "name": "matchingEndpointsDoNotUpgradeUnknownOrUnevaluatedCoverage",
+            "seconds": "0.0",
+            "passed": true
+          },
+          {
+            "name": "exposedListsCannotBeMutatedThroughPropertiesOrDestructuring",
+            "seconds": "0.005",
+            "passed": true
+          },
+          {
+            "name": "constructionAndCopyValidateReplacementBoundaryEvidence",
+            "seconds": "0.002",
+            "passed": true
+          },
+          {
+            "name": "missingNetworkOrFrameCannotCertifyContinuity",
+            "seconds": "0.0",
+            "passed": true
+          },
+          {
+            "name": "movingPoseReferencesDoNotTurnAnIntervalIntoACompletionPoint",
+            "seconds": "0.0",
+            "passed": true
+          },
+          {
+            "name": "movementRemainsUnavailableInsteadOfZeroWhenUnknown",
+            "seconds": "0.004",
+            "passed": true
+          },
+          {
+            "name": "poseFreeContextIsExplicitlyNotApplicable",
+            "seconds": "0.0",
+            "passed": true
+          },
+          {
+            "name": "insertingIntoSourceListCannotAlterContinuousInterval",
+            "seconds": "0.001",
+            "passed": true
+          },
+          {
+            "name": "aToBToABoundariesCannotBeHiddenByMatchingEndpoints",
+            "seconds": "0.001",
+            "passed": true
+          },
+          {
+            "name": "clearingSourceListCannotEraseAToBToAEvidence",
+            "seconds": "0.002",
+            "passed": true
+          },
+          {
+            "name": "crossSessionAndRegressingIntervalsAreRejected",
+            "seconds": "0.003",
+            "passed": true
+          },
+          {
+            "name": "snapshotRepairPreservesValueCopyAndDestructuringBehavior",
+            "seconds": "0.001",
+            "passed": true
+          },
+          {
+            "name": "copiedAndReconstructedIntervalsOwnTheirBoundarySnapshots",
+            "seconds": "0.002",
+            "passed": true
+          },
+          {
+            "name": "boundariesMustBeOrderedAndInsideTheInterval",
+            "seconds": "0.004",
+            "passed": true
+          },
+          {
+            "name": "networkAndPoseDiscontinuitiesAreIndependent",
+            "seconds": "0.002",
+            "passed": true
+          }
+        ]
+      }
+    ]
+  },
+  "candidate_sha256": [
+    {
+      "path": "android/app/build.gradle.kts",
+      "sha256": "0f6b4d1e8ba4ba8b9eabcf3bd28e91425e7d910ce7ff935f8f073241f22da051"
+    },
+    {
+      "path": "android/app/src/main/AndroidManifest.xml",
+      "sha256": "2ad8ae46a62c79e63668dcec5078bc8c6a06fd43663e3d47ef669c1c4832219a"
+    },
+    {
+      "path": "android/app/src/main/java/com/omanii/app/model/Availability.kt",
+      "sha256": "5c6066762f6310c8b7af59b2c1771e311e97061966a4293045c10d7129e7214b"
+    },
+    {
+      "path": "android/app/src/main/java/com/omanii/app/model/DevelopmentMetadata.kt",
+      "sha256": "920793d06d2f6af74a5b7344ab7d5e20f70f9b1688811313af31883029a789ca"
+    },
+    {
+      "path": "android/app/src/main/java/com/omanii/app/model/Geometry.kt",
+      "sha256": "4fd1d012b1845c60be10724e49ba9ee988fed8ab39dd1ee0ed82edc82f12da9d"
+    },
+    {
+      "path": "android/app/src/main/java/com/omanii/app/model/Identity.kt",
+      "sha256": "1a92f512335493dabdf856d5ba217c7d51dd2f3ef9e23686d568eb217f07592a"
+    },
+    {
+      "path": "android/app/src/main/java/com/omanii/app/model/MonotonicClock.kt",
+      "sha256": "d10b0c9cc13df2124094ba22a23b126bac9ec56b6a1f92cabb4a578727f21e2c"
+    },
+    {
+      "path": "android/app/src/main/java/com/omanii/app/model/ObservationTiming.kt",
+      "sha256": "c624c8398cfdf840f4d21bf4f4eff9cddc05b9f435f060dbbf0c86ce10b0efe4"
+    },
+    {
+      "path": "android/app/src/main/java/com/omanii/app/probe/ConcurrentByteBudget.kt",
+      "sha256": "562dbf97d5eebadc47331db86373952e3ee0ec6b9b52d54535de2660bbf0fae5"
+    },
+    {
+      "path": "android/app/src/main/java/com/omanii/app/probe/ProbeClient.kt",
+      "sha256": "06c60948a86d85b7df8bca494d7240f137d4d6afaf785b0115ca7fa2bd3d5017"
+    },
+    {
+      "path": "android/app/src/main/java/com/omanii/app/probe/ProbeModels.kt",
+      "sha256": "0eb8e0fdc8d629fac98608edc7ad610647dfd6dbe9f7c9767f83c4b600fe4a64"
+    },
+    {
+      "path": "android/app/src/main/java/com/omanii/app/session/ProbeContextHooks.kt",
+      "sha256": "600054d606a3417a485ed84eb077ae0121017b64ab2698cc95cfdf893eb2d863"
+    },
+    {
+      "path": "android/app/src/main/java/com/omanii/app/time/AndroidElapsedRealtimeClock.kt",
+      "sha256": "eeae56dbec45fe0eba6ed2eba718110ff3eb14dab77aa935f019786a08fcbc41"
+    },
+    {
+      "path": "android/app/src/test/java/com/omanii/app/probe/ConcurrentByteBudgetTest.kt",
+      "sha256": "fb39a888f43b7d6cfa2db81d50c20c72eb8a80b85e0e1704eefa5d5ce32914cb"
+    },
+    {
+      "path": "android/app/src/test/java/com/omanii/app/probe/ProbeClientTest.kt",
+      "sha256": "36ce60492f9a75b6eacb537e8368a8b4361fc96763ef08b948a8e1474e3b4bb1"
+    },
+    {
+      "path": "fixtures/probe/observations.json",
+      "sha256": "b9cf193c01718446901b5a49c91c76a95916dfb5b658fd26a31fd860130a558d"
+    },
+    {
+      "path": "fixtures/probe/README.md",
+      "sha256": "6994818880b5553b965fcd80d91833fe5741b09ff652fce5bcc277138187d991"
+    },
+    {
+      "path": "measurement-server/package-lock.json",
+      "sha256": "0da0155ea3e41e735b850e81677e1a3c38e4252b6c54d7e5e86dc88c8c96666d"
+    },
+    {
+      "path": "measurement-server/package.json",
+      "sha256": "bc5943b8da3e401281c57f5e8f9a01640314a44d1c5ce384f718430b40af6e0d"
+    },
+    {
+      "path": "measurement-server/src/main.ts",
+      "sha256": "2a3e12c844c2132f98584cbb6437e832ec5fef5d264269a76ace2fa9161f24a9"
+    },
+    {
+      "path": "measurement-server/src/replay-context.ts",
+      "sha256": "7b5afb76d542914f00748c07f8e10590c8dea2ca2c9d6649c14b508eb6452352"
+    },
+    {
+      "path": "measurement-server/src/replay.ts",
+      "sha256": "6e074959f33e2b903dfe29c6e3f0b8287bfe881edb094c9a21cfd50ca535150c"
+    },
+    {
+      "path": "measurement-server/src/server.ts",
+      "sha256": "9ebdc0c78c881bd88fc39e2fd7358c29d22e9732b34006e0fe77409d8f251ff8"
+    },
+    {
+      "path": "measurement-server/test/android-endpoint.ts",
+      "sha256": "c75e12eb1b8148552138907ba7e6ff84a00e4c3722fc50725d6aae404c2237ab"
+    },
+    {
+      "path": "measurement-server/test/replay.test.ts",
+      "sha256": "5381b985864f9960dc3b9ff75829756b172f9e6ce59dc6e953d45fee015d7e0e"
+    },
+    {
+      "path": "measurement-server/test/server.test.ts",
+      "sha256": "a384f74d06cb09630a182d173625fa9d2304b7e8b737310c352858b80dfb4e89"
+    }
+  ]
+}

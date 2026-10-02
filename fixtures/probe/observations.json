@@ -1,0 +1,1287 @@
+[
+  {
+    "fixture": "synthetic",
+    "case": "success",
+    "schema_version": "probe-wave1-alpha-1",
+    "protocol_version": "http-probe-alpha-1",
+    "test_profile": "low_data_responsiveness",
+    "profile_version": "experimental-1",
+    "endpoint_context": {
+      "endpoint_id": "omanii-local-alpha",
+      "service_version": "0.1.0",
+      "region": "local-private",
+      "protocol_type": "HTTP/1.1"
+    },
+    "probe_id": "synthetic-0",
+    "sequence": 0,
+    "probe_type": "RESPONSIVENESS",
+    "start_nanos": "9007199254740993",
+    "end_nanos": "9007201254740993",
+    "received_at_nanos": "9007201254741993",
+    "measurement_at_nanos": "9007201254740993",
+    "requested_bytes": 1,
+    "actual_bytes": 1,
+    "http_bytes_charged": 501,
+    "unconfirmed_upload_bytes": 0,
+    "outcome": "SUCCESS",
+    "endpoint_health": "healthy",
+    "endpoint_validated": true,
+    "context": {
+      "start": {
+        "at_elapsed_realtime_ns": "9007199254740993",
+        "session_id": "synthetic-session",
+        "segment": {
+          "value": {
+            "session_id": "synthetic-session",
+            "segment_id": "synthetic-segment-a"
+          },
+          "availability": "AVAILABLE",
+          "reason": null
+        },
+        "network_epoch": {
+          "value": {
+            "session_id": "synthetic-session",
+            "epoch_token": "synthetic-epoch-a"
+          },
+          "availability": "AVAILABLE",
+          "reason": null
+        },
+        "coordinate_frame": {
+          "value": {
+            "session_id": "synthetic-session",
+            "frame_id": "synthetic-frame"
+          },
+          "availability": "AVAILABLE",
+          "reason": null
+        },
+        "pose_observation_id": {
+          "value": null,
+          "availability": "NOT_EVALUATED",
+          "reason": "pose_not_evaluated"
+        }
+      },
+      "end": {
+        "at_elapsed_realtime_ns": "9007201254740993",
+        "session_id": "synthetic-session",
+        "segment": {
+          "value": {
+            "session_id": "synthetic-session",
+            "segment_id": "synthetic-segment-a"
+          },
+          "availability": "AVAILABLE",
+          "reason": null
+        },
+        "network_epoch": {
+          "value": {
+            "session_id": "synthetic-session",
+            "epoch_token": "synthetic-epoch-a"
+          },
+          "availability": "AVAILABLE",
+          "reason": null
+        },
+        "coordinate_frame": {
+          "value": {
+            "session_id": "synthetic-session",
+            "frame_id": "synthetic-frame"
+          },
+          "availability": "AVAILABLE",
+          "reason": null
+        },
+        "pose_observation_id": {
+          "value": null,
+          "availability": "NOT_EVALUATED",
+          "reason": "pose_not_evaluated"
+        }
+      },
+      "boundaries": [],
+      "continuity": "CONTINUOUS",
+      "movement_span_m": {
+        "value": null,
+        "availability": "NOT_EVALUATED",
+        "reason": "movement_not_evaluated"
+      }
+    },
+    "comparison_safe": true,
+    "lower_bound": false,
+    "connection": "REUSED",
+    "concurrent_load": "NOT_EVALUATED",
+    "http_application_rtt_nanos": "2000000000",
+    "server_upload_bytes": null,
+    "reason": null,
+    "begin_context": {
+      "at_elapsed_realtime_ns": "9007199254740993",
+      "session_id": "synthetic-session",
+      "segment": {
+        "value": {
+          "session_id": "synthetic-session",
+          "segment_id": "synthetic-segment-a"
+        },
+        "availability": "AVAILABLE",
+        "reason": null
+      },
+      "network_epoch": {
+        "value": {
+          "session_id": "synthetic-session",
+          "epoch_token": "synthetic-epoch-a"
+        },
+        "availability": "AVAILABLE",
+        "reason": null
+      },
+      "coordinate_frame": {
+        "value": {
+          "session_id": "synthetic-session",
+          "frame_id": "synthetic-frame"
+        },
+        "availability": "AVAILABLE",
+        "reason": null
+      },
+      "pose_observation_id": {
+        "value": null,
+        "availability": "NOT_EVALUATED",
+        "reason": "pose_not_evaluated"
+      }
+    }
+  },
+  {
+    "fixture": "synthetic",
+    "case": "timeout",
+    "schema_version": "probe-wave1-alpha-1",
+    "protocol_version": "http-probe-alpha-1",
+    "test_profile": "low_data_responsiveness",
+    "profile_version": "experimental-1",
+    "endpoint_context": {
+      "endpoint_id": "omanii-local-alpha",
+      "service_version": "0.1.0",
+      "region": "local-private",
+      "protocol_type": "HTTP/1.1"
+    },
+    "probe_id": "synthetic-1",
+    "sequence": 1,
+    "probe_type": "RESPONSIVENESS",
+    "start_nanos": "9007204254740993",
+    "end_nanos": "9007206254740993",
+    "received_at_nanos": "9007206254741993",
+    "measurement_at_nanos": "9007206254740993",
+    "requested_bytes": 1,
+    "actual_bytes": 0,
+    "http_bytes_charged": 500,
+    "unconfirmed_upload_bytes": 0,
+    "outcome": "TIMEOUT",
+    "endpoint_health": null,
+    "endpoint_validated": false,
+    "context": {
+      "start": {
+        "at_elapsed_realtime_ns": "9007204254740993",
+        "session_id": "synthetic-session",
+        "segment": {
+          "value": {
+            "session_id": "synthetic-session",
+            "segment_id": "synthetic-segment-a"
+          },
+          "availability": "AVAILABLE",
+          "reason": null
+        },
+        "network_epoch": {
+          "value": {
+            "session_id": "synthetic-session",
+            "epoch_token": "synthetic-epoch-a"
+          },
+          "availability": "AVAILABLE",
+          "reason": null
+        },
+        "coordinate_frame": {
+          "value": {
+            "session_id": "synthetic-session",
+            "frame_id": "synthetic-frame"
+          },
+          "availability": "AVAILABLE",
+          "reason": null
+        },
+        "pose_observation_id": {
+          "value": null,
+          "availability": "NOT_EVALUATED",
+          "reason": "pose_not_evaluated"
+        }
+      },
+      "end": {
+        "at_elapsed_realtime_ns": "9007206254740993",
+        "session_id": "synthetic-session",
+        "segment": {
+          "value": {
+            "session_id": "synthetic-session",
+            "segment_id": "synthetic-segment-a"
+          },
+          "availability": "AVAILABLE",
+          "reason": null
+        },
+        "network_epoch": {
+          "value": {
+            "session_id": "synthetic-session",
+            "epoch_token": "synthetic-epoch-a"
+          },
+          "availability": "AVAILABLE",
+          "reason": null
+        },
+        "coordinate_frame": {
+          "value": {
+            "session_id": "synthetic-session",
+            "frame_id": "synthetic-frame"
+          },
+          "availability": "AVAILABLE",
+          "reason": null
+        },
+        "pose_observation_id": {
+          "value": null,
+          "availability": "NOT_EVALUATED",
+          "reason": "pose_not_evaluated"
+        }
+      },
+      "boundaries": [],
+      "continuity": "CONTINUOUS",
+      "movement_span_m": {
+        "value": null,
+        "availability": "NOT_EVALUATED",
+        "reason": "movement_not_evaluated"
+      }
+    },
+    "comparison_safe": false,
+    "lower_bound": false,
+    "connection": "COLD",
+    "concurrent_load": "NOT_EVALUATED",
+    "http_application_rtt_nanos": null,
+    "server_upload_bytes": null,
+    "reason": "timeout",
+    "begin_context": {
+      "at_elapsed_realtime_ns": "9007204254740993",
+      "session_id": "synthetic-session",
+      "segment": {
+        "value": {
+          "session_id": "synthetic-session",
+          "segment_id": "synthetic-segment-a"
+        },
+        "availability": "AVAILABLE",
+        "reason": null
+      },
+      "network_epoch": {
+        "value": {
+          "session_id": "synthetic-session",
+          "epoch_token": "synthetic-epoch-a"
+        },
+        "availability": "AVAILABLE",
+        "reason": null
+      },
+      "coordinate_frame": {
+        "value": {
+          "session_id": "synthetic-session",
+          "frame_id": "synthetic-frame"
+        },
+        "availability": "AVAILABLE",
+        "reason": null
+      },
+      "pose_observation_id": {
+        "value": null,
+        "availability": "NOT_EVALUATED",
+        "reason": "pose_not_evaluated"
+      }
+    }
+  },
+  {
+    "fixture": "synthetic",
+    "case": "cancellation",
+    "schema_version": "probe-wave1-alpha-1",
+    "protocol_version": "http-probe-alpha-1",
+    "test_profile": "verification_low_data",
+    "profile_version": "experimental-1",
+    "endpoint_context": {
+      "endpoint_id": "omanii-local-alpha",
+      "service_version": "0.1.0",
+      "region": "local-private",
+      "protocol_type": "HTTP/1.1"
+    },
+    "probe_id": "synthetic-2",
+    "sequence": 2,
+    "probe_type": "DOWNLOAD",
+    "start_nanos": "9007209254740993",
+    "end_nanos": "9007211254740993",
+    "received_at_nanos": "9007211254741993",
+    "measurement_at_nanos": "9007211254740993",
+    "requested_bytes": 65536,
+    "actual_bytes": 32768,
+    "http_bytes_charged": 33268,
+    "unconfirmed_upload_bytes": 0,
+    "outcome": "CANCELLED",
+    "endpoint_health": "healthy",
+    "endpoint_validated": true,
+    "context": {
+      "start": {
+        "at_elapsed_realtime_ns": "9007209254740993",
+        "session_id": "synthetic-session",
+        "segment": {
+          "value": {
+            "session_id": "synthetic-session",
+            "segment_id": "synthetic-segment-a"
+          },
+          "availability": "AVAILABLE",
+          "reason": null
+        },
+        "network_epoch": {
+          "value": {
+            "session_id": "synthetic-session",
+            "epoch_token": "synthetic-epoch-a"
+          },
+          "availability": "AVAILABLE",
+          "reason": null
+        },
+        "coordinate_frame": {
+          "value": {
+            "session_id": "synthetic-session",
+            "frame_id": "synthetic-frame"
+          },
+          "availability": "AVAILABLE",
+          "reason": null
+        },
+        "pose_observation_id": {
+          "value": null,
+          "availability": "NOT_EVALUATED",
+          "reason": "pose_not_evaluated"
+        }
+      },
+      "end": {
+        "at_elapsed_realtime_ns": "9007211254740993",
+        "session_id": "synthetic-session",
+        "segment": {
+          "value": {
+            "session_id": "synthetic-session",
+            "segment_id": "synthetic-segment-a"
+          },
+          "availability": "AVAILABLE",
+          "reason": null
+        },
+        "network_epoch": {
+          "value": {
+            "session_id": "synthetic-session",
+            "epoch_token": "synthetic-epoch-a"
+          },
+          "availability": "AVAILABLE",
+          "reason": null
+        },
+        "coordinate_frame": {
+          "value": {
+            "session_id": "synthetic-session",
+            "frame_id": "synthetic-frame"
+          },
+          "availability": "AVAILABLE",
+          "reason": null
+        },
+        "pose_observation_id": {
+          "value": null,
+          "availability": "NOT_EVALUATED",
+          "reason": "pose_not_evaluated"
+        }
+      },
+      "boundaries": [],
+      "continuity": "CONTINUOUS",
+      "movement_span_m": {
+        "value": null,
+        "availability": "NOT_EVALUATED",
+        "reason": "movement_not_evaluated"
+      }
+    },
+    "comparison_safe": false,
+    "lower_bound": true,
+    "connection": "COLD",
+    "concurrent_load": "NOT_EVALUATED",
+    "http_application_rtt_nanos": null,
+    "server_upload_bytes": null,
+    "reason": "cancellation",
+    "begin_context": {
+      "at_elapsed_realtime_ns": "9007209254740993",
+      "session_id": "synthetic-session",
+      "segment": {
+        "value": {
+          "session_id": "synthetic-session",
+          "segment_id": "synthetic-segment-a"
+        },
+        "availability": "AVAILABLE",
+        "reason": null
+      },
+      "network_epoch": {
+        "value": {
+          "session_id": "synthetic-session",
+          "epoch_token": "synthetic-epoch-a"
+        },
+        "availability": "AVAILABLE",
+        "reason": null
+      },
+      "coordinate_frame": {
+        "value": {
+          "session_id": "synthetic-session",
+          "frame_id": "synthetic-frame"
+        },
+        "availability": "AVAILABLE",
+        "reason": null
+      },
+      "pose_observation_id": {
+        "value": null,
+        "availability": "NOT_EVALUATED",
+        "reason": "pose_not_evaluated"
+      }
+    }
+  },
+  {
+    "fixture": "synthetic",
+    "case": "partial-transfer",
+    "schema_version": "probe-wave1-alpha-1",
+    "protocol_version": "http-probe-alpha-1",
+    "test_profile": "verification_low_data",
+    "profile_version": "experimental-1",
+    "endpoint_context": {
+      "endpoint_id": "omanii-local-alpha",
+      "service_version": "0.1.0",
+      "region": "local-private",
+      "protocol_type": "HTTP/1.1"
+    },
+    "probe_id": "synthetic-3",
+    "sequence": 3,
+    "probe_type": "DOWNLOAD",
+    "start_nanos": "9007214254740993",
+    "end_nanos": "9007216254740993",
+    "received_at_nanos": "9007216254741993",
+    "measurement_at_nanos": "9007216254740993",
+    "requested_bytes": 65536,
+    "actual_bytes": 16384,
+    "http_bytes_charged": 16884,
+    "unconfirmed_upload_bytes": 0,
+    "outcome": "PARTIAL",
+    "endpoint_health": "healthy",
+    "endpoint_validated": true,
+    "context": {
+      "start": {
+        "at_elapsed_realtime_ns": "9007214254740993",
+        "session_id": "synthetic-session",
+        "segment": {
+          "value": {
+            "session_id": "synthetic-session",
+            "segment_id": "synthetic-segment-a"
+          },
+          "availability": "AVAILABLE",
+          "reason": null
+        },
+        "network_epoch": {
+          "value": {
+            "session_id": "synthetic-session",
+            "epoch_token": "synthetic-epoch-a"
+          },
+          "availability": "AVAILABLE",
+          "reason": null
+        },
+        "coordinate_frame": {
+          "value": {
+            "session_id": "synthetic-session",
+            "frame_id": "synthetic-frame"
+          },
+          "availability": "AVAILABLE",
+          "reason": null
+        },
+        "pose_observation_id": {
+          "value": null,
+          "availability": "NOT_EVALUATED",
+          "reason": "pose_not_evaluated"
+        }
+      },
+      "end": {
+        "at_elapsed_realtime_ns": "9007216254740993",
+        "session_id": "synthetic-session",
+        "segment": {
+          "value": {
+            "session_id": "synthetic-session",
+            "segment_id": "synthetic-segment-a"
+          },
+          "availability": "AVAILABLE",
+          "reason": null
+        },
+        "network_epoch": {
+          "value": {
+            "session_id": "synthetic-session",
+            "epoch_token": "synthetic-epoch-a"
+          },
+          "availability": "AVAILABLE",
+          "reason": null
+        },
+        "coordinate_frame": {
+          "value": {
+            "session_id": "synthetic-session",
+            "frame_id": "synthetic-frame"
+          },
+          "availability": "AVAILABLE",
+          "reason": null
+        },
+        "pose_observation_id": {
+          "value": null,
+          "availability": "NOT_EVALUATED",
+          "reason": "pose_not_evaluated"
+        }
+      },
+      "boundaries": [],
+      "continuity": "CONTINUOUS",
+      "movement_span_m": {
+        "value": null,
+        "availability": "NOT_EVALUATED",
+        "reason": "movement_not_evaluated"
+      }
+    },
+    "comparison_safe": false,
+    "lower_bound": true,
+    "connection": "COLD",
+    "concurrent_load": "NOT_EVALUATED",
+    "http_application_rtt_nanos": null,
+    "server_upload_bytes": null,
+    "reason": "partial-transfer",
+    "begin_context": {
+      "at_elapsed_realtime_ns": "9007214254740993",
+      "session_id": "synthetic-session",
+      "segment": {
+        "value": {
+          "session_id": "synthetic-session",
+          "segment_id": "synthetic-segment-a"
+        },
+        "availability": "AVAILABLE",
+        "reason": null
+      },
+      "network_epoch": {
+        "value": {
+          "session_id": "synthetic-session",
+          "epoch_token": "synthetic-epoch-a"
+        },
+        "availability": "AVAILABLE",
+        "reason": null
+      },
+      "coordinate_frame": {
+        "value": {
+          "session_id": "synthetic-session",
+          "frame_id": "synthetic-frame"
+        },
+        "availability": "AVAILABLE",
+        "reason": null
+      },
+      "pose_observation_id": {
+        "value": null,
+        "availability": "NOT_EVALUATED",
+        "reason": "pose_not_evaluated"
+      }
+    }
+  },
+  {
+    "fixture": "synthetic",
+    "case": "budget-exhausted",
+    "schema_version": "probe-wave1-alpha-1",
+    "protocol_version": "http-probe-alpha-1",
+    "test_profile": "verification_low_data",
+    "profile_version": "experimental-1",
+    "endpoint_context": {
+      "endpoint_id": "omanii-local-alpha",
+      "service_version": "0.1.0",
+      "region": "local-private",
+      "protocol_type": "HTTP/1.1"
+    },
+    "probe_id": "synthetic-4",
+    "sequence": 4,
+    "probe_type": "DOWNLOAD",
+    "start_nanos": "9007219254740993",
+    "end_nanos": "9007221254740993",
+    "received_at_nanos": "9007221254741993",
+    "measurement_at_nanos": "9007221254740993",
+    "requested_bytes": 65536,
+    "actual_bytes": 0,
+    "http_bytes_charged": 0,
+    "unconfirmed_upload_bytes": 0,
+    "outcome": "BUDGET_EXHAUSTED",
+    "endpoint_health": null,
+    "endpoint_validated": false,
+    "context": {
+      "start": {
+        "at_elapsed_realtime_ns": "9007219254740993",
+        "session_id": "synthetic-session",
+        "segment": {
+          "value": {
+            "session_id": "synthetic-session",
+            "segment_id": "synthetic-segment-a"
+          },
+          "availability": "AVAILABLE",
+          "reason": null
+        },
+        "network_epoch": {
+          "value": {
+            "session_id": "synthetic-session",
+            "epoch_token": "synthetic-epoch-a"
+          },
+          "availability": "AVAILABLE",
+          "reason": null
+        },
+        "coordinate_frame": {
+          "value": {
+            "session_id": "synthetic-session",
+            "frame_id": "synthetic-frame"
+          },
+          "availability": "AVAILABLE",
+          "reason": null
+        },
+        "pose_observation_id": {
+          "value": null,
+          "availability": "NOT_EVALUATED",
+          "reason": "pose_not_evaluated"
+        }
+      },
+      "end": {
+        "at_elapsed_realtime_ns": "9007221254740993",
+        "session_id": "synthetic-session",
+        "segment": {
+          "value": {
+            "session_id": "synthetic-session",
+            "segment_id": "synthetic-segment-a"
+          },
+          "availability": "AVAILABLE",
+          "reason": null
+        },
+        "network_epoch": {
+          "value": {
+            "session_id": "synthetic-session",
+            "epoch_token": "synthetic-epoch-a"
+          },
+          "availability": "AVAILABLE",
+          "reason": null
+        },
+        "coordinate_frame": {
+          "value": {
+            "session_id": "synthetic-session",
+            "frame_id": "synthetic-frame"
+          },
+          "availability": "AVAILABLE",
+          "reason": null
+        },
+        "pose_observation_id": {
+          "value": null,
+          "availability": "NOT_EVALUATED",
+          "reason": "pose_not_evaluated"
+        }
+      },
+      "boundaries": [],
+      "continuity": "CONTINUOUS",
+      "movement_span_m": {
+        "value": null,
+        "availability": "NOT_EVALUATED",
+        "reason": "movement_not_evaluated"
+      }
+    },
+    "comparison_safe": false,
+    "lower_bound": true,
+    "connection": "NOT_OPENED",
+    "concurrent_load": "NOT_EVALUATED",
+    "http_application_rtt_nanos": null,
+    "server_upload_bytes": null,
+    "reason": "budget-exhausted",
+    "begin_context": {
+      "at_elapsed_realtime_ns": "9007219254740993",
+      "session_id": "synthetic-session",
+      "segment": {
+        "value": {
+          "session_id": "synthetic-session",
+          "segment_id": "synthetic-segment-a"
+        },
+        "availability": "AVAILABLE",
+        "reason": null
+      },
+      "network_epoch": {
+        "value": {
+          "session_id": "synthetic-session",
+          "epoch_token": "synthetic-epoch-a"
+        },
+        "availability": "AVAILABLE",
+        "reason": null
+      },
+      "coordinate_frame": {
+        "value": {
+          "session_id": "synthetic-session",
+          "frame_id": "synthetic-frame"
+        },
+        "availability": "AVAILABLE",
+        "reason": null
+      },
+      "pose_observation_id": {
+        "value": null,
+        "availability": "NOT_EVALUATED",
+        "reason": "pose_not_evaluated"
+      }
+    }
+  },
+  {
+    "fixture": "synthetic",
+    "case": "endpoint-overload",
+    "schema_version": "probe-wave1-alpha-1",
+    "protocol_version": "http-probe-alpha-1",
+    "test_profile": "low_data_responsiveness",
+    "profile_version": "experimental-1",
+    "endpoint_context": {
+      "endpoint_id": "omanii-local-alpha",
+      "service_version": "0.1.0",
+      "region": "local-private",
+      "protocol_type": "HTTP/1.1"
+    },
+    "probe_id": "synthetic-5",
+    "sequence": 5,
+    "probe_type": "RESPONSIVENESS",
+    "start_nanos": "9007224254740993",
+    "end_nanos": "9007226254740993",
+    "received_at_nanos": "9007226254741993",
+    "measurement_at_nanos": "9007226254740993",
+    "requested_bytes": 1,
+    "actual_bytes": 0,
+    "http_bytes_charged": 500,
+    "unconfirmed_upload_bytes": 0,
+    "outcome": "SERVER_INVALID",
+    "endpoint_health": "invalid",
+    "endpoint_validated": false,
+    "context": {
+      "start": {
+        "at_elapsed_realtime_ns": "9007224254740993",
+        "session_id": "synthetic-session",
+        "segment": {
+          "value": {
+            "session_id": "synthetic-session",
+            "segment_id": "synthetic-segment-a"
+          },
+          "availability": "AVAILABLE",
+          "reason": null
+        },
+        "network_epoch": {
+          "value": {
+            "session_id": "synthetic-session",
+            "epoch_token": "synthetic-epoch-a"
+          },
+          "availability": "AVAILABLE",
+          "reason": null
+        },
+        "coordinate_frame": {
+          "value": {
+            "session_id": "synthetic-session",
+            "frame_id": "synthetic-frame"
+          },
+          "availability": "AVAILABLE",
+          "reason": null
+        },
+        "pose_observation_id": {
+          "value": null,
+          "availability": "NOT_EVALUATED",
+          "reason": "pose_not_evaluated"
+        }
+      },
+      "end": {
+        "at_elapsed_realtime_ns": "9007226254740993",
+        "session_id": "synthetic-session",
+        "segment": {
+          "value": {
+            "session_id": "synthetic-session",
+            "segment_id": "synthetic-segment-a"
+          },
+          "availability": "AVAILABLE",
+          "reason": null
+        },
+        "network_epoch": {
+          "value": {
+            "session_id": "synthetic-session",
+            "epoch_token": "synthetic-epoch-a"
+          },
+          "availability": "AVAILABLE",
+          "reason": null
+        },
+        "coordinate_frame": {
+          "value": {
+            "session_id": "synthetic-session",
+            "frame_id": "synthetic-frame"
+          },
+          "availability": "AVAILABLE",
+          "reason": null
+        },
+        "pose_observation_id": {
+          "value": null,
+          "availability": "NOT_EVALUATED",
+          "reason": "pose_not_evaluated"
+        }
+      },
+      "boundaries": [],
+      "continuity": "CONTINUOUS",
+      "movement_span_m": {
+        "value": null,
+        "availability": "NOT_EVALUATED",
+        "reason": "movement_not_evaluated"
+      }
+    },
+    "comparison_safe": false,
+    "lower_bound": false,
+    "connection": "COLD",
+    "concurrent_load": "NOT_EVALUATED",
+    "http_application_rtt_nanos": null,
+    "server_upload_bytes": null,
+    "reason": "endpoint-overload",
+    "begin_context": {
+      "at_elapsed_realtime_ns": "9007224254740993",
+      "session_id": "synthetic-session",
+      "segment": {
+        "value": {
+          "session_id": "synthetic-session",
+          "segment_id": "synthetic-segment-a"
+        },
+        "availability": "AVAILABLE",
+        "reason": null
+      },
+      "network_epoch": {
+        "value": {
+          "session_id": "synthetic-session",
+          "epoch_token": "synthetic-epoch-a"
+        },
+        "availability": "AVAILABLE",
+        "reason": null
+      },
+      "coordinate_frame": {
+        "value": {
+          "session_id": "synthetic-session",
+          "frame_id": "synthetic-frame"
+        },
+        "availability": "AVAILABLE",
+        "reason": null
+      },
+      "pose_observation_id": {
+        "value": null,
+        "availability": "NOT_EVALUATED",
+        "reason": "pose_not_evaluated"
+      }
+    }
+  },
+  {
+    "fixture": "synthetic",
+    "case": "context-transition",
+    "schema_version": "probe-wave1-alpha-1",
+    "protocol_version": "http-probe-alpha-1",
+    "test_profile": "verification_low_data",
+    "profile_version": "experimental-1",
+    "endpoint_context": {
+      "endpoint_id": "omanii-local-alpha",
+      "service_version": "0.1.0",
+      "region": "local-private",
+      "protocol_type": "HTTP/1.1"
+    },
+    "probe_id": "synthetic-6",
+    "sequence": 6,
+    "probe_type": "DOWNLOAD",
+    "start_nanos": "9007229254740993",
+    "end_nanos": "9007231254740993",
+    "received_at_nanos": "9007231254741993",
+    "measurement_at_nanos": "9007231254740993",
+    "requested_bytes": 65536,
+    "actual_bytes": 65536,
+    "http_bytes_charged": 66036,
+    "unconfirmed_upload_bytes": 0,
+    "outcome": "SUCCESS",
+    "endpoint_health": "healthy",
+    "endpoint_validated": true,
+    "context": {
+      "start": {
+        "at_elapsed_realtime_ns": "9007229254740993",
+        "session_id": "synthetic-session",
+        "segment": {
+          "value": {
+            "session_id": "synthetic-session",
+            "segment_id": "synthetic-segment-a"
+          },
+          "availability": "AVAILABLE",
+          "reason": null
+        },
+        "network_epoch": {
+          "value": {
+            "session_id": "synthetic-session",
+            "epoch_token": "synthetic-epoch-a"
+          },
+          "availability": "AVAILABLE",
+          "reason": null
+        },
+        "coordinate_frame": {
+          "value": {
+            "session_id": "synthetic-session",
+            "frame_id": "synthetic-frame"
+          },
+          "availability": "AVAILABLE",
+          "reason": null
+        },
+        "pose_observation_id": {
+          "value": null,
+          "availability": "NOT_EVALUATED",
+          "reason": "pose_not_evaluated"
+        }
+      },
+      "end": {
+        "at_elapsed_realtime_ns": "9007231254740993",
+        "session_id": "synthetic-session",
+        "segment": {
+          "value": {
+            "session_id": "synthetic-session",
+            "segment_id": "synthetic-segment-a"
+          },
+          "availability": "AVAILABLE",
+          "reason": null
+        },
+        "network_epoch": {
+          "value": {
+            "session_id": "synthetic-session",
+            "epoch_token": "synthetic-epoch-a"
+          },
+          "availability": "AVAILABLE",
+          "reason": null
+        },
+        "coordinate_frame": {
+          "value": {
+            "session_id": "synthetic-session",
+            "frame_id": "synthetic-frame"
+          },
+          "availability": "AVAILABLE",
+          "reason": null
+        },
+        "pose_observation_id": {
+          "value": null,
+          "availability": "NOT_EVALUATED",
+          "reason": "pose_not_evaluated"
+        }
+      },
+      "boundaries": [
+        {
+          "at_elapsed_realtime_ns": "9007230254740993",
+          "reason": "network_transition",
+          "before": {
+            "at_elapsed_realtime_ns": "9007230254740993",
+            "session_id": "synthetic-session",
+            "segment": {
+              "value": {
+                "session_id": "synthetic-session",
+                "segment_id": "synthetic-segment-a"
+              },
+              "availability": "AVAILABLE",
+              "reason": null
+            },
+            "network_epoch": {
+              "value": {
+                "session_id": "synthetic-session",
+                "epoch_token": "synthetic-epoch-a"
+              },
+              "availability": "AVAILABLE",
+              "reason": null
+            },
+            "coordinate_frame": {
+              "value": {
+                "session_id": "synthetic-session",
+                "frame_id": "synthetic-frame"
+              },
+              "availability": "AVAILABLE",
+              "reason": null
+            },
+            "pose_observation_id": {
+              "value": null,
+              "availability": "NOT_EVALUATED",
+              "reason": "pose_not_evaluated"
+            }
+          },
+          "after": {
+            "at_elapsed_realtime_ns": "9007230254740993",
+            "session_id": "synthetic-session",
+            "segment": {
+              "value": {
+                "session_id": "synthetic-session",
+                "segment_id": "synthetic-segment-b"
+              },
+              "availability": "AVAILABLE",
+              "reason": null
+            },
+            "network_epoch": {
+              "value": {
+                "session_id": "synthetic-session",
+                "epoch_token": "synthetic-epoch-b"
+              },
+              "availability": "AVAILABLE",
+              "reason": null
+            },
+            "coordinate_frame": {
+              "value": {
+                "session_id": "synthetic-session",
+                "frame_id": "synthetic-frame"
+              },
+              "availability": "AVAILABLE",
+              "reason": null
+            },
+            "pose_observation_id": {
+              "value": null,
+              "availability": "NOT_EVALUATED",
+              "reason": "pose_not_evaluated"
+            }
+          }
+        },
+        {
+          "at_elapsed_realtime_ns": "9007230754740993",
+          "reason": "network_return",
+          "before": {
+            "at_elapsed_realtime_ns": "9007230754740993",
+            "session_id": "synthetic-session",
+            "segment": {
+              "value": {
+                "session_id": "synthetic-session",
+                "segment_id": "synthetic-segment-b"
+              },
+              "availability": "AVAILABLE",
+              "reason": null
+            },
+            "network_epoch": {
+              "value": {
+                "session_id": "synthetic-session",
+                "epoch_token": "synthetic-epoch-b"
+              },
+              "availability": "AVAILABLE",
+              "reason": null
+            },
+            "coordinate_frame": {
+              "value": {
+                "session_id": "synthetic-session",
+                "frame_id": "synthetic-frame"
+              },
+              "availability": "AVAILABLE",
+              "reason": null
+            },
+            "pose_observation_id": {
+              "value": null,
+              "availability": "NOT_EVALUATED",
+              "reason": "pose_not_evaluated"
+            }
+          },
+          "after": {
+            "at_elapsed_realtime_ns": "9007230754740993",
+            "session_id": "synthetic-session",
+            "segment": {
+              "value": {
+                "session_id": "synthetic-session",
+                "segment_id": "synthetic-segment-a"
+              },
+              "availability": "AVAILABLE",
+              "reason": null
+            },
+            "network_epoch": {
+              "value": {
+                "session_id": "synthetic-session",
+                "epoch_token": "synthetic-epoch-a"
+              },
+              "availability": "AVAILABLE",
+              "reason": null
+            },
+            "coordinate_frame": {
+              "value": {
+                "session_id": "synthetic-session",
+                "frame_id": "synthetic-frame"
+              },
+              "availability": "AVAILABLE",
+              "reason": null
+            },
+            "pose_observation_id": {
+              "value": null,
+              "availability": "NOT_EVALUATED",
+              "reason": "pose_not_evaluated"
+            }
+          }
+        }
+      ],
+      "continuity": "BROKEN",
+      "movement_span_m": {
+        "value": 2,
+        "availability": "AVAILABLE",
+        "reason": null
+      }
+    },
+    "comparison_safe": false,
+    "lower_bound": true,
+    "connection": "COLD",
+    "concurrent_load": "NOT_EVALUATED",
+    "http_application_rtt_nanos": null,
+    "server_upload_bytes": null,
+    "reason": null,
+    "begin_context": {
+      "at_elapsed_realtime_ns": "9007229254740993",
+      "session_id": "synthetic-session",
+      "segment": {
+        "value": {
+          "session_id": "synthetic-session",
+          "segment_id": "synthetic-segment-a"
+        },
+        "availability": "AVAILABLE",
+        "reason": null
+      },
+      "network_epoch": {
+        "value": {
+          "session_id": "synthetic-session",
+          "epoch_token": "synthetic-epoch-a"
+        },
+        "availability": "AVAILABLE",
+        "reason": null
+      },
+      "coordinate_frame": {
+        "value": {
+          "session_id": "synthetic-session",
+          "frame_id": "synthetic-frame"
+        },
+        "availability": "AVAILABLE",
+        "reason": null
+      },
+      "pose_observation_id": {
+        "value": null,
+        "availability": "NOT_EVALUATED",
+        "reason": "pose_not_evaluated"
+      }
+    }
+  },
+  {
+    "fixture": "synthetic",
+    "case": "http-failure-not-packet-loss",
+    "schema_version": "probe-wave1-alpha-1",
+    "protocol_version": "http-probe-alpha-1",
+    "test_profile": "low_data_responsiveness",
+    "profile_version": "experimental-1",
+    "endpoint_context": {
+      "endpoint_id": "omanii-local-alpha",
+      "service_version": "0.1.0",
+      "region": "local-private",
+      "protocol_type": "HTTP/1.1"
+    },
+    "probe_id": "synthetic-7",
+    "sequence": 7,
+    "probe_type": "RESPONSIVENESS",
+    "start_nanos": "9007234254740993",
+    "end_nanos": "9007236254740993",
+    "received_at_nanos": "9007236254741993",
+    "measurement_at_nanos": "9007236254740993",
+    "requested_bytes": 1,
+    "actual_bytes": 0,
+    "http_bytes_charged": 500,
+    "unconfirmed_upload_bytes": 0,
+    "outcome": "ERROR",
+    "endpoint_health": null,
+    "endpoint_validated": false,
+    "context": {
+      "start": {
+        "at_elapsed_realtime_ns": "9007234254740993",
+        "session_id": "synthetic-session",
+        "segment": {
+          "value": {
+            "session_id": "synthetic-session",
+            "segment_id": "synthetic-segment-a"
+          },
+          "availability": "AVAILABLE",
+          "reason": null
+        },
+        "network_epoch": {
+          "value": {
+            "session_id": "synthetic-session",
+            "epoch_token": "synthetic-epoch-a"
+          },
+          "availability": "AVAILABLE",
+          "reason": null
+        },
+        "coordinate_frame": {
+          "value": {
+            "session_id": "synthetic-session",
+            "frame_id": "synthetic-frame"
+          },
+          "availability": "AVAILABLE",
+          "reason": null
+        },
+        "pose_observation_id": {
+          "value": null,
+          "availability": "NOT_EVALUATED",
+          "reason": "pose_not_evaluated"
+        }
+      },
+      "end": {
+        "at_elapsed_realtime_ns": "9007236254740993",
+        "session_id": "synthetic-session",
+        "segment": {
+          "value": {
+            "session_id": "synthetic-session",
+            "segment_id": "synthetic-segment-a"
+          },
+          "availability": "AVAILABLE",
+          "reason": null
+        },
+        "network_epoch": {
+          "value": {
+            "session_id": "synthetic-session",
+            "epoch_token": "synthetic-epoch-a"
+          },
+          "availability": "AVAILABLE",
+          "reason": null
+        },
+        "coordinate_frame": {
+          "value": {
+            "session_id": "synthetic-session",
+            "frame_id": "synthetic-frame"
+          },
+          "availability": "AVAILABLE",
+          "reason": null
+        },
+        "pose_observation_id": {
+          "value": null,
+          "availability": "NOT_EVALUATED",
+          "reason": "pose_not_evaluated"
+        }
+      },
+      "boundaries": [],
+      "continuity": "CONTINUOUS",
+      "movement_span_m": {
+        "value": null,
+        "availability": "NOT_EVALUATED",
+        "reason": "movement_not_evaluated"
+      }
+    },
+    "comparison_safe": false,
+    "lower_bound": false,
+    "connection": "COLD",
+    "concurrent_load": "NOT_EVALUATED",
+    "http_application_rtt_nanos": null,
+    "server_upload_bytes": null,
+    "reason": "http-failure-not-packet-loss",
+    "begin_context": {
+      "at_elapsed_realtime_ns": "9007234254740993",
+      "session_id": "synthetic-session",
+      "segment": {
+        "value": {
+          "session_id": "synthetic-session",
+          "segment_id": "synthetic-segment-a"
+        },
+        "availability": "AVAILABLE",
+        "reason": null
+      },
+      "network_epoch": {
+        "value": {
+          "session_id": "synthetic-session",
+          "epoch_token": "synthetic-epoch-a"
+        },
+        "availability": "AVAILABLE",
+        "reason": null
+      },
+      "coordinate_frame": {
+        "value": {
+          "session_id": "synthetic-session",
+          "frame_id": "synthetic-frame"
+        },
+        "availability": "AVAILABLE",
+        "reason": null
+      },
+      "pose_observation_id": {
+        "value": null,
+        "availability": "NOT_EVALUATED",
+        "reason": "pose_not_evaluated"
+      }
+    }
+  }
+]

@@ -1,0 +1,13 @@
+{
+  "name": "omanii-measurement-alpha",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=24.0.0 <25" },
+  "scripts": {
+    "start": "node src/main.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "node --test test/*.test.ts"
+  },
+  "devDependencies": { "@types/node": "24.10.1", "typescript": "5.9.3" }
+}

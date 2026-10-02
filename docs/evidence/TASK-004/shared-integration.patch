@@ -1,0 +1,98 @@
+diff --git a/android/app/src/main/java/com/omanii/app/time/MonotonicClock.kt b/android/app/src/main/java/com/omanii/app/time/MonotonicClock.kt
+new file mode 100644
+--- /dev/null
++++ b/android/app/src/main/java/com/omanii/app/time/MonotonicClock.kt
+@@ -0,0 +1,5 @@
++package com.omanii.app.time
++
++fun interface MonotonicClock {
++    fun nowNanos(): Long
++}
+diff --git a/android/app/src/main/java/com/omanii/app/model/ProbeContracts.kt b/android/app/src/main/java/com/omanii/app/model/ProbeContracts.kt
+new file mode 100644
+--- /dev/null
++++ b/android/app/src/main/java/com/omanii/app/model/ProbeContracts.kt
+@@ -0,0 +1,49 @@
++package com.omanii.app.model
++
++import java.net.InetAddress
++
++enum class ProbeType { RESPONSIVENESS, DOWNLOAD, UPLOAD }
++enum class ProbeOutcome { SUCCESS, TIMEOUT, ERROR, CANCELLED, SERVER_INVALID, PARTIAL, BUDGET_EXHAUSTED }
++enum class ContextContinuity { CONTINUOUS, BROKEN, UNKNOWN, NOT_EVALUATED }
++enum class ConnectionSemantics { COLD, REUSED, NOT_OPENED }
++data class EndpointContext(
++    val endpointId: String, val serviceVersion: String, val region: String,
++    val protocolVersion: String, val host: String, val port: Int,
++    val address: InetAddress, val tls: Boolean,
++)
++data class TestProfile(
++    val name: String, val version: String, val type: ProbeType, val samples: Int,
++    val requestedBytes: Long, val sampleTimeoutNanos: Long, val totalTimeoutNanos: Long,
++)
++data class ProbeContextRef(val segmentId: String?, val networkEpoch: String?)
++data class ProbeContextSpan(
++    val start: ProbeContextRef, val end: ProbeContextRef, val continuity: ContextContinuity,
++    val boundaryNanos: List<Long>, val movementDistanceMeters: Double? = null,
++)
++data class ProbeObservation(
++    val probeId: String, val sequence: Int, val schemaVersion: String,
++    val endpoint: EndpointContext, val profile: TestProfile,
++    val startNanos: Long, val endNanos: Long, val receivedAtNanos: Long,
++    val measurementAtNanos: Long?, val requestedBytes: Long, val actualBytes: Long,
++    val httpBytesCharged: Long, val unconfirmedUploadBytes: Long,
++    val outcome: ProbeOutcome, val reason: String?, val endpointHealth: String?,
++    val endpointValidated: Boolean, val serverUploadBytes: Long?,
++    val context: ProbeContextSpan, val comparisonSafe: Boolean,
++    val connection: ConnectionSemantics, val concurrentLoad: String,
++    val httpApplicationRttNanos: Long?, val lowerBound: Boolean,
++)
++data class ByteBudgetSnapshot(
++    val budgetId: String, val totalBytes: Long, val consumedBytes: Long,
++    val reservedBytes: Long, val exhausted: Boolean, val cancelled: Boolean,
++)
++interface ByteReservation : AutoCloseable {
++    fun charge(bytes: Long)
++    val chargedBytes: Long
++    override fun close()
++}
++interface ByteBudget {
++    val budgetId: String
++    fun reserve(maximumBytes: Long): ByteReservation?
++    fun snapshot(): ByteBudgetSnapshot
++    fun cancel()
++}
+diff --git a/android/app/src/main/java/com/omanii/app/session/ProbeContextHooks.kt b/android/app/src/main/java/com/omanii/app/session/ProbeContextHooks.kt
+new file mode 100644
+--- /dev/null
++++ b/android/app/src/main/java/com/omanii/app/session/ProbeContextHooks.kt
+@@ -0,0 +1,10 @@
++package com.omanii.app.session
++
++import com.omanii.app.model.ProbeContextSpan
++
++// Integration supplies a boundary-preserving interval tracker, including A -> B -> A transitions.
++// begin/end must be fast and must not perform network work. Ownership remains with the session.
++interface ProbeContextHooks {
++    fun begin(startNanos: Long): Any
++    fun end(token: Any, endNanos: Long): ProbeContextSpan
++}
+diff --git a/android/app/src/main/java/com/omanii/app/time/ElapsedRealtimeClock.kt b/android/app/src/main/java/com/omanii/app/time/ElapsedRealtimeClock.kt
+new file mode 100644
+--- /dev/null
++++ b/android/app/src/main/java/com/omanii/app/time/ElapsedRealtimeClock.kt
+@@ -0,0 +1,7 @@
++package com.omanii.app.time
++
++import android.os.SystemClock
++
++object ElapsedRealtimeClock : MonotonicClock {
++    override fun nowNanos(): Long = SystemClock.elapsedRealtimeNanos()
++}
+diff --git a/android/app/src/main/AndroidManifest.xml b/android/app/src/main/AndroidManifest.xml
+--- a/android/app/src/main/AndroidManifest.xml
++++ b/android/app/src/main/AndroidManifest.xml
+@@ -1,2 +1,3 @@
+ <manifest xmlns:android="http://schemas.android.com/apk/res/android">
++    <uses-permission android:name="android.permission.INTERNET" />
+     <application
