@@ -3,6 +3,7 @@ package com.omanii.app.pose
 import org.junit.Assert.*
 import org.junit.Test
 import kotlin.math.sqrt
+import com.omanii.app.model.SegmentRef
 
 class PoseCaptureTest {
     private var time = 1_000_000_000L
@@ -138,5 +139,39 @@ class PoseCaptureTest {
         assertThrows(IllegalArgumentException::class.java) { PositionM(Double.NaN, 0.0, 0.0) }
         assertThrows(IllegalArgumentException::class.java) { QuaternionXyzw.normalized(0.0, 0.0, 0.0, 0.0) }
         assertThrows(IllegalArgumentException::class.java) { QuaternionXyzw(0.0, 0.0, 0.0, 2.0) }
+    }
+
+    @Test fun comparisonSegmentChangePreservesOriginFrameAndCameraFrameDeduplication() {
+        val c = capture(); c.started(); c.accept(frame())
+        time++
+        val boundary = c.changeSegment(SegmentRef("session", "network_segment"))!!
+        assertEquals(PoseReason.SEGMENT_CHANGED, boundary.reason)
+        assertEquals(PoseFrameIdentity("network_segment", "f0"), boundary.identity)
+        assertEquals(id, boundary.previousIdentity); assertEquals(0, resets)
+        assertTrue(c.accept(frame()).isEmpty())
+        val next = c.accept(frame(101, pose(6.0, 3.0, -5.0))).last()
+        assertEquals(PositionM(2.0, 1.0, -2.0), next.pose!!.position)
+        assertEquals("f0", next.identity.coordinateFrameId)
+    }
+
+    @Test fun networkChangeDuringTrackingLossDoesNotErasePendingPoseDiscontinuity() {
+        val c = capture(); c.started(); c.accept(frame())
+        c.accept(PoseFrame(101, PoseTracking.PAUSED, PoseTracking.PAUSED))
+        val segmentOnly = c.changeSegment(SegmentRef("session", "network_segment"))!!
+        assertEquals(PoseTracking.PAUSED, segmentOnly.tracking)
+        assertEquals("f0", segmentOnly.identity.coordinateFrameId)
+        val recovered = c.accept(frame(102))
+        val poseBoundary = recovered.single { it.kind == PoseRecordKind.BOUNDARY }
+        assertEquals(PoseFrameIdentity("network_segment", "f0"), poseBoundary.previousIdentity)
+        assertEquals(PoseFrameIdentity("s1", "f1"), poseBoundary.identity)
+        assertEquals(1, resets)
+    }
+
+    @Test fun segmentChangeRejectsCrossSessionAndReusedSegmentReferences() {
+        val c = capture(); c.started()
+        assertThrows(IllegalArgumentException::class.java) { c.changeSegment(SegmentRef("other", "s1")) }
+        c.changeSegment(SegmentRef("session", "s1"))
+        assertThrows(IllegalArgumentException::class.java) { c.changeSegment(SegmentRef("session", "s0")) }
+        assertNull(c.changeSegment(SegmentRef("session", "s1")))
     }
 }

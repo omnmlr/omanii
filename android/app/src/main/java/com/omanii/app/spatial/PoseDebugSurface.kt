@@ -6,11 +6,16 @@ import android.opengl.GLSurfaceView
 import android.os.Handler
 import android.os.Looper
 import androidx.activity.ComponentActivity
+import com.omanii.app.model.MonotonicClock
 import com.omanii.app.pose.ArCoreFrameSource
+import com.omanii.app.pose.CanonicalPoseRecord
+import com.omanii.app.pose.PoseCanonicalMapper
+import com.omanii.app.pose.PoseDataOrigin
+import com.omanii.app.pose.PoseDebugMetadata
+import com.omanii.app.pose.PoseMappingContext
 import com.omanii.app.pose.PoseFrameIdentity
 import com.omanii.app.pose.PoseProvider
 import com.omanii.app.pose.PoseReason
-import com.omanii.app.pose.PoseRecord
 import com.omanii.app.pose.PoseRecordKind
 import java.util.UUID
 import java.util.concurrent.atomic.AtomicBoolean
@@ -20,19 +25,23 @@ import javax.microedition.khronos.opengles.GL10
 /** GL surface only services ARCore updates. It never renders/retains camera pixels. */
 internal class PoseDebugSurface(
     private val activity: ComponentActivity,
-    nowNs: () -> Long,
-    onRecord: (PoseRecord) -> Unit,
+    clock: MonotonicClock,
+    appBuild: String,
+    onRecord: (CanonicalPoseRecord) -> Unit,
 ) : GLSurfaceView(activity) {
     private val closed = AtomicBoolean(false)
-    private val source = ArCoreFrameSource.create(activity)
     val sessionId = UUID.randomUUID().toString()
+    private val mapper = PoseCanonicalMapper(PoseMappingContext(sessionId, UUID.randomUUID().toString(), appBuild,
+        PoseDebugMetadata(PoseDataOrigin.LIVE_ARCORE)))
+    private val source = ArCoreFrameSource.create(activity)
     private val mainHandler = Handler(Looper.getMainLooper())
     private var segment = 0
     private fun identity() = PoseFrameIdentity("debug_${sessionId}_s$segment", "debug_${sessionId}_f$segment")
-    private val provider = PoseProvider(source, sessionId, identity(), { segment++; identity() }, nowNs, { record ->
+    private val provider = PoseProvider(source, sessionId, identity(), { segment++; identity() }, clock, { record ->
+        val canonical = mapper.map(record) // Association invalidation occurs on receipt, before posting UI work.
         // Always enqueue, including UI-thread STOP. Control events must precede their terminal record.
         mainHandler.post {
-            if (!closed.get() || record.kind != PoseRecordKind.SAMPLE) onRecord(record)
+            if (!closed.get() || record.kind != PoseRecordKind.SAMPLE) onRecord(canonical)
         }
     }, dispatchCleanup = { action ->
         if (Looper.myLooper() == Looper.getMainLooper()) action() else mainHandler.post { action() }

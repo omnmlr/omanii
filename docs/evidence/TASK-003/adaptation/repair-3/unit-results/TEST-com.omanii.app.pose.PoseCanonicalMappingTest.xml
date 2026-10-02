@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.omanii.app.pose.PoseCanonicalMappingTest" tests="14" skipped="0" failures="0" errors="0" timestamp="2026-10-02T03:30:36.261Z" hostname="DESKTOP-0JG6VKQ" time="0.829">
+  <properties/>
+  <testcase name="distinctSessionRunPairsCannotAliasClockInstancesOrRecordIds" classname="com.omanii.app.pose.PoseCanonicalMappingTest" time="0.211"/>
+  <testcase name="enrichedExportReplayPreservesOriginalRecordsScopedClockAndCanonicalMetadata" classname="com.omanii.app.pose.PoseCanonicalMappingTest" time="0.204"/>
+  <testcase name="sharedGeometryPreservesMetresHeightXzAndHamiltonXyzwExactly" classname="com.omanii.app.pose.PoseCanonicalMappingTest" time="0.009"/>
+  <testcase name="sourceTimestampsUseUndefinedDomainFrameCaptureAndSessionRunToken" classname="com.omanii.app.pose.PoseCanonicalMappingTest" time="0.002"/>
+  <testcase name="enrichedReplayRejectsDomainProvenanceScopeAndMetadataTampering" classname="com.omanii.app.pose.PoseCanonicalMappingTest" time="0.065"/>
+  <testcase name="recoveryDoesNotRestoreAssociationUntilActualNewFrameSample" classname="com.omanii.app.pose.PoseCanonicalMappingTest" time="0.012"/>
+  <testcase name="segmentAndFrameReferencesAreSessionScopedAndSeparate" classname="com.omanii.app.pose.PoseCanonicalMappingTest" time="0.002"/>
+  <testcase name="exportIdGapsFromSuppressedSamplesDoNotCreateMissingAssociationReferences" classname="com.omanii.app.pose.PoseCanonicalMappingTest" time="0.016"/>
+  <testcase name="canonicalDevelopmentMetadataKeepsDebugAndSyntheticLiveProvenance" classname="com.omanii.app.pose.PoseCanonicalMappingTest" time="0.007"/>
+  <testcase name="networkOnlySegmentBoundaryPreservesFrameAndPriorObservationWithoutInventingSample" classname="com.omanii.app.pose.PoseCanonicalMappingTest" time="0.001"/>
+  <testcase name="trackingLossImmediatelyInvalidatesAssociationBeforeAnyBoundary" classname="com.omanii.app.pose.PoseCanonicalMappingTest" time="0.001"/>
+  <testcase name="networkOnlyFixtureReplaysWithSameScopedFrameAcrossSegmentBoundary" classname="com.omanii.app.pose.PoseCanonicalMappingTest" time="0.015"/>
+  <testcase name="sharedClockControlsReceiveOrderingWithoutSourceClockConversion" classname="com.omanii.app.pose.PoseCanonicalMappingTest" time="0.011"/>
+  <testcase name="rawFixturesRemainReadableWithoutCanonicalMetadata" classname="com.omanii.app.pose.PoseCanonicalMappingTest" time="0.014"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,5 +1,7 @@
 # Integration-owner proposal (not applied)
 
+Historical checkpoint proposal. **Superseded by approved foundation `4be02dce58b2b070de6bff669309ead2bbe384e9`; do not apply this patch to the merged branch.** The canonical clock is `com.omanii.app.model.MonotonicClock` / `AndroidElapsedRealtimeClock.nowElapsedRealtimeNs()`. The shadow time interface and wholesale MainActivity change below were rejected/deferred. Current pose/debug code uses that canonical clock, and navigation still requires separate integration-owner work. See the adaptation section of REPORT.md for current status.
+
 `proposed-shared-integration.patch` is an exact patch against base `c1b3903ca9078651d74cefad9c22b67e5acd3f12`. Review/apply through the integration owner. Task-owned code intentionally references the ARCore SDK; the normal scaffold cannot compile it until the dependency is integrated.
 
 ## Proposed changes and justification

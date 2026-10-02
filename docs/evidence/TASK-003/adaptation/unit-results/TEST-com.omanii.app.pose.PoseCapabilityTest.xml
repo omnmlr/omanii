@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.omanii.app.pose.PoseCapabilityTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2026-10-02T02:48:10.754Z" hostname="DESKTOP-0JG6VKQ" time="0.262">
+  <properties/>
+  <testcase name="unsupportedIsFallbackWithoutCameraRequest" classname="com.omanii.app.pose.PoseCapabilityTest" time="0.034"/>
+  <testcase name="constructionAndInspectionDoNotRequestCamera" classname="com.omanii.app.pose.PoseCapabilityTest" time="0.0"/>
+  <testcase name="bothCameraDenialStatesPreserveFallback" classname="com.omanii.app.pose.PoseCapabilityTest" time="0.0"/>
+  <testcase name="cancellationIgnoresLateAvailabilityResult" classname="com.omanii.app.pose.PoseCapabilityTest" time="0.0"/>
+  <testcase name="installAndUpdatePromptThenContinueWithFalse" classname="com.omanii.app.pose.PoseCapabilityTest" time="0.001"/>
+  <testcase name="initializationCleanupWrapperPreservesCameraDenial" classname="com.omanii.app.pose.PoseCapabilityTest" time="0.21"/>
+  <testcase name="runtimeUnknownDoesNotMasqueradeAsUnsupported" classname="com.omanii.app.pose.PoseCapabilityTest" time="0.015"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

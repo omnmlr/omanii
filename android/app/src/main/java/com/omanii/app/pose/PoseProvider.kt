@@ -1,5 +1,7 @@
 package com.omanii.app.pose
 
+import com.omanii.app.model.MonotonicClock
+import com.omanii.app.model.SegmentRef
 import java.util.concurrent.CompletableFuture
 import java.util.concurrent.atomic.AtomicBoolean
 import java.util.concurrent.atomic.AtomicReference
@@ -18,10 +20,10 @@ interface PoseFrameSource {
 /** Caller drives foreground updates; this adapter never schedules a global scan. */
 class PoseProvider(
     private val source: PoseFrameSource,
-    sessionId: String,
+    private val sessionId: String,
     initialIdentity: PoseFrameIdentity,
     nextIdentity: (PoseReason) -> PoseFrameIdentity,
-    nowNs: () -> Long,
+    clock: MonotonicClock,
     private val emit: (PoseRecord) -> Unit,
     sampleIntervalNs: Long = 100_000_000L,
     private val dispatchCleanup: (() -> Unit) -> Unit = { it() },
@@ -29,10 +31,11 @@ class PoseProvider(
     private val lock = Any()
     private val accepting = AtomicBoolean(false)
     private val pendingStop = AtomicReference<PoseReason?>(null)
-    private val capture = PoseCapture(sessionId, initialIdentity, nextIdentity, nowNs, source::resetOrigin, sampleIntervalNs)
+    private val capture = PoseCapture(sessionId, initialIdentity, nextIdentity, clock, source::resetOrigin, sampleIntervalNs)
     private var started = false
     private var stopped = false
     private var inUpdate = false
+    private val pendingSegments = java.util.ArrayDeque<SegmentRef>()
     @Volatile var cleanup: CompletableFuture<Unit>? = null
         private set
 
@@ -67,6 +70,10 @@ class PoseProvider(
             // even if cancellation closes the gate mid-batch; otherwise STOP can lose its frame boundary.
             records.forEach { if (it.kind != PoseRecordKind.SAMPLE || accepting.get()) emit(it) }
             if (frame.cameraTracking == PoseTracking.STOPPED) requestStop(PoseReason.CAMERA_TRACKING_STOPPED)
+            // Finish the accepted update batch before emitting caller-driven segment boundaries.
+            while (accepting.get() && pendingSegments.isNotEmpty()) {
+                capture.changeSegment(pendingSegments.removeFirst())?.let(emit)
+            }
         } catch (_: SecurityException) {
             requestStop(PoseReason.CAMERA_DENIED)
         } catch (e: PoseSourceException) {
@@ -76,12 +83,23 @@ class PoseProvider(
         } catch (_: Exception) {
             requestStop(PoseReason.UPDATE_FAILED)
         } finally {
+            pendingSegments.clear()
             inUpdate = false
             pendingStop.get()?.let { reason -> dispatchCleanup { synchronized(lock) { stopLocked(reason) } } }
         }
     }
 
     fun discontinuity() = synchronized(lock) { if (accepting.get()) capture.discontinuity() }
+
+    /** Requests from update callbacks follow the current batch; cancellation discards pending requests. */
+    fun changeSegment(segment: SegmentRef) = synchronized(lock) {
+        if (accepting.get()) {
+            require(segment.sessionId == sessionId)
+            requireToken(segment.segmentId)
+            if (inUpdate) pendingSegments.addLast(segment)
+            else capture.changeSegment(segment)?.let(emit)
+        }
+    }
 
     fun prepareGl(textureId: Int, rotation: Int, widthPx: Int, heightPx: Int) = synchronized(lock) {
         if (accepting.get()) try { source.prepareGl(textureId, rotation, widthPx, heightPx) }

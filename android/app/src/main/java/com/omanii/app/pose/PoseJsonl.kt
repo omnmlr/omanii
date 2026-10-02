@@ -1,7 +1,11 @@
 package com.omanii.app.pose
 
 enum class PoseDataOrigin { LIVE_ARCORE, SYNTHETIC_FIXTURE }
-data class PoseReplay(val dataOrigin: PoseDataOrigin, val records: List<PoseRecord>)
+data class PoseReplay(
+    val dataOrigin: PoseDataOrigin,
+    val records: List<PoseRecord>,
+    val canonicalRecords: List<CanonicalPoseRecord>? = null,
+)
 
 /** Task-local debug dialect, not a new shared protocol version. No storage or upload side effects. */
 object PoseJsonl {
@@ -14,6 +18,43 @@ object PoseJsonl {
         "age_known", "kind", "tracking", "source_timestamp_ns", "source_clock_domain", "source_event_meaning",
         "x_m", "y_m", "z_m", "qx", "qy", "qz", "qw", "reason", "tracking_failure",
         "previous_segment_id", "previous_coordinate_frame_id",
+    )
+    private val canonicalFields = setOf(
+        "canonical_record_id", "canonical_producer", "canonical_app_build", "canonical_run_token",
+        "canonical_profile_availability", "canonical_profile_reason", "canonical_source_clock_instance_token",
+        "canonical_source_time_meaning", "canonical_segment_session_id", "canonical_coordinate_frame_session_id",
+        "canonical_spatial_association_availability", "canonical_pose_observation_id",
+    )
+
+    /** Retains the v1 debug fields/provenance and adds the approved shared development projection. */
+    fun encodeCanonical(records: List<CanonicalPoseRecord>): String {
+        require(records.isNotEmpty())
+        val context = records.first().mappingContext
+        require(records.all { it.mappingContext == context })
+        require(records.map { it.metadata.recordId }.distinct().size == records.size)
+        val local = records.map { it.debugRecord }
+        val lines = encode(local, context.debug.dataOrigin).lineSequence().filter { it.isNotBlank() }.toList()
+        val mapper = PoseCanonicalMapper(context)
+        return lines.mapIndexed { index, line ->
+            // Association references only the observations retained in this export, including ID gaps.
+            val mapped = mapper.restore(local[index], records[index].metadata.recordId)
+            FlatJson.encode(FlatJson.decode(line) + canonicalValues(mapped))
+        }.joinToString("\n", postfix = "\n")
+    }
+
+    private fun canonicalValues(record: CanonicalPoseRecord): Map<String, Any?> = linkedMapOf(
+        "canonical_record_id" to record.metadata.recordId,
+        "canonical_producer" to record.metadata.producer,
+        "canonical_app_build" to record.metadata.appBuild,
+        "canonical_run_token" to record.mappingContext.runToken,
+        "canonical_profile_availability" to record.metadata.testProfile.availability.name,
+        "canonical_profile_reason" to record.metadata.testProfile.reason,
+        "canonical_source_clock_instance_token" to record.timing.sourceTimestamp?.domain?.instanceToken,
+        "canonical_source_time_meaning" to record.timing.sourceTimestamp?.meaning?.name,
+        "canonical_segment_session_id" to record.segment.sessionId,
+        "canonical_coordinate_frame_session_id" to record.coordinateFrame.sessionId,
+        "canonical_spatial_association_availability" to record.association.lastObservedGeometry.availability.name,
+        "canonical_pose_observation_id" to record.association.poseObservationId.value,
     )
 
     fun encode(records: List<PoseRecord>, dataOrigin: PoseDataOrigin): String {
@@ -43,10 +84,15 @@ object PoseJsonl {
         val lines = jsonl.lineSequence().filter { it.isNotBlank() }.toList()
         require(lines.size in 2..20_000)
         var origin: PoseDataOrigin? = null
+        val canonicalRows = mutableListOf<Map<String, Any?>>()
+        var enriched: Boolean? = null
         val records = lines.map { line ->
             require(line.length < 4096)
             val m = FlatJson.decode(line)
-            require(m.keys == fields) { "Unexpected or missing debug fields" }
+            val hasCanonical = m.keys == fields + canonicalFields
+            require(m.keys == fields || hasCanonical) { "Unexpected or missing debug fields" }
+            require(enriched == null || enriched == hasCanonical); enriched = hasCanonical
+            if (hasCanonical) canonicalRows += m.filterKeys { it in canonicalFields }
             require(m["schema_version"] == SCHEMA && m["protocol_version"] == PROTOCOL)
             require(m["test_profile"] == "pose_debug_only" && m["source"] == "ARCORE")
             require(m["coordinates"] == COORDINATES && m["orientation"] == "HAMILTON_XYZW")
@@ -77,7 +123,22 @@ object PoseJsonl {
             )
         }
         validate(records)
-        return PoseReplay(origin!!, records)
+        val canonical = if (enriched == true) {
+            val first = canonicalRows.first()
+            val context = PoseMappingContext(records.first().sessionId, first.string("canonical_run_token"),
+                first.string("canonical_app_build"), PoseDebugMetadata(origin!!))
+            val mapper = PoseCanonicalMapper(context)
+            val usedIds = mutableSetOf<String>()
+            records.mapIndexed { index, record ->
+                val row = canonicalRows[index]
+                val id = row.string("canonical_record_id")
+                require(usedIds.add(id))
+                val mapped = mapper.restore(record, id)
+                require(row == canonicalValues(mapped)) { "Canonical projection disagrees with debug evidence" }
+                mapped
+            }
+        } else null
+        return PoseReplay(origin!!, records, canonical)
     }
 
     private fun validate(records: List<PoseRecord>) {
@@ -99,8 +160,14 @@ object PoseJsonl {
             require(index == records.lastIndex || r.kind != PoseRecordKind.STOP)
             if (r.kind == PoseRecordKind.BOUNDARY) {
                 require(r.previousIdentity == identity && r.reason != null)
-                require(segments.add(r.identity.segmentId) && frames.add(r.identity.coordinateFrameId))
-                identity = r.identity; sampleSourceNs = null
+                require(segments.add(r.identity.segmentId))
+                if (r.reason == PoseReason.SEGMENT_CHANGED) {
+                    require(r.identity.coordinateFrameId == identity.coordinateFrameId)
+                } else {
+                    require(frames.add(r.identity.coordinateFrameId))
+                    sampleSourceNs = null
+                }
+                identity = r.identity
             }
             require(r.identity == identity)
             when (r.kind) {
@@ -133,6 +200,7 @@ private object FlatJson {
         val encoded = when (v) {
             null -> "null"
             is String -> quote(v)
+            is JsonNumber -> v.raw
             is Boolean, is Long, is Double -> v.toString()
             else -> error("Unsupported JSON value")
         }

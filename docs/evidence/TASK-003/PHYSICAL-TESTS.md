@@ -2,7 +2,7 @@
 
 Status: **not performed**. This is the task-required test checklist, not results or a research-promotion proposal. Canonical acceptance remains TASK-003 and the later experiment gate in PRODUCT/EXPERIMENTS.
 
-Before running, the integration owner must apply/reconcile the reviewed shared patch and produce the integrated debug build. Record device model, Android API/build, app source/build hash, ARCore installed runtime version and runtime AVAILABLE/permission states. A model name or sideloaded runtime alone does not establish support.
+The approved Wave 1 foundation is merged; normal gates and authorized scoped repair pass, with independent PASS WITH FOLLOW-UP for code. Before running, have the integration owner provide approved debug navigation using `PoseDebugPanel(activity, appBuild, clock)`. The historical shared patch is superseded and must not be applied. Record device model, Android API/build, app source/build hash, ARCore installed runtime version and runtime AVAILABLE/permission states. A model name or sideloaded runtime alone does not establish support.
 
 | Required run/check | Evidence to retain | Observed result |
 | --- | --- | --- |

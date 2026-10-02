@@ -6,6 +6,8 @@ import java.util.concurrent.CompletableFuture
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.ConcurrentLinkedQueue
+import com.omanii.app.model.SegmentRef
+import com.omanii.app.model.CoordinateFrameRef
 
 class PoseProviderTest {
     private class Source : PoseFrameSource {
@@ -162,5 +164,97 @@ class PoseProviderTest {
         while (true) { val action = ownerQueue.poll() ?: break; action() }
         assertEquals(1, source.pauses); assertEquals(1, source.closes)
         assertEquals(PoseReason.CANCELLED, events.last().reason)
+    }
+
+    @Test fun externalSegmentChangeNeverResetsPoseSourceOrKeepsEmittingAfterStop() {
+        val source = Source(); val events = mutableListOf<PoseRecord>(); val p = provider(source, events)
+        p.start(); p.update(); p.changeSegment(SegmentRef("session", "network_segment")); p.update()
+        assertEquals(0, source.resets)
+        assertEquals("f0", events.last().identity.coordinateFrameId)
+        assertEquals("network_segment", events.last().identity.segmentId)
+        p.stop(); val count = events.size; p.changeSegment(SegmentRef("session", "later_segment"))
+        assertEquals(count, events.size)
+        assertEquals(events, PoseJsonl.decode(PoseJsonl.encode(events, PoseDataOrigin.SYNTHETIC_FIXTURE)).records)
+    }
+
+    @Test fun reentrantSegmentChangeDuringRecoveryPreservesCanonicalAndReplayOrdering() {
+        val source = Source(); val events = mutableListOf<PoseRecord>()
+        val mapped = mutableListOf<CanonicalPoseRecord>()
+        val mapper = PoseCanonicalMapper(PoseMappingContext("session", "run", "test-build",
+            PoseDebugMetadata(PoseDataOrigin.SYNTHETIC_FIXTURE)))
+        val pose = PhysicalPose(PositionM(0.0, 0.0, 0.0), QuaternionXyzw.IDENTITY)
+        source.frameFactory = { n -> if (n == 2) PoseFrame(2, PoseTracking.PAUSED, PoseTracking.PAUSED)
+            else PoseFrame(n.toLong(), PoseTracking.TRACKING, PoseTracking.TRACKING, pose, pose) }
+        lateinit var p: PoseProvider
+        var changeOnRecovery = false
+        p = PoseProvider(source, "session", PoseFrameIdentity("s0", "f0"), { PoseFrameIdentity("s1", "f1") }, { 10L }, {
+            events += it
+            mapped += mapper.map(it)
+            if (changeOnRecovery && it.kind == PoseRecordKind.TRACKING && it.tracking == PoseTracking.TRACKING) {
+                changeOnRecovery = false
+                p.changeSegment(SegmentRef("session", "network_segment"))
+            }
+        }, 0)
+        p.start(); p.update(); p.update(); changeOnRecovery = true; p.update()
+        assertEquals(listOf(PoseRecordKind.TRACKING, PoseRecordKind.BOUNDARY, PoseRecordKind.SAMPLE, PoseRecordKind.BOUNDARY),
+            events.takeLast(4).map { it.kind })
+        assertEquals(listOf(PoseReason.TRACKING_DISCONTINUITY, PoseReason.SEGMENT_CHANGED),
+            events.filter { it.kind == PoseRecordKind.BOUNDARY }.map { it.reason })
+        assertEquals(PoseFrameIdentity("network_segment", "f1"), events.last().identity)
+        assertEquals(CoordinateFrameRef("session", "f1"), mapped.last().association.coordinateFrame.value)
+        assertEquals(1, source.resets)
+        p.stop()
+        assertEquals(events, PoseJsonl.decode(PoseJsonl.encode(events, PoseDataOrigin.SYNTHETIC_FIXTURE)).records)
+        assertEquals(mapped, PoseJsonl.decode(PoseJsonl.encodeCanonical(mapped)).canonicalRecords)
+    }
+
+    @Test fun queuedReentrantSegmentChangeCannotSurviveCancellation() {
+        val source = Source(); val events = mutableListOf<PoseRecord>()
+        val pose = PhysicalPose(PositionM(0.0, 0.0, 0.0), QuaternionXyzw.IDENTITY)
+        source.frameFactory = { n -> if (n == 2) PoseFrame(2, PoseTracking.PAUSED, PoseTracking.PAUSED)
+            else PoseFrame(n.toLong(), PoseTracking.TRACKING, PoseTracking.TRACKING, pose, pose) }
+        lateinit var p: PoseProvider
+        var cancelOnRecovery = false
+        p = PoseProvider(source, "session", PoseFrameIdentity("s0", "f0"), { PoseFrameIdentity("s1", "f1") }, { 10L }, {
+            events += it
+            if (cancelOnRecovery && it.kind == PoseRecordKind.TRACKING && it.tracking == PoseTracking.TRACKING) {
+                cancelOnRecovery = false
+                p.changeSegment(SegmentRef("session", "network_segment"))
+                p.stop()
+            }
+        }, 0)
+        p.start(); p.update(); p.update(); cancelOnRecovery = true; p.update()
+        assertEquals(listOf(PoseRecordKind.TRACKING, PoseRecordKind.BOUNDARY, PoseRecordKind.STOP),
+            events.takeLast(3).map { it.kind })
+        assertFalse(events.any { it.reason == PoseReason.SEGMENT_CHANGED })
+        assertEquals(PoseFrameIdentity("s1", "f1"), events.last().identity)
+        assertEquals(events, PoseJsonl.decode(PoseJsonl.encode(events, PoseDataOrigin.SYNTHETIC_FIXTURE)).records)
+    }
+
+    @Test fun reentrantSegmentRequestsStayFifoWhenBoundaryCallbackAddsAnother() {
+        val source = Source(); val events = mutableListOf<PoseRecord>()
+        val mapped = mutableListOf<CanonicalPoseRecord>()
+        val mapper = PoseCanonicalMapper(PoseMappingContext("session", "run", "test-build",
+            PoseDebugMetadata(PoseDataOrigin.SYNTHETIC_FIXTURE)))
+        lateinit var p: PoseProvider
+        p = PoseProvider(source, "session", PoseFrameIdentity("s0", "f0"), { PoseFrameIdentity("s1", "f1") }, { 10L }, {
+            events += it
+            mapped += mapper.map(it)
+            if (it.kind == PoseRecordKind.TRACKING && it.tracking == PoseTracking.TRACKING) {
+                p.changeSegment(SegmentRef("session", "network_a"))
+                p.changeSegment(SegmentRef("session", "network_b"))
+            }
+            if (it.kind == PoseRecordKind.BOUNDARY && it.identity.segmentId == "network_a") {
+                p.changeSegment(SegmentRef("session", "network_c"))
+            }
+        }, 0)
+        p.start(); p.update(); p.stop()
+        val boundaries = events.filter { it.kind == PoseRecordKind.BOUNDARY }
+        assertEquals(listOf("network_a", "network_b", "network_c"), boundaries.map { it.identity.segmentId })
+        assertTrue(boundaries.all { it.identity.coordinateFrameId == "f0" && it.reason == PoseReason.SEGMENT_CHANGED })
+        assertEquals("s0", events.single { it.kind == PoseRecordKind.SAMPLE }.identity.segmentId)
+        assertEquals(0, source.resets)
+        assertEquals(events, PoseJsonl.decode(PoseJsonl.encode(events, PoseDataOrigin.SYNTHETIC_FIXTURE)).records)
+        assertEquals(mapped, PoseJsonl.decode(PoseJsonl.encodeCanonical(mapped)).canonicalRecords)
     }
 }

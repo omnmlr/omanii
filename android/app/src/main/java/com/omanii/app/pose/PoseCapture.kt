@@ -1,11 +1,14 @@
 package com.omanii.app.pose
 
+import com.omanii.app.model.MonotonicClock
+import com.omanii.app.model.SegmentRef
+
 /** Pose-side capture only. The caller supplies session/segment/frame IDs and the shared receive clock. */
 class PoseCapture(
     private val sessionId: String,
     initialIdentity: PoseFrameIdentity,
     private val nextIdentity: (PoseReason) -> PoseFrameIdentity,
-    private val nowNs: () -> Long,
+    private val clock: MonotonicClock,
     private val resetOrigin: () -> Unit,
     private val sampleIntervalNs: Long = 100_000_000L,
 ) {
@@ -23,6 +26,19 @@ class PoseCapture(
     private var pendingBoundary: PoseReason? = null
 
     fun started(): PoseRecord = record(PoseRecordKind.START, readTime(), reason = PoseReason.STARTED)
+
+    /** External session owner changes comparison segment; pose origin/source cadence remain intact. */
+    fun changeSegment(segment: SegmentRef): PoseRecord? {
+        require(segment.sessionId == sessionId)
+        if (!active || segment.segmentId == identity.segmentId) return null
+        requireToken(segment.segmentId)
+        require(segment.segmentId !in usedSegments)
+        val time = readTime()
+        val previous = identity
+        identity = identity.copy(segmentId = segment.segmentId)
+        usedSegments += segment.segmentId
+        return record(PoseRecordKind.BOUNDARY, time, reason = PoseReason.SEGMENT_CHANGED, previous = previous)
+    }
 
     fun discontinuity(reason: PoseReason = PoseReason.EXPLICIT_DISCONTINUITY) {
         if (!active) return
@@ -103,7 +119,7 @@ class PoseCapture(
     }
 
     private fun readTime(): Long {
-        val time = nowNs()
+        val time = clock.nowElapsedRealtimeNs()
         require(time >= 0 && (lastReceiveNs == null || time >= lastReceiveNs!!)) { "Receive clock regressed" }
         lastReceiveNs = time
         return time

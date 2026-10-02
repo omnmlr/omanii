@@ -6,6 +6,8 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Handler
 import android.os.Looper
+import com.omanii.app.model.MonotonicClock
+import com.omanii.app.time.AndroidElapsedRealtimeClock
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -37,7 +39,7 @@ import com.omanii.app.pose.ArCoreRuntime
 import com.omanii.app.pose.ArCoreInitializationException
 import com.omanii.app.pose.ArRuntimeState
 import com.omanii.app.pose.CameraPermissionState
-import com.omanii.app.pose.PoseDataOrigin
+import com.omanii.app.pose.CanonicalPoseRecord
 import com.omanii.app.pose.PoseEntryAction
 import com.omanii.app.pose.PoseEntryGate
 import com.omanii.app.pose.PoseJsonl
@@ -46,11 +48,12 @@ import com.omanii.app.pose.PoseRecord
 import com.omanii.app.pose.PoseRecordKind
 import java.util.concurrent.CompletableFuture
 
-/** Task-only debug entry. Integration passes the shared MonotonicClock's nanosecond read function. */
+/** Task-only debug entry using the approved injected elapsed-realtime clock and explicit build label. */
 @Composable
-fun PoseDebugPanel(activity: ComponentActivity, nowNs: () -> Long) {
+fun PoseDebugPanel(activity: ComponentActivity, appBuild: String, clock: MonotonicClock = AndroidElapsedRealtimeClock) {
     val gate = remember { PoseEntryGate() }
     val records = remember { mutableStateListOf<PoseRecord>() }
+    val canonicalRecords = remember { mutableStateListOf<CanonicalPoseRecord>() }
     val mainHandler = remember { Handler(Looper.getMainLooper()) }
     var surface by remember { mutableStateOf<PoseDebugSurface?>(null) }
     var capability by remember { mutableStateOf(gate.capability) }
@@ -132,10 +135,13 @@ fun PoseDebugPanel(activity: ComponentActivity, nowNs: () -> Long) {
             PoseEntryAction.START_CAPTURE -> {
                 if (activity.lifecycle.currentState.isAtLeast(Lifecycle.State.RESUMED)) {
                     records.clear()
+                    canonicalRecords.clear()
                     try {
-                        val created = PoseDebugSurface(activity, nowNs) { record ->
+                        val created = PoseDebugSurface(activity, clock, appBuild) { canonical ->
+                            val record = canonical.debugRecord
                             if (alive && record.sessionId == recordsSessionId) {
                                 records += record
+                                canonicalRecords += canonical
                                 if (record.kind == PoseRecordKind.STOP) {
                                     message = "Stopped: ${record.reason}"
                                     if (record.reason == PoseReason.CAMERA_DENIED) {
@@ -208,7 +214,7 @@ fun PoseDebugPanel(activity: ComponentActivity, nowNs: () -> Long) {
         DebugAction("End capture", surface != null) { stop(PoseReason.COMPLETED) }
         DebugAction("Mark discontinuity", surface != null) { surface?.discontinuity() }
         DebugAction("Export local pose JSONL", !exportBusy && surface == null && records.lastOrNull()?.kind == PoseRecordKind.STOP) {
-            exportPending = PoseJsonl.encode(records.toList(), PoseDataOrigin.LIVE_ARCORE)
+            exportPending = PoseJsonl.encodeCanonical(canonicalRecords.toList())
             exportLauncher.launch("pose-debug.jsonl")
         }
         surface?.let { active -> AndroidView(factory = { active }, modifier = Modifier.fillMaxWidth().height(48.dp)) }

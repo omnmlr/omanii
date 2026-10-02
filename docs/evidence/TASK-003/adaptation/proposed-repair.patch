@@ -1,0 +1,185 @@
+diff --git a/android/app/src/main/java/com/omanii/app/pose/PoseCanonicalMapping.kt b/android/app/src/main/java/com/omanii/app/pose/PoseCanonicalMapping.kt
+index 695e50f..15f217a 100644
+--- a/android/app/src/main/java/com/omanii/app/pose/PoseCanonicalMapping.kt
++++ b/android/app/src/main/java/com/omanii/app/pose/PoseCanonicalMapping.kt
+@@ -42,8 +42,10 @@ data class PoseMappingContext(
+     val debug: PoseDebugMetadata,
+ ) {
+     init { requireToken(sessionId); requireToken(runToken); require(appBuild.isNotBlank()) }
++    // Length prefixes keep distinct allowed session/run pairs distinct, including underscore tokens.
++    internal val scopeToken = "${sessionId.length}:$sessionId:${runToken.length}:$runToken"
+     // Neither a device identity nor an ARCore/elapsed-realtime clock alignment.
+-    val sourceClockDomain = ClockDomainRef(ClockDomainKind.ARCORE_FRAME_UNDEFINED, "arcore_${sessionId}_$runToken")
++    val sourceClockDomain = ClockDomainRef(ClockDomainKind.ARCORE_FRAME_UNDEFINED, "arcore_$scopeToken")
+ }
+
+ data class PoseSpatialAssociation(
+@@ -91,7 +93,7 @@ class PoseCanonicalMapper(val context: PoseMappingContext) {
+         val frame = CoordinateFrameRef(record.sessionId, record.identity.coordinateFrameId)
+         val previousSegment = record.previousIdentity?.let { SegmentRef(record.sessionId, it.segmentId) }
+         val previousFrame = record.previousIdentity?.let { CoordinateFrameRef(record.sessionId, it.coordinateFrameId) }
+-        val prefix = "pose_${context.sessionId}_${context.runToken}_"
++        val prefix = "pose_${context.scopeToken}_"
+         if (recordId != null) require(recordId.startsWith(prefix) && recordId.removePrefix(prefix).toLongOrNull()?.let { it >= 0 } == true)
+         val metadata = DevelopmentRecordMetadata(
+             recordId = recordId ?: "$prefix${sequence++}",
+diff --git a/android/app/src/main/java/com/omanii/app/pose/PoseProvider.kt b/android/app/src/main/java/com/omanii/app/pose/PoseProvider.kt
+index 7f07452..0805e44 100644
+--- a/android/app/src/main/java/com/omanii/app/pose/PoseProvider.kt
++++ b/android/app/src/main/java/com/omanii/app/pose/PoseProvider.kt
+@@ -20,7 +20,7 @@ interface PoseFrameSource {
+ /** Caller drives foreground updates; this adapter never schedules a global scan. */
+ class PoseProvider(
+     private val source: PoseFrameSource,
+-    sessionId: String,
++    private val sessionId: String,
+     initialIdentity: PoseFrameIdentity,
+     nextIdentity: (PoseReason) -> PoseFrameIdentity,
+     clock: MonotonicClock,
+@@ -35,6 +35,7 @@ class PoseProvider(
+     private var started = false
+     private var stopped = false
+     private var inUpdate = false
++    private val pendingSegments = java.util.ArrayDeque<SegmentRef>()
+     @Volatile var cleanup: CompletableFuture<Unit>? = null
+         private set
+
+@@ -69,6 +70,10 @@ class PoseProvider(
+             // even if cancellation closes the gate mid-batch; otherwise STOP can lose its frame boundary.
+             records.forEach { if (it.kind != PoseRecordKind.SAMPLE || accepting.get()) emit(it) }
+             if (frame.cameraTracking == PoseTracking.STOPPED) requestStop(PoseReason.CAMERA_TRACKING_STOPPED)
++            // Finish the accepted update batch before emitting caller-driven segment boundaries.
++            while (accepting.get() && pendingSegments.isNotEmpty()) {
++                capture.changeSegment(pendingSegments.removeFirst())?.let(emit)
++            }
+         } catch (_: SecurityException) {
+             requestStop(PoseReason.CAMERA_DENIED)
+         } catch (e: PoseSourceException) {
+@@ -78,6 +83,7 @@ class PoseProvider(
+         } catch (_: Exception) {
+             requestStop(PoseReason.UPDATE_FAILED)
+         } finally {
++            pendingSegments.clear()
+             inUpdate = false
+             pendingStop.get()?.let { reason -> dispatchCleanup { synchronized(lock) { stopLocked(reason) } } }
+         }
+@@ -86,7 +92,12 @@ class PoseProvider(
+     fun discontinuity() = synchronized(lock) { if (accepting.get()) capture.discontinuity() }
+
+     fun changeSegment(segment: SegmentRef) = synchronized(lock) {
+-        if (accepting.get()) capture.changeSegment(segment)?.let(emit)
++        if (accepting.get()) {
++            require(segment.sessionId == sessionId)
++            requireToken(segment.segmentId)
++            if (inUpdate) pendingSegments.addLast(segment)
++            else capture.changeSegment(segment)?.let(emit)
++        }
+     }
+
+     fun prepareGl(textureId: Int, rotation: Int, widthPx: Int, heightPx: Int) = synchronized(lock) {
+diff --git a/android/app/src/test/java/com/omanii/app/pose/PoseCanonicalMappingTest.kt b/android/app/src/test/java/com/omanii/app/pose/PoseCanonicalMappingTest.kt
+index e635480..5e28630 100644
+--- a/android/app/src/test/java/com/omanii/app/pose/PoseCanonicalMappingTest.kt
++++ b/android/app/src/test/java/com/omanii/app/pose/PoseCanonicalMappingTest.kt
+@@ -140,14 +140,14 @@ class PoseCanonicalMappingTest {
+         assertEquals(mapped, decoded.canonicalRecords)
+         assertEquals(mapped, decoded.toCanonicalRecords("test-build-1", "replay_run"))
+         assertTrue(enriched.contains("FRAME_CAPTURE"))
+-        assertTrue(enriched.contains("arcore_synthetic_route_replay_run"))
++        assertTrue(enriched.contains("arcore_15:synthetic_route:10:replay_run"))
+         assertThrows(IllegalArgumentException::class.java) { decoded.toCanonicalRecords("wrong_build", "new_run") }
+     }
+
+     @Test fun enrichedReplayRejectsDomainProvenanceScopeAndMetadataTampering() {
+         val json = PoseJsonl.encodeCanonical(fixture().toCanonicalRecords("test-build-1", "replay_run"))
+         listOf(
+-            json.replace("arcore_synthetic_route_replay_run", "arcore_unrelated_run"),
++            json.replace("arcore_15:synthetic_route:10:replay_run", "arcore_unrelated_run"),
+             json.replace("\"canonical_source_time_meaning\":\"FRAME_CAPTURE\"", "\"canonical_source_time_meaning\":\"MEASUREMENT\""),
+             json.replace("\"canonical_segment_session_id\":\"synthetic_route\"", "\"canonical_segment_session_id\":\"other_session\""),
+             json.replace("\"canonical_profile_availability\":\"NOT_APPLICABLE\"", "\"canonical_profile_availability\":\"AVAILABLE\""),
+@@ -182,4 +182,13 @@ class PoseCanonicalMappingTest {
+         assertEquals(com.omanii.app.model.PositionM(2.0, 1.0, -1.0), next.pose.value!!.position)
+         assertEquals(mapped, PoseJsonl.decode(PoseJsonl.encodeCanonical(mapped)).canonicalRecords)
+     }
++
++    @Test fun distinctSessionRunPairsCannotAliasClockInstancesOrRecordIds() {
++        val aContext = context(session = "a_b", run = "c")
++        val bContext = context(session = "a", run = "b_c")
++        val a = PoseCanonicalMapper(aContext).map(start("a_b"))
++        val b = PoseCanonicalMapper(bContext).map(start("a"))
++        assertNotEquals(aContext.sourceClockDomain, bContext.sourceClockDomain)
++        assertNotEquals(a.metadata.recordId, b.metadata.recordId)
++    }
+ }
+diff --git a/android/app/src/test/java/com/omanii/app/pose/PoseProviderTest.kt b/android/app/src/test/java/com/omanii/app/pose/PoseProviderTest.kt
+index bfd741a..f85ad32 100644
+--- a/android/app/src/test/java/com/omanii/app/pose/PoseProviderTest.kt
++++ b/android/app/src/test/java/com/omanii/app/pose/PoseProviderTest.kt
+@@ -7,6 +7,7 @@ import java.util.concurrent.CountDownLatch
+ import java.util.concurrent.TimeUnit
+ import java.util.concurrent.ConcurrentLinkedQueue
+ import com.omanii.app.model.SegmentRef
++import com.omanii.app.model.CoordinateFrameRef
+
+ class PoseProviderTest {
+     private class Source : PoseFrameSource {
+@@ -175,4 +176,58 @@ class PoseProviderTest {
+         assertEquals(count, events.size)
+         assertEquals(events, PoseJsonl.decode(PoseJsonl.encode(events, PoseDataOrigin.SYNTHETIC_FIXTURE)).records)
+     }
++
++    @Test fun reentrantSegmentChangeDuringRecoveryPreservesCanonicalAndReplayOrdering() {
++        val source = Source(); val events = mutableListOf<PoseRecord>()
++        val mapped = mutableListOf<CanonicalPoseRecord>()
++        val mapper = PoseCanonicalMapper(PoseMappingContext("session", "run", "test-build",
++            PoseDebugMetadata(PoseDataOrigin.SYNTHETIC_FIXTURE)))
++        val pose = PhysicalPose(PositionM(0.0, 0.0, 0.0), QuaternionXyzw.IDENTITY)
++        source.frameFactory = { n -> if (n == 2) PoseFrame(2, PoseTracking.PAUSED, PoseTracking.PAUSED)
++            else PoseFrame(n.toLong(), PoseTracking.TRACKING, PoseTracking.TRACKING, pose, pose) }
++        lateinit var p: PoseProvider
++        var changeOnRecovery = false
++        p = PoseProvider(source, "session", PoseFrameIdentity("s0", "f0"), { PoseFrameIdentity("s1", "f1") }, { 10L }, {
++            events += it
++            mapped += mapper.map(it)
++            if (changeOnRecovery && it.kind == PoseRecordKind.TRACKING && it.tracking == PoseTracking.TRACKING) {
++                changeOnRecovery = false
++                p.changeSegment(SegmentRef("session", "network_segment"))
++            }
++        }, 0)
++        p.start(); p.update(); p.update(); changeOnRecovery = true; p.update()
++        assertEquals(listOf(PoseRecordKind.TRACKING, PoseRecordKind.BOUNDARY, PoseRecordKind.SAMPLE, PoseRecordKind.BOUNDARY),
++            events.takeLast(4).map { it.kind })
++        assertEquals(listOf(PoseReason.TRACKING_DISCONTINUITY, PoseReason.SEGMENT_CHANGED),
++            events.filter { it.kind == PoseRecordKind.BOUNDARY }.map { it.reason })
++        assertEquals(PoseFrameIdentity("network_segment", "f1"), events.last().identity)
++        assertEquals(CoordinateFrameRef("session", "f1"), mapped.last().association.coordinateFrame.value)
++        assertEquals(1, source.resets)
++        p.stop()
++        assertEquals(events, PoseJsonl.decode(PoseJsonl.encode(events, PoseDataOrigin.SYNTHETIC_FIXTURE)).records)
++        assertEquals(mapped, PoseJsonl.decode(PoseJsonl.encodeCanonical(mapped)).canonicalRecords)
++    }
++
++    @Test fun queuedReentrantSegmentChangeCannotSurviveCancellation() {
++        val source = Source(); val events = mutableListOf<PoseRecord>()
++        val pose = PhysicalPose(PositionM(0.0, 0.0, 0.0), QuaternionXyzw.IDENTITY)
++        source.frameFactory = { n -> if (n == 2) PoseFrame(2, PoseTracking.PAUSED, PoseTracking.PAUSED)
++            else PoseFrame(n.toLong(), PoseTracking.TRACKING, PoseTracking.TRACKING, pose, pose) }
++        lateinit var p: PoseProvider
++        var cancelOnRecovery = false
++        p = PoseProvider(source, "session", PoseFrameIdentity("s0", "f0"), { PoseFrameIdentity("s1", "f1") }, { 10L }, {
++            events += it
++            if (cancelOnRecovery && it.kind == PoseRecordKind.TRACKING && it.tracking == PoseTracking.TRACKING) {
++                cancelOnRecovery = false
++                p.changeSegment(SegmentRef("session", "network_segment"))
++                p.stop()
++            }
++        }, 0)
++        p.start(); p.update(); p.update(); cancelOnRecovery = true; p.update()
++        assertEquals(listOf(PoseRecordKind.TRACKING, PoseRecordKind.BOUNDARY, PoseRecordKind.STOP),
++            events.takeLast(3).map { it.kind })
++        assertFalse(events.any { it.reason == PoseReason.SEGMENT_CHANGED })
++        assertEquals(PoseFrameIdentity("s1", "f1"), events.last().identity)
++        assertEquals(events, PoseJsonl.decode(PoseJsonl.encode(events, PoseDataOrigin.SYNTHETIC_FIXTURE)).records)
++    }
+ }

@@ -1,0 +1,4 @@
+0DFFBF4A144EA1C73F2F147943D6DAA98DC9F222701AC9FF3BA200FD38B2FFE5  android/app/src/main/java/com/omanii/app/pose/PoseCanonicalMapping.kt
+5194525B545C239FEC9F53ABDDF223F80E8328DF4293D014C1A5D7EA9F28CCCE  android/app/src/main/java/com/omanii/app/pose/PoseProvider.kt
+744FBB46157D1DD1DBE56CA82650BB98B4CEEBA69F79BC8B5720AFD4D3674D03  android/app/src/test/java/com/omanii/app/pose/PoseCanonicalMappingTest.kt
+AE2CCB0CB6CF089887CAEA89381D35653D4175BE6101B03CF8145648A918F5FF  android/app/src/test/java/com/omanii/app/pose/PoseProviderTest.kt
