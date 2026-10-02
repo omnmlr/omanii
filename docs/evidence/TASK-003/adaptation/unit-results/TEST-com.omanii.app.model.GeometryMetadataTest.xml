@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.omanii.app.model.GeometryMetadataTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-10-02T02:48:02.319Z" hostname="DESKTOP-0JG6VKQ" time="0.16">
+  <properties/>
+  <testcase name="developmentVersionAxesAreIndependentAndPassiveProfileIsExplicit" classname="com.omanii.app.model.GeometryMetadataTest" time="0.138"/>
+  <testcase name="identitiesAreSessionScopedAndRemainSeparateConcepts" classname="com.omanii.app.model.GeometryMetadataTest" time="0.007"/>
+  <testcase name="invalidRotationsAreNotSilentlyNormalized" classname="com.omanii.app.model.GeometryMetadataTest" time="0.005"/>
+  <testcase name="xyzwRepresentsIdentityAndKnownQuarterTurn" classname="com.omanii.app.model.GeometryMetadataTest" time="0.001"/>
+  <testcase name="coordinatesRetainHeightAndRejectNonFiniteValues" classname="com.omanii.app.model.GeometryMetadataTest" time="0.005"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

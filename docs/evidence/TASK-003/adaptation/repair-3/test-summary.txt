@@ -1,0 +1,19 @@
+
+Suite                                           Tests Failures Errors Skipped
+-----                                           ----- -------- ------ -------
+com.omanii.app.model.AvailabilityTest               4        0      0       0
+com.omanii.app.model.GeometryMetadataTest           5        0      0       0
+com.omanii.app.model.ObservationTimingTest          7        0      0       0
+com.omanii.app.pose.PoseCanonicalMappingTest       14        0      0       0
+com.omanii.app.pose.PoseCapabilityTest              7        0      0       0
+com.omanii.app.pose.PoseCaptureTest                19        0      0       0
+com.omanii.app.pose.PoseProviderTest               16        0      0       0
+com.omanii.app.pose.PoseReplayTest                  8        0      0       0
+com.omanii.app.ScaffoldTest                         1        0      0       0
+com.omanii.app.session.ProbeIntervalContextTest    15        0      0       0
+
+Tests     : 96
+TaskTests : 64
+Failures  : 0
+Errors    : 0
+Skipped   : 0

@@ -1,0 +1,7 @@
+git diff --check: PASS
+Raw untracked whitespace checks: PASS; CR at EOL accepted, no-index difference exit 1 expected, no diagnostics
+Final source/fixture hashes match full-gate snapshot: PASS
+Task ownership/shared-contract/build/manifest/navigation check: PASS; no out-of-scope changes
+Index is unchanged; repaired adaptation unstaged/uncommitted
+Branch/HEAD: feat/task-003-ar-pose / 5a4db9567a1314e854600ec7511939e4ff7ec0c2
+No physical/instrumented test performed; no adaptation commit or push

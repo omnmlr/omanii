@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.omanii.app.ScaffoldTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-10-02T03:30:37.255Z" hostname="DESKTOP-0JG6VKQ" time="0.105">
+  <properties/>
+  <testcase name="launchActivityUsesTheApplicationNamespace" classname="com.omanii.app.ScaffoldTest" time="0.104"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

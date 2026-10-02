@@ -1,0 +1,11 @@
+Repair source scope vs pre-repair snapshot: exactly four authorized source/test files; all other pose/spatial/fixtures unchanged
+android/app/src/main/java/com/omanii/app/pose/PoseCanonicalMapping.kt
+android/app/src/main/java/com/omanii/app/pose/PoseProvider.kt
+android/app/src/test/java/com/omanii/app/pose/PoseCanonicalMappingTest.kt
+android/app/src/test/java/com/omanii/app/pose/PoseProviderTest.kt
+git diff --check: PASS
+Overall task ownership: PASS; no shared contract/build/manifest/navigation/other package changes
+Task source sensitive-data/API scan: no imagery/depth acquisition, recording, pose logging, display-oriented pose or competing clock calls
+No dependency or permission diff from merged HEAD
+HEAD: 5a4db9567a1314e854600ec7511939e4ff7ec0c2
+Branch: feat/task-003-ar-pose

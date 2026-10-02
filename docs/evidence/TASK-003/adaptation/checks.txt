@@ -1,0 +1,9 @@
+git diff --check: PASS
+Untracked raw whitespace checks: PASS (no diagnostics; no-index difference exit 1 expected; CR at EOL accepted)
+Ownership check: PASS; all tracked/untracked changes are task-owned
+Checkpoint-to-merge task-owned path diff: EMPTY
+Approved foundation ancestry: PASS
+HEAD: 5a4db9567a1314e854600ec7511939e4ff7ec0c2
+Branch: feat/task-003-ar-pose
+Merge parents: 3f5436b625185298f5945a21d0e65bc3a135f964 4be02dce58b2b070de6bff669309ead2bbe384e9
+Proposed repair git apply --check --whitespace=error-all: PASS; not applied/compiled/tested

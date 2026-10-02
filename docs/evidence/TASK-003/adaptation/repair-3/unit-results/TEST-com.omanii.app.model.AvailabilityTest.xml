@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.omanii.app.model.AvailabilityTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-10-02T03:30:37.375Z" hostname="DESKTOP-0JG6VKQ" time="0.085">
+  <properties/>
+  <testcase name="unknownAndNotEvaluatedRemainDifferent" classname="com.omanii.app.model.AvailabilityTest" time="0.014"/>
+  <testcase name="missingStatesNeverCarryMeasurements" classname="com.omanii.app.model.AvailabilityTest" time="0.033"/>
+  <testcase name="reasonsAreOptionalButCannotBeBlank" classname="com.omanii.app.model.AvailabilityTest" time="0.03"/>
+  <testcase name="zeroAndFalseRemainAvailableValues" classname="com.omanii.app.model.AvailabilityTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

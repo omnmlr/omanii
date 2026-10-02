@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.omanii.app.session.ProbeIntervalContextTest" tests="15" skipped="0" failures="0" errors="0" timestamp="2026-10-02T02:48:15.249Z" hostname="DESKTOP-0JG6VKQ" time="0.656">
+  <properties/>
+  <testcase name="matchingEndpointsDoNotUpgradeUnknownOrUnevaluatedCoverage" classname="com.omanii.app.session.ProbeIntervalContextTest" time="0.048"/>
+  <testcase name="exposedListsCannotBeMutatedThroughPropertiesOrDestructuring" classname="com.omanii.app.session.ProbeIntervalContextTest" time="0.143"/>
+  <testcase name="constructionAndCopyValidateReplacementBoundaryEvidence" classname="com.omanii.app.session.ProbeIntervalContextTest" time="0.008"/>
+  <testcase name="missingNetworkOrFrameCannotCertifyContinuity" classname="com.omanii.app.session.ProbeIntervalContextTest" time="0.091"/>
+  <testcase name="movingPoseReferencesDoNotTurnAnIntervalIntoACompletionPoint" classname="com.omanii.app.session.ProbeIntervalContextTest" time="0.001"/>
+  <testcase name="movementRemainsUnavailableInsteadOfZeroWhenUnknown" classname="com.omanii.app.session.ProbeIntervalContextTest" time="0.007"/>
+  <testcase name="poseFreeContextIsExplicitlyNotApplicable" classname="com.omanii.app.session.ProbeIntervalContextTest" time="0.001"/>
+  <testcase name="insertingIntoSourceListCannotAlterContinuousInterval" classname="com.omanii.app.session.ProbeIntervalContextTest" time="0.001"/>
+  <testcase name="aToBToABoundariesCannotBeHiddenByMatchingEndpoints" classname="com.omanii.app.session.ProbeIntervalContextTest" time="0.003"/>
+  <testcase name="clearingSourceListCannotEraseAToBToAEvidence" classname="com.omanii.app.session.ProbeIntervalContextTest" time="0.002"/>
+  <testcase name="crossSessionAndRegressingIntervalsAreRejected" classname="com.omanii.app.session.ProbeIntervalContextTest" time="0.002"/>
+  <testcase name="snapshotRepairPreservesValueCopyAndDestructuringBehavior" classname="com.omanii.app.session.ProbeIntervalContextTest" time="0.112"/>
+  <testcase name="copiedAndReconstructedIntervalsOwnTheirBoundarySnapshots" classname="com.omanii.app.session.ProbeIntervalContextTest" time="0.083"/>
+  <testcase name="boundariesMustBeOrderedAndInsideTheInterval" classname="com.omanii.app.session.ProbeIntervalContextTest" time="0.136"/>
+  <testcase name="networkAndPoseDiscontinuitiesAreIndependent" classname="com.omanii.app.session.ProbeIntervalContextTest" time="0.006"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,138 @@
+Starting a Gradle Daemon, 1 incompatible and 11 stopped Daemons could not be reused, use --status for details
+> Task :app:preBuild UP-TO-DATE
+> Task :app:preDebugBuild UP-TO-DATE
+> Task :app:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :app:generateDebugResources
+> Task :app:packageDebugResources
+> Task :app:processDebugNavigationResources
+> Task :app:generateDebugAssets UP-TO-DATE
+> Task :app:javaPreCompileDebug
+> Task :app:parseDebugLocalResources
+> Task :app:mergeDebugAssets
+> Task :app:compressDebugAssets
+> Task :app:generateDebugRFile
+> Task :app:generateDebugGlobalSynthetics
+> Task :app:desugarDebugFileDependencies
+> Task :app:checkDebugDuplicateClasses
+> Task :app:mapDebugSourceSetPaths
+> Task :app:checkDebugAarMetadata
+> Task :app:compileDebugNavigationResources
+> Task :app:mergeLibDexDebug
+> Task :app:createDebugCompatibleScreenManifests
+> Task :app:extractDeepLinksDebug
+> Task :app:processDebugMainManifest
+> Task :app:processDebugManifest
+> Task :app:mergeDebugJniLibFolders
+> Task :app:mergeDebugResources
+> Task :app:mergeDebugNativeLibs
+> Task :app:validateSigningDebug
+> Task :app:writeDebugAppMetadata
+
+> Task :app:stripDebugDebugSymbols
+Unable to strip the following libraries, packaging them as they are: libandroidx.graphics.path.so. Run with --info option to learn more.
+
+> Task :app:writeDebugSigningConfigVersions
+> Task :app:preDebugUnitTestBuild UP-TO-DATE
+> Task :app:preDebugAndroidTestBuild SKIPPED
+> Task :app:javaPreCompileDebugUnitTest
+> Task :app:extractProguardFiles
+> Task :app:processDebugManifestForPackage
+> Task :app:processDebugResources
+> Task :app:mergeExtDexDebug
+
+> Task :app:compileDebugKotlin
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreFrameSource.kt:4:19 Unresolved reference 'ar'.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreFrameSource.kt:5:19 Unresolved reference 'ar'.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreFrameSource.kt:6:19 Unresolved reference 'ar'.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreFrameSource.kt:7:19 Unresolved reference 'ar'.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreFrameSource.kt:8:19 Unresolved reference 'ar'.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreFrameSource.kt:12:66 Unresolved reference 'Session'.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreFrameSource.kt:13:25 Unresolved reference 'Anchor'.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreFrameSource.kt:18:53 Unresolved reference 'resume'.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreFrameSource.kt:21:17 Unresolved reference 'setCameraTextureName'.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreFrameSource.kt:22:50 Unresolved reference 'setDisplayGeometry'.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreFrameSource.kt:27:29 Unresolved reference 'update'.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreFrameSource.kt:30:37 Unresolved reference 'detach'.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreFrameSource.kt:34:30 Unresolved reference 'createAnchor'.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreFrameSource.kt:34:43 Unresolved reference 'Pose'.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreFrameSource.kt:34:59 Unresolved reference 'translation'.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreFrameSource.kt:37:41 Unresolved reference 'trackingState'.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreFrameSource.kt:43:85 Unresolved reference 'pose'.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreFrameSource.kt:50:43 Unresolved reference 'pause'.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreFrameSource.kt:60:27 Unresolved reference 'detach'.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreFrameSource.kt:60:45 Unresolved reference 'close'.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreFrameSource.kt:63:31 Unresolved reference 'close'.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreFrameSource.kt:73:27 Unresolved reference 'Session'.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreFrameSource.kt:75:35 Unresolved reference 'Config'.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreFrameSource.kt:75:51 Cannot infer type for type parameter 'T'. Specify it explicitly.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreFrameSource.kt:75:57 Cannot infer type for type parameter 'T'. Specify it explicitly.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreFrameSource.kt:76:21 Unresolved reference 'updateMode'.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreFrameSource.kt:76:34 Unresolved reference 'Config'.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreFrameSource.kt:77:21 Unresolved reference 'planeFindingMode'.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreFrameSource.kt:77:40 Unresolved reference 'Config'.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreFrameSource.kt:78:21 Unresolved reference 'lightEstimationMode'.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreFrameSource.kt:78:43 Unresolved reference 'Config'.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreFrameSource.kt:79:21 Unresolved reference 'depthMode'.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreFrameSource.kt:79:33 Unresolved reference 'Config'.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreFrameSource.kt:80:21 Unresolved reference 'geospatialMode'.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreFrameSource.kt:80:38 Unresolved reference 'Config'.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreFrameSource.kt:91:13 Unresolved reference 'TrackingState'.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreFrameSource.kt:91:60 'when' expression must be exhaustive. Add an 'else' branch.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreFrameSource.kt:91:66 Unresolved reference 'TrackingState'.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreFrameSource.kt:92:5 Unresolved reference 'TrackingState'.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreFrameSource.kt:93:5 Unresolved reference 'TrackingState'.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreFrameSource.kt:94:5 Unresolved reference 'TrackingState'.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreFrameSource.kt:97:13 Unresolved reference 'Pose'.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreFrameSource.kt:98:23 Unresolved reference 'translation'.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreFrameSource.kt:99:20 Unresolved reference 'rotationQuaternion'.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreFrameSource.kt:101:19 Cannot infer type for type parameter 'V'. Specify it explicitly.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreFrameSource.kt:101:46 Cannot infer type for type parameter 'V'. Specify it explicitly.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreFrameSource.kt:101:73 Cannot infer type for type parameter 'V'. Specify it explicitly.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreFrameSource.kt:102:35 Cannot infer type for type parameter 'V'. Specify it explicitly.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreFrameSource.kt:102:59 Cannot infer type for type parameter 'V'. Specify it explicitly.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreFrameSource.kt:102:83 Cannot infer type for type parameter 'V'. Specify it explicitly.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreFrameSource.kt:102:107 Cannot infer type for type parameter 'V'. Specify it explicitly.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreRuntime.kt:5:19 Unresolved reference 'ar'.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreRuntime.kt:6:19 Unresolved reference 'ar'.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreRuntime.kt:7:19 Unresolved reference 'ar'.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreRuntime.kt:8:19 Unresolved reference 'ar'.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreRuntime.kt:9:19 Unresolved reference 'ar'.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreRuntime.kt:10:19 Unresolved reference 'ar'.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreRuntime.kt:15:13 Unresolved reference 'ArCoreApk'.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreRuntime.kt:15:82 Unresolved reference 'it'.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreRuntime.kt:21:9 'when' expression must be exhaustive. Add an 'else' branch.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreRuntime.kt:21:15 Unresolved reference 'ArCoreApk'.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreRuntime.kt:22:13 Unresolved reference 'ArCoreApk'.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreRuntime.kt:23:13 Unresolved reference 'ArCoreApk'.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreRuntime.kt:28:12 Unresolved reference 'UnavailableDeviceNotCompatibleException'.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreRuntime.kt:29:12 Unresolved reference 'UnavailableArcoreNotInstalledException'.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreRuntime.kt:30:12 Unresolved reference 'UnavailableApkTooOldException'.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreRuntime.kt:31:12 Unresolved reference 'UnavailableUserDeclinedInstallationException'.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreRuntime.kt:32:12 Unresolved reference 'UnavailableSdkTooOldException'.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreRuntime.kt:36:29 Unresolved reference 'ArCoreApk'.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreRuntime.kt:36:71 'when' expression must be exhaustive. Add an 'else' branch.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreRuntime.kt:37:9 Unresolved reference 'ArCoreApk'.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreRuntime.kt:38:9 Unresolved reference 'ArCoreApk'.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreRuntime.kt:39:9 Unresolved reference 'ArCoreApk'.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreRuntime.kt:40:9 Unresolved reference 'ArCoreApk'.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreRuntime.kt:41:9 Unresolved reference 'ArCoreApk'.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreRuntime.kt:42:9 Unresolved reference 'ArCoreApk'.
+e: file:///C:/Users/USER/Desktop/omanii-task-003/android/app/src/main/java/com/omanii/app/pose/ArCoreRuntime.kt:43:9 Unresolved reference 'ArCoreApk'.
+
+> Task :app:compileDebugKotlin FAILED
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':app:compileDebugKotlin' (registered by plugin 'com.android.internal.application').
+> A failure occurred while executing org.jetbrains.kotlin.compilerRunner.btapi.BuildToolsApiCompilationWork
+   > Compilation error. See log for more details
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights from a Build Scan (powered by Develocity).
+> Get more help at https://help.gradle.org.
+
+BUILD FAILED in 55s
+32 actionable tasks: 32 executed

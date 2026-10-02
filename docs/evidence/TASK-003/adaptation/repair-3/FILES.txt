@@ -1,0 +1,59 @@
+ M android/app/src/main/java/com/omanii/app/pose/PoseCapture.kt
+ M android/app/src/main/java/com/omanii/app/pose/PoseJsonl.kt
+ M android/app/src/main/java/com/omanii/app/pose/PoseProvider.kt
+ M android/app/src/main/java/com/omanii/app/pose/PoseValues.kt
+ M android/app/src/main/java/com/omanii/app/spatial/PoseDebugPanel.kt
+ M android/app/src/main/java/com/omanii/app/spatial/PoseDebugSurface.kt
+ M android/app/src/test/java/com/omanii/app/pose/PoseCaptureTest.kt
+ M android/app/src/test/java/com/omanii/app/pose/PoseProviderTest.kt
+ M docs/evidence/TASK-003/INTEGRATION.md
+ M docs/evidence/TASK-003/PHYSICAL-TESTS.md
+ M docs/evidence/TASK-003/REPORT.md
+ M fixtures/pose/README.md
+?? android/app/src/main/java/com/omanii/app/pose/PoseCanonicalMapping.kt
+?? android/app/src/test/java/com/omanii/app/pose/PoseCanonicalMappingTest.kt
+?? docs/evidence/TASK-003/adaptation/FILES.txt
+?? docs/evidence/TASK-003/adaptation/PROPOSED-REPAIR.md
+?? docs/evidence/TASK-003/adaptation/REVIEW.md
+?? docs/evidence/TASK-003/adaptation/SOURCE-SHA256.txt
+?? docs/evidence/TASK-003/adaptation/android-gates.log
+?? docs/evidence/TASK-003/adaptation/checks.txt
+?? docs/evidence/TASK-003/adaptation/lint.txt
+?? docs/evidence/TASK-003/adaptation/merged-manifest.xml
+?? docs/evidence/TASK-003/adaptation/proposed-repair.patch
+?? docs/evidence/TASK-003/adaptation/repair-3/APK.json
+?? docs/evidence/TASK-003/adaptation/repair-3/FILES.txt
+?? docs/evidence/TASK-003/adaptation/repair-3/REGRESSION-RED-SHA256.txt
+?? docs/evidence/TASK-003/adaptation/repair-3/REVIEW.md
+?? docs/evidence/TASK-003/adaptation/repair-3/SOURCE-SHA256.txt
+?? docs/evidence/TASK-003/adaptation/repair-3/android-gates.log
+?? docs/evidence/TASK-003/adaptation/repair-3/final-checks.txt
+?? docs/evidence/TASK-003/adaptation/repair-3/lint.txt
+?? docs/evidence/TASK-003/adaptation/repair-3/merged-manifest.xml
+?? docs/evidence/TASK-003/adaptation/repair-3/regressions-before-fix.log
+?? docs/evidence/TASK-003/adaptation/repair-3/regressions-before-fix/TEST-com.omanii.app.pose.PoseCanonicalMappingTest.xml
+?? docs/evidence/TASK-003/adaptation/repair-3/regressions-before-fix/TEST-com.omanii.app.pose.PoseProviderTest.xml
+?? docs/evidence/TASK-003/adaptation/repair-3/scope-and-hygiene.txt
+?? docs/evidence/TASK-003/adaptation/repair-3/test-summary.txt
+?? docs/evidence/TASK-003/adaptation/repair-3/unit-results/TEST-com.omanii.app.ScaffoldTest.xml
+?? docs/evidence/TASK-003/adaptation/repair-3/unit-results/TEST-com.omanii.app.model.AvailabilityTest.xml
+?? docs/evidence/TASK-003/adaptation/repair-3/unit-results/TEST-com.omanii.app.model.GeometryMetadataTest.xml
+?? docs/evidence/TASK-003/adaptation/repair-3/unit-results/TEST-com.omanii.app.model.ObservationTimingTest.xml
+?? docs/evidence/TASK-003/adaptation/repair-3/unit-results/TEST-com.omanii.app.pose.PoseCanonicalMappingTest.xml
+?? docs/evidence/TASK-003/adaptation/repair-3/unit-results/TEST-com.omanii.app.pose.PoseCapabilityTest.xml
+?? docs/evidence/TASK-003/adaptation/repair-3/unit-results/TEST-com.omanii.app.pose.PoseCaptureTest.xml
+?? docs/evidence/TASK-003/adaptation/repair-3/unit-results/TEST-com.omanii.app.pose.PoseProviderTest.xml
+?? docs/evidence/TASK-003/adaptation/repair-3/unit-results/TEST-com.omanii.app.pose.PoseReplayTest.xml
+?? docs/evidence/TASK-003/adaptation/repair-3/unit-results/TEST-com.omanii.app.session.ProbeIntervalContextTest.xml
+?? docs/evidence/TASK-003/adaptation/test-summary.txt
+?? docs/evidence/TASK-003/adaptation/unit-results/TEST-com.omanii.app.ScaffoldTest.xml
+?? docs/evidence/TASK-003/adaptation/unit-results/TEST-com.omanii.app.model.AvailabilityTest.xml
+?? docs/evidence/TASK-003/adaptation/unit-results/TEST-com.omanii.app.model.GeometryMetadataTest.xml
+?? docs/evidence/TASK-003/adaptation/unit-results/TEST-com.omanii.app.model.ObservationTimingTest.xml
+?? docs/evidence/TASK-003/adaptation/unit-results/TEST-com.omanii.app.pose.PoseCanonicalMappingTest.xml
+?? docs/evidence/TASK-003/adaptation/unit-results/TEST-com.omanii.app.pose.PoseCapabilityTest.xml
+?? docs/evidence/TASK-003/adaptation/unit-results/TEST-com.omanii.app.pose.PoseCaptureTest.xml
+?? docs/evidence/TASK-003/adaptation/unit-results/TEST-com.omanii.app.pose.PoseProviderTest.xml
+?? docs/evidence/TASK-003/adaptation/unit-results/TEST-com.omanii.app.pose.PoseReplayTest.xml
+?? docs/evidence/TASK-003/adaptation/unit-results/TEST-com.omanii.app.session.ProbeIntervalContextTest.xml
+?? fixtures/pose/network-only-segment.jsonl

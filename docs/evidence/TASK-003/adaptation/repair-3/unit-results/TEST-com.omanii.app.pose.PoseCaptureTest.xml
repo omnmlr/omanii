@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.omanii.app.pose.PoseCaptureTest" tests="19" skipped="0" failures="0" errors="0" timestamp="2026-10-02T03:30:37.659Z" hostname="DESKTOP-0JG6VKQ" time="0.154">
+  <properties/>
+  <testcase name="repeatedCameraFrameIsNotAnotherObservation" classname="com.omanii.app.pose.PoseCaptureTest" time="0.031"/>
+  <testcase name="stopRecordsReasonAndRejectsLaterFrames" classname="com.omanii.app.pose.PoseCaptureTest" time="0.077"/>
+  <testcase name="callerCannotReusePreviousSegmentOrFrame" classname="com.omanii.app.pose.PoseCaptureTest" time="0.003"/>
+  <testcase name="quaternionHamiltonOrderAndNormalizationAreExplicit" classname="com.omanii.app.pose.PoseCaptureTest" time="0.0"/>
+  <testcase name="horizontalProjectionRetainsHeightAndKnownGoldenCoordinates" classname="com.omanii.app.pose.PoseCaptureTest" time="0.002"/>
+  <testcase name="startupZeroTimestampPlacesNothing" classname="com.omanii.app.pose.PoseCaptureTest" time="0.001"/>
+  <testcase name="sameFrameAnchorCompensatesWorldTranslationAndRotation" classname="com.omanii.app.pose.PoseCaptureTest" time="0.001"/>
+  <testcase name="lostTrackingResumesOnlyInNewCallerAssignedSegmentAndOrigin" classname="com.omanii.app.pose.PoseCaptureTest" time="0.002"/>
+  <testcase name="firstUsableFrameIsTranslationOriginAndRetainsCameraOrientation" classname="com.omanii.app.pose.PoseCaptureTest" time="0.001"/>
+  <testcase name="invalidCoordinatesOrQuaternionAreRejected" classname="com.omanii.app.pose.PoseCaptureTest" time="0.002"/>
+  <testcase name="untrackedAnchorBlocksPlacementEvenWithTrackedCamera" classname="com.omanii.app.pose.PoseCaptureTest" time="0.0"/>
+  <testcase name="downsampleNeverRemovesTrackingTransitions" classname="com.omanii.app.pose.PoseCaptureTest" time="0.0"/>
+  <testcase name="networkChangeDuringTrackingLossDoesNotErasePendingPoseDiscontinuity" classname="com.omanii.app.pose.PoseCaptureTest" time="0.0"/>
+  <testcase name="receiveOrderingAllowsEqualTimeButRejectsRegression" classname="com.omanii.app.pose.PoseCaptureTest" time="0.001"/>
+  <testcase name="sourceRegressionRequiresAnotherUpdateAfterOriginReset" classname="com.omanii.app.pose.PoseCaptureTest" time="0.001"/>
+  <testcase name="segmentChangeRejectsCrossSessionAndReusedSegmentReferences" classname="com.omanii.app.pose.PoseCaptureTest" time="0.006"/>
+  <testcase name="receiveAndUndefinedSourceClockAreSeparate" classname="com.omanii.app.pose.PoseCaptureTest" time="0.001"/>
+  <testcase name="explicitDiscontinuityResetsAndCreatesBoundary" classname="com.omanii.app.pose.PoseCaptureTest" time="0.004"/>
+  <testcase name="comparisonSegmentChangePreservesOriginFrameAndCameraFrameDeduplication" classname="com.omanii.app.pose.PoseCaptureTest" time="0.004"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

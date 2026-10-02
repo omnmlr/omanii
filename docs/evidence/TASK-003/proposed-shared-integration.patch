@@ -1,0 +1,203 @@
+diff --git a/android/app/build.gradle.kts b/android/app/build.gradle.kts
+--- a/android/app/build.gradle.kts
++++ b/android/app/build.gradle.kts
+@@ -1,35 +1,36 @@
+-plugins {
+-    id("com.android.application")
+-    id("org.jetbrains.kotlin.plugin.compose")
+-}
+-
+-android {
+-    namespace = "com.omanii.app"
+-    compileSdk = 37
+-
+-    defaultConfig {
+-        applicationId = "com.omanii.app"
+-        minSdk = 24
+-        targetSdk = 36
+-        versionCode = 1
+-        versionName = "0.1.0"
+-    }
+-
+-    compileOptions {
+-        sourceCompatibility = JavaVersion.VERSION_17
+-        targetCompatibility = JavaVersion.VERSION_17
+-    }
+-
+-    buildFeatures {
+-        compose = true
+-    }
+-}
+-
+-dependencies {
+-    val composeBom = platform("androidx.compose:compose-bom:2026.09.00")
+-    implementation(composeBom)
+-    implementation("androidx.activity:activity-compose:1.13.0")
+-    implementation("androidx.compose.foundation:foundation")
+-
+-    testImplementation("junit:junit:4.13.2")
+-}
++plugins {
++    id("com.android.application")
++    id("org.jetbrains.kotlin.plugin.compose")
++}
++
++android {
++    namespace = "com.omanii.app"
++    compileSdk = 37
++
++    defaultConfig {
++        applicationId = "com.omanii.app"
++        minSdk = 24
++        targetSdk = 36
++        versionCode = 1
++        versionName = "0.1.0"
++    }
++
++    compileOptions {
++        sourceCompatibility = JavaVersion.VERSION_17
++        targetCompatibility = JavaVersion.VERSION_17
++    }
++
++    buildFeatures {
++        compose = true
++    }
++}
++
++dependencies {
++    implementation("com.google.ar:core:1.56.0")
++    val composeBom = platform("androidx.compose:compose-bom:2026.09.00")
++    implementation(composeBom)
++    implementation("androidx.activity:activity-compose:1.13.0")
++    implementation("androidx.compose.foundation:foundation")
++
++    testImplementation("junit:junit:4.13.2")
++}
+diff --git a/android/app/src/main/AndroidManifest.xml b/android/app/src/main/AndroidManifest.xml
+--- a/android/app/src/main/AndroidManifest.xml
++++ b/android/app/src/main/AndroidManifest.xml
+@@ -1,15 +1,21 @@
+-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+-    <application
+-        android:allowBackup="false"
+-        android:label="@string/app_name"
+-        android:theme="@android:style/Theme.Material.Light.NoActionBar">
+-        <activity
+-            android:name=".MainActivity"
+-            android:exported="true">
+-            <intent-filter>
+-                <action android:name="android.intent.action.MAIN" />
+-                <category android:name="android.intent.category.LAUNCHER" />
+-            </intent-filter>
+-        </activity>
+-    </application>
+-</manifest>
++<manifest xmlns:android="http://schemas.android.com/apk/res/android">
++    <uses-permission android:name="android.permission.CAMERA" />
++    <uses-feature android:name="android.hardware.camera" android:required="false" />
++    <uses-feature android:name="android.hardware.camera.autofocus" android:required="false" />
++    <uses-feature android:name="android.hardware.camera.any" android:required="false" />
++    <uses-feature android:name="android.hardware.camera.ar" android:required="false" />
++    <application
++        android:allowBackup="false"
++        android:label="@string/app_name"
++        android:theme="@android:style/Theme.Material.Light.NoActionBar">
++        <meta-data android:name="com.google.ar.core" android:value="optional" />
++        <activity
++            android:name=".MainActivity"
++            android:exported="true">
++            <intent-filter>
++                <action android:name="android.intent.action.MAIN" />
++                <category android:name="android.intent.category.LAUNCHER" />
++            </intent-filter>
++        </activity>
++    </application>
++</manifest>
+diff --git a/android/app/src/main/java/com/omanii/app/MainActivity.kt b/android/app/src/main/java/com/omanii/app/MainActivity.kt
+--- a/android/app/src/main/java/com/omanii/app/MainActivity.kt
++++ b/android/app/src/main/java/com/omanii/app/MainActivity.kt
+@@ -1,21 +1,47 @@
+-package com.omanii.app
+-
+-import android.os.Bundle
+-import androidx.activity.ComponentActivity
+-import androidx.activity.compose.setContent
+-import androidx.compose.foundation.layout.Box
+-import androidx.compose.foundation.layout.fillMaxSize
+-import androidx.compose.foundation.text.BasicText
+-import androidx.compose.ui.Alignment
+-import androidx.compose.ui.Modifier
+-
+-class MainActivity : ComponentActivity() {
+-    override fun onCreate(savedInstanceState: Bundle?) {
+-        super.onCreate(savedInstanceState)
+-        setContent {
+-            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+-                BasicText("omanii development build")
+-            }
+-        }
+-    }
+-}
++package com.omanii.app
++
++import android.content.pm.ApplicationInfo
++import android.os.Bundle
++import androidx.activity.ComponentActivity
++import androidx.activity.compose.setContent
++import androidx.compose.foundation.clickable
++import androidx.compose.foundation.layout.Box
++import androidx.compose.foundation.layout.Column
++import androidx.compose.foundation.layout.fillMaxSize
++import androidx.compose.foundation.text.BasicText
++import androidx.compose.runtime.getValue
++import androidx.compose.runtime.mutableStateOf
++import androidx.compose.runtime.remember
++import androidx.compose.runtime.setValue
++import androidx.compose.ui.Alignment
++import androidx.compose.ui.Modifier
++import com.omanii.app.spatial.PoseDebugPanel
++import com.omanii.app.time.AndroidMonotonicClock
++import com.omanii.app.time.MonotonicClock
++
++class MainActivity : ComponentActivity() {
++    private val receiveClock: MonotonicClock = AndroidMonotonicClock
++
++    override fun onCreate(savedInstanceState: Bundle?) {
++        super.onCreate(savedInstanceState)
++        val debugEnabled = (applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE) != 0
++        setContent {
++            var showPoseDebug by remember { mutableStateOf(false) }
++            if (debugEnabled && showPoseDebug) {
++                Column {
++                    BasicText("Back to development shell", Modifier.clickable { showPoseDebug = false })
++                    PoseDebugPanel(this@MainActivity, receiveClock::nowNs)
++                }
++            } else {
++                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
++                    Column {
++                        BasicText("omanii development build")
++                        if (debugEnabled) {
++                            BasicText("Open pose debug", Modifier.clickable { showPoseDebug = true })
++                        }
++                    }
++                }
++            }
++        }
++    }
++}
+diff --git a/android/app/src/main/java/com/omanii/app/time/MonotonicClock.kt b/android/app/src/main/java/com/omanii/app/time/MonotonicClock.kt
+new file mode 100644
+--- /dev/null
++++ b/android/app/src/main/java/com/omanii/app/time/MonotonicClock.kt
+@@ -0,0 +1,11 @@
++package com.omanii.app.time
++
++import android.os.SystemClock
++
++fun interface MonotonicClock {
++    fun nowNs(): Long
++}
++
++object AndroidMonotonicClock : MonotonicClock {
++    override fun nowNs(): Long = SystemClock.elapsedRealtimeNanos()
++}
