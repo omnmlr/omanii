@@ -51,6 +51,7 @@ No experiment can silently become the default through a configuration toggle.
 - EXP-007: cross-device normalization/calibration
 - EXP-008: low-data experienced-performance fusion
 - EXP-009: bottleneck classification confidence calibration
+- EXP-010: [Baseline location repeatability](../../research/experiments/EXP-010-baseline-location-repeatability.md) — PROPOSED; draft protocol, not executed
 
 ## Baseline principle
 
